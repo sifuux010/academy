@@ -1,0 +1,3 @@
+# Netlify / Cloudflare Pages — application monopage (BrowserRouter) :
+# toute URL inconnue sert index.html, le routeur React prend le relais.
+/*    /index.html   200

@@ -1,0 +1,230 @@
+[
+  {
+    "id": "aut-01",
+    "slug": "amina-belkacem",
+    "firstName": "Amina",
+    "lastName": "Belkacem",
+    "title": "Kinésithérapeute, MSc Rééducation musculo-squelettique",
+    "country": "Algérie",
+    "city": "Alger",
+    "expertise": [
+      "musculosquelettique",
+      "rhumatologie"
+    ],
+    "bio": "Kinésithérapeute en cabinet libéral et chargée d’enseignement, elle travaille sur la prise en charge des lombalgies communes et l’éducation thérapeutique du patient.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-02",
+    "slug": "yacine-haddad",
+    "firstName": "Yacine",
+    "lastName": "Haddad",
+    "title": "Kinésithérapeute du sport, DU Réathlétisation",
+    "country": "Algérie",
+    "city": "Oran",
+    "expertise": [
+      "sport",
+      "genou"
+    ],
+    "bio": "Responsable de la rééducation d’un club de football professionnel, il accompagne les retours au sport après reconstruction du LCA depuis plus de dix ans.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-03",
+    "slug": "sarah-mansouri",
+    "firstName": "Sarah",
+    "lastName": "Mansouri",
+    "title": "Kinésithérapeute, spécialisée neurologie adulte",
+    "country": "Tunisie",
+    "city": "Tunis",
+    "expertise": [
+      "neurologie",
+      "posturologie"
+    ],
+    "bio": "Exerce en centre de rééducation neurologique. Ses travaux portent sur la récupération de la marche après accident vasculaire cérébral.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-04",
+    "slug": "karim-benali",
+    "firstName": "Karim",
+    "lastName": "Benali",
+    "title": "Kinésithérapeute, thérapie manuelle (OMT)",
+    "country": "Maroc",
+    "city": "Casablanca",
+    "expertise": [
+      "musculosquelettique",
+      "epaule"
+    ],
+    "bio": "Formateur en thérapie manuelle orthopédique, il enseigne le raisonnement clinique appliqué à l’épaule douloureuse non traumatique.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-05",
+    "slug": "leila-cherif",
+    "firstName": "Leïla",
+    "lastName": "Cherif",
+    "title": "Kinésithérapeute respiratoire, hôpital universitaire",
+    "country": "Algérie",
+    "city": "Constantine",
+    "expertise": [
+      "cardioresp",
+      "geriatrie"
+    ],
+    "bio": "Impliquée dans la réhabilitation respiratoire de la BPCO et les programmes de réentraînement à l’effort en milieu hospitalier.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-06",
+    "slug": "omar-ziani",
+    "firstName": "Omar",
+    "lastName": "Ziani",
+    "title": "Kinésithérapeute pédiatrique",
+    "country": "Algérie",
+    "city": "Blida",
+    "expertise": [
+      "pediatrie",
+      "neurologie"
+    ],
+    "bio": "Prise en charge des troubles du développement moteur et de la paralysie cérébrale de l’enfant.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-07",
+    "slug": "nadia-lounis",
+    "firstName": "Nadia",
+    "lastName": "Lounis",
+    "title": "Docteure en sciences du mouvement, enseignante-chercheuse",
+    "country": "France",
+    "city": "Lyon",
+    "expertise": [
+      "musculosquelettique",
+      "recherche"
+    ],
+    "bio": "Enseignante-chercheuse, elle publie sur les tendinopathies et la charge d’entraînement, et anime des ateliers de lecture critique d’article.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-08",
+    "slug": "hicham-tazi",
+    "firstName": "Hicham",
+    "lastName": "Tazi",
+    "title": "Kinésithérapeute, gériatrie et prévention des chutes",
+    "country": "Maroc",
+    "city": "Rabat",
+    "expertise": [
+      "geriatrie",
+      "posturologie"
+    ],
+    "bio": "Conçoit des programmes d’équilibre et de prévention des chutes en EHPAD et en ambulatoire.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-09",
+    "slug": "equipe-pedagogique-kinedok",
+    "firstName": "Équipe pédagogique",
+    "lastName": "KINEDOK",
+    "title": "Comité éditorial KINEDOK ACADÉMIE",
+    "country": "Algérie",
+    "city": "Alger",
+    "expertise": [
+      "musculosquelettique",
+      "sport",
+      "neurologie"
+    ],
+    "bio": "Le comité éditorial rassemble et relit les fiches pratiques, bilans et documents pédagogiques publiés sur la plateforme.",
+    "role": "CONTENT_EDITOR"
+  },
+  {
+    "id": "aut-10",
+    "slug": "meriem-saadi",
+    "firstName": "Meriem",
+    "lastName": "Saadi",
+    "title": "Kinésithérapeute, périnéologie et santé de la femme",
+    "country": "Algérie",
+    "city": "Alger",
+    "expertise": [
+      "musculosquelettique",
+      "rhumatologie"
+    ],
+    "bio": "Consacre son activité à la rééducation périnéale et à l’accompagnement post-partum.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-11",
+    "slug": "rachid-amrani",
+    "firstName": "Rachid",
+    "lastName": "Amrani",
+    "title": "Kinésithérapeute spécialisé en rééducation de la main",
+    "country": "Algérie",
+    "city": "Sétif",
+    "expertise": [
+      "musculosquelettique",
+      "poignet"
+    ],
+    "bio": "Exerce en cabinet dédié au membre supérieur : syndromes canalaires, suites de chirurgie de la main et du poignet, reprise du geste professionnel.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-12",
+    "slug": "farid-boukerche",
+    "firstName": "Farid",
+    "lastName": "Boukerche",
+    "title": "Kinésithérapeute, rééducation post-opératoire orthopédique",
+    "country": "Algérie",
+    "city": "Annaba",
+    "expertise": [
+      "musculosquelettique",
+      "hanche",
+      "geriatrie"
+    ],
+    "bio": "Intervient en service de chirurgie orthopédique et en ambulatoire : arthroplasties de hanche et de genou, protocoles de récupération accélérée.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-13",
+    "slug": "samia-ould-ali",
+    "firstName": "Samia",
+    "lastName": "Ould Ali",
+    "title": "Kinésithérapeute, rééducation vestibulaire et troubles de l’équilibre",
+    "country": "Algérie",
+    "city": "Alger",
+    "expertise": [
+      "vestibulaire",
+      "neurologie",
+      "posturologie"
+    ],
+    "bio": "Exerce en cabinet spécialisé en rééducation vestibulaire : vertiges positionnels, névrites, instabilités chroniques et prévention des chutes du sujet âgé.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-14",
+    "slug": "djamila-brahimi",
+    "firstName": "Djamila",
+    "lastName": "Brahimi",
+    "title": "Kinésithérapeute, lymphologie et rééducation en oncologie",
+    "country": "Algérie",
+    "city": "Tizi Ouzou",
+    "expertise": [
+      "oncologie",
+      "musculosquelettique"
+    ],
+    "bio": "Accompagne les patientes après chirurgie du sein : lymphœdème, récupération de la mobilité de l’épaule, reprise de l’activité physique adaptée.",
+    "role": "INSTRUCTOR"
+  },
+  {
+    "id": "aut-15",
+    "slug": "tarek-messaoudi",
+    "firstName": "Tarek",
+    "lastName": "Messaoudi",
+    "title": "Kinésithérapeute, neurologie du mouvement",
+    "country": "Tunisie",
+    "city": "Sfax",
+    "expertise": [
+      "neurologie",
+      "posturologie"
+    ],
+    "bio": "Travaille auprès de patients parkinsoniens et de personnes atteintes de troubles du mouvement : entraînement intensif, indiçage externe, prévention des chutes.",
+    "role": "INSTRUCTOR"
+  }
+]

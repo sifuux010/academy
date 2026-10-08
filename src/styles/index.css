@@ -1,0 +1,62 @@
+/* =====================================================================
+   KINEDOK ACADÉMIE — point d'entrée des styles (Tailwind CSS v4)
+   ---------------------------------------------------------------------
+   Ordre de la cascade :
+     1. Tailwind : thème + utilitaires. Le preflight est volontairement
+        omis : base.css (conçu sans reset global) définit déjà la base,
+        et le preflight modifierait titres, listes, images et SVG.
+     2. tokens.css   — variables de la charte, NON stratifiées : elles
+                       priment sur les variables de thème de Tailwind
+     3. base.css     — typographie et éléments HTML   (couche base)
+     4. layout.css, components.css, showcase.css, landing.css, rtl.css
+                                                      (couche components)
+
+   Les classes de composants (.btn, .card, .badge…) vivent dans la couche
+   `components` : les utilitaires Tailwind ajoutés dans le JSX peuvent
+   donc les surcharger ponctuellement, comme le veut la convention
+   Tailwind. Le design system reste défini à un seul endroit.
+   ===================================================================== */
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@import "./tokens.css";
+
+@import "./base.css" layer(base);
+@import "./layout.css" layer(components);
+@import "./components.css" layer(components);
+@import "./detail.css" layer(components);
+@import "./landing.css" layer(components);
+@import "./auth.css" layer(components);
+@import "./resource.css" layer(components);
+@import "./listing.css" layer(components);
+@import "./workspace.css" layer(components);
+@import "./rtl.css" layer(components);
+
+/* Classes du design system qui portent le même nom qu'un utilitaire
+   Tailwind : on empêche Tailwind de les générer pour que la définition
+   d'origine s'applique seule (ex. .text-sm imposerait sinon sa propre
+   hauteur de ligne). */
+@source not inline("{text-xs,text-sm,text-lg,text-center,text-start,text-muted,grid,grow,hidden,sr-only,mt-0,mt-4,mt-6,mt-8,mt-auto,mb-0}");
+
+/* Les couleurs de la charte deviennent des utilitaires Tailwind :
+   bg-kinedok, text-kinedok-700, bg-surface, border-line…
+   `inline` conserve la référence à la variable : les utilitaires suivent
+   donc automatiquement le thème clair / sombre. */
+@theme inline {
+  --color-kinedok: var(--kinedok-primary);
+  --color-kinedok-600: var(--kinedok-primary-600);
+  --color-kinedok-700: var(--kinedok-primary-700);
+  --color-kinedok-soft: var(--kinedok-primary-soft);
+  --color-brand-slate: var(--kinedok-secondary);
+  --color-surface: var(--kinedok-surface);
+  --color-surface-alt: var(--kinedok-surface-alt);
+  --color-ink: var(--kinedok-text);
+  --color-muted: var(--kinedok-muted);
+  --color-line: var(--kinedok-border);
+  --color-success: var(--kinedok-success);
+  --color-warning: var(--kinedok-warning);
+  --color-danger: var(--kinedok-danger);
+}

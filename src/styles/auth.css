@@ -1,0 +1,697 @@
+/* =====================================================================
+   Écrans d'authentification — connexion, inscription, mot de passe
+   ---------------------------------------------------------------------
+   Classes préfixées `au-`.
+
+   La page est un fond pleine page et une carte posée à droite. Tout le
+   volet gauche (titre, accroche, arguments, illustration, ornements) vit
+   dans l'image `public/auth/hero.webp` : remplacer ce fichier suffit à
+   le changer.
+
+   Trois partis pris :
+
+   - **la carte est seule à porter du texte.** Ce qui doit être lu, être
+     traduit ou être annoncé par un lecteur d'écran est dans la carte,
+     jamais dans l'image.
+   - **sur téléphone, le fond disparaît.** Pas replié, retiré : il porte
+     un argumentaire, et le garder repousserait le formulaire hors de
+     l'écran alors que le remplir est la seule raison de venir là.
+   - **un champ se lit avant d'être rempli.** Libellé au-dessus, icône en
+     tête, astérisque décoratif ; l'obligation est portée par `required`,
+     pas par la couleur.
+
+   Les couleurs reprennent les tokens `--ll-*` de la liste : les deux
+   écrans sont issus de la même maquette et doivent rester solidaires.
+   ===================================================================== */
+
+:root {
+  --au-card: 468px;
+  --au-r: 16px;
+  --au-r-field: 8px;
+
+  /* Hauteurs relevées sur la maquette : un champ fait 39 px, le bouton
+     d'envoi 40, celui de Google 46. Les trois sont des variables parce
+     qu'ils se répondent — changer l'un sans les autres casse le rythme. */
+  --au-field-h: 38px;
+  --au-submit-h: 42px;
+  --au-gap: 13px;
+  --au-col-gap: 14px;
+
+  /* Teinte relevée sur la première ligne du visuel : la bande laissée
+     au-dessus de lui en reprend le dégradé, la jonction ne se voit pas. */
+  --au-bg: linear-gradient(90deg, #F9FDFE 0%, #F9FCFD 25%, #F6FDFD 50%, #F5FCFD 75%, #E1F8F8 100%);
+  --au-ink: #0C2E6B;
+  --au-text: #16202B;
+  --au-muted: #64748B;
+  --au-line: #E3EAF5;
+  --au-field: #FBFCFE;
+  --au-req: #D92D20;
+
+  --au-shadow: 0 2px 6px rgb(16 32 45 / 5%), 0 18px 44px rgb(16 32 45 / 10%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --au-bg: #0B1218;
+    --au-ink: #DCE8F5;
+    --au-text: #E8EFF3;
+    --au-muted: #97A8B4;
+    --au-line: #24313A;
+    --au-field: #121B22;
+  }
+}
+
+:root[data-theme="dark"] {
+  --au-bg: #0B1218;
+  --au-ink: #DCE8F5;
+  --au-text: #E8EFF3;
+  --au-muted: #97A8B4;
+  --au-line: #24313A;
+  --au-field: #121B22;
+}
+
+/* ============================================================= page -- */
+
+.au {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--header-height));
+  background: var(--au-bg);
+}
+
+/* Quand la carte est courte (connexion, mot de passe oublié), le fond doit
+   tout de même descendre jusqu'au bas de l'écran : `:has()` laisse la
+   colonne principale s'étirer. Le `min-height` ci-dessus reste le repli
+   pour les navigateurs qui l'ignorent. */
+.site-main:has(> .au) {
+  display: flex;
+}
+
+.site-main:has(> .au) > .au {
+  flex: 1;
+  /* La hauteur vient alors du flux, pas du repli : `--header-height` est
+     la hauteur de la barre de navigation seule, et la sous-estime d'autant
+     que la bande de services la surmonte — la page défilerait pour rien. */
+  min-height: 0;
+}
+
+/* Le fond est accroché en bas à gauche et tient dans la page sans être
+   rogné (`contain`).
+
+   `cover` l'agrandirait jusqu'à remplir la hauteur : sur l'inscription,
+   dont le formulaire est long, le visuel grossirait d'un bon tiers et son
+   titre passerait sous la carte. `contain` fige la composition sur la
+   largeur — la colonne de texte reste donc toujours à gauche de la carte,
+   quelle que soit la hauteur du formulaire.
+
+   Le vide éventuel est au-dessus, là où le visuel est uni : `--au-bg`
+   reprend cette teinte, la jonction ne se voit pas. */
+.au-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left bottom;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* L'étage remplit la page et pousse la carte à droite ; `margin-block:
+   auto` sur la carte la centre verticalement. Il tire sa hauteur de `.au`
+   plutôt que de `100vh` : la bande de services et la barre de navigation
+   occupent déjà une centaine de pixels, et un `100vh` ici ferait défiler
+   la page d'autant pour rien. */
+.au-stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  min-height: 0;
+  padding: 26px clamp(16px, 3vw, 44px);
+}
+
+/* ============================================================ carte -- */
+
+.au-card {
+  width: min(var(--au-card), 100%);
+  margin-block: auto;
+  padding: 26px clamp(18px, 2.4vw, 30px) 24px;
+  border-radius: var(--au-r);
+  background: var(--kinedok-surface);
+  box-shadow: var(--au-shadow);
+}
+
+.au-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-block-end: 14px;
+}
+
+.au-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--au-ink);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.au-back:hover {
+  color: var(--ll-blue);
+}
+
+.au-switch {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--au-muted);
+  text-align: end;
+}
+
+.au-link {
+  color: var(--ll-blue);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.au-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --------------------------------------------------------- emblème -- */
+
+.au-emblem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  color: var(--ll-blue);
+}
+
+.au-emblem-mark {
+  display: grid;
+  place-items: center;
+}
+
+/* Les éclats encadrent la toque, l'un jaune, l'autre ardoise, comme sur
+   la maquette. Purement décoratifs. */
+.au-emblem-spark {
+  width: 14px;
+  height: 17px;
+  margin-block-start: 2px;
+}
+
+.au-emblem-spark-start {
+  color: var(--ll-doodle);
+}
+
+.au-emblem-spark-end {
+  color: var(--kinedok-secondary);
+  transform: scaleX(-1);
+}
+
+.au-card-title {
+  margin: 10px 0 0;
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.45rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--au-ink);
+  text-align: center;
+}
+
+.au-card-sub {
+  max-width: 44ch;
+  margin: 5px auto 0;
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--au-muted);
+  text-align: center;
+}
+
+/* ------------------------------------------------- connexion tierce -- */
+
+.au-provider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-block-start: 18px;
+  height: 42px;
+  padding-inline: 18px;
+  border: 1px solid var(--au-line);
+  border-radius: var(--au-r-field);
+  background: var(--kinedok-surface);
+  color: var(--au-text);
+  font-family: inherit;
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.au-provider:hover:not(:disabled) {
+  border-color: var(--ll-blue);
+  background: var(--ll-tint);
+}
+
+.au-provider:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* « OU » : un filet coupé par le mot, pas un mot posé sur un filet. */
+.au-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-block: 18px;
+  color: var(--au-muted);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.au-divider::before,
+.au-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--au-line);
+}
+
+/* =========================================================== champs -- */
+
+.au-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--au-gap);
+}
+
+/* Deux colonnes, écartées de 26 px ; repliées, elles reprennent l'écart
+   vertical du formulaire. */
+.au-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--au-gap) var(--au-col-gap);
+}
+
+.au-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.au-label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--au-text);
+}
+
+.au-req {
+  margin-inline-start: 3px;
+  color: var(--au-req);
+}
+
+.au-input-wrap {
+  position: relative;
+  display: block;
+}
+
+.au-input {
+  width: 100%;
+  height: var(--au-field-h);
+  padding-inline: 13px;
+  border: 1px solid var(--au-line);
+  border-radius: var(--au-r-field);
+  background: var(--au-field);
+  color: var(--au-text);
+  font-family: inherit;
+  font-size: var(--text-base);
+}
+
+.au-input::placeholder {
+  color: var(--au-muted);
+  opacity: 0.85;
+}
+
+.au-input:focus {
+  outline: none;
+  border-color: var(--ll-blue);
+  background: var(--kinedok-surface);
+  box-shadow: var(--shadow-focus);
+}
+
+.au-input[aria-invalid="true"] {
+  border-color: var(--au-req);
+}
+
+.au-has-icon {
+  padding-inline-start: 38px;
+}
+
+.au-has-eye {
+  padding-inline-end: 40px;
+}
+
+.au-input-icon {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 13px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  color: var(--au-muted);
+  pointer-events: none;
+}
+
+.au-eye {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 6px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--au-muted);
+  cursor: pointer;
+}
+
+.au-eye:hover {
+  color: var(--ll-blue);
+}
+
+/* ------------------------------------------------------------ liste -- */
+
+.au-select {
+  padding-inline-end: 29px;
+  appearance: none;
+  cursor: pointer;
+  /* En deux colonnes le champ tombe sous 210 px : sans cela, « Choisissez
+     votre pays » passait sous le chevron. */
+  text-overflow: ellipsis;
+}
+
+.au-select-chev {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 9px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  color: var(--au-muted);
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------- téléphone -- */
+
+.au-phone {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.au-phone-code .au-select {
+  padding-inline: 11px 24px;
+  font-size: var(--text-base);
+}
+
+.au-phone-code .au-select-chev {
+  inset-inline-end: 7px;
+}
+
+/* ------------------------------------------------------- messages --- */
+
+.au-hint {
+  font-size: var(--text-xs);
+  color: var(--au-muted);
+}
+
+/* Indication qui porte sur une rangée entière, pas sur un seul champ. */
+.au-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.au-row-hint {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--au-muted);
+}
+
+.au-error {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--au-req);
+}
+
+/* ============================================= choix du profil ------- */
+
+/*
+   Deux options sur une ligne chacune, à la hauteur d'un champ.
+
+   La maquette n'a pas ce choix — mais `validateRegistration` l'exige, et
+   les formules, les accès et le tableau de bord en dépendent. Il reste
+   donc, réduit à ce qu'il est vraiment : un champ à deux valeurs. Sa
+   description longue a disparu ; la phrase sous le groupe suffit à dire
+   ce que le choix change.
+*/
+
+.au-profile {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.au-profile-legend {
+  padding: 0;
+  margin-block-end: 5px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--au-text);
+}
+
+.au-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.au-profile-opt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: var(--au-field-h);
+  padding-inline: 10px;
+  border: 1px solid var(--au-line);
+  border-radius: var(--au-r-field);
+  background: var(--au-field);
+  color: var(--au-text);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+}
+
+.au-profile-opt .icon {
+  flex: none;
+  color: var(--au-muted);
+}
+
+.au-profile-opt:hover {
+  border-color: var(--ll-blue);
+}
+
+.au-profile-opt[aria-pressed="true"] {
+  border-color: var(--ll-blue);
+  background: var(--ll-soft);
+  color: var(--ll-blue-700);
+}
+
+.au-profile-opt[aria-pressed="true"] .icon {
+  color: var(--ll-blue);
+}
+
+/* Le libellé long (« Étudiant en kinésithérapie ») se réduit plutôt que
+   de déborder : la pastille garde la largeur de sa colonne. */
+.au-profile-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.au-profile-hint {
+  margin: 8px 0 0;
+  font-size: var(--text-xs);
+  color: var(--au-muted);
+}
+
+/* Champs propres à un profil : repliés tant qu'il n'est pas choisi. */
+.au-branch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--au-gap);
+}
+
+/* ========================================================= cases ----- */
+
+.au-check {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--au-text);
+  cursor: pointer;
+}
+
+.au-check input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.au-check-box {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  margin-block-start: 1px;
+  border: 1.5px solid var(--kinedok-border-strong);
+  border-radius: 5px;
+  background: var(--kinedok-surface);
+  color: transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.au-check:hover .au-check-box {
+  border-color: var(--ll-blue);
+}
+
+.au-check input:checked + .au-check-box {
+  border-color: var(--ll-blue);
+  background: var(--ll-blue);
+  color: #fff;
+}
+
+.au-check input:focus-visible + .au-check-box {
+  outline: 2px solid var(--ll-blue);
+  outline-offset: 2px;
+}
+
+.au-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* ========================================================= envoi ----- */
+
+.au-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: var(--au-submit-h);
+  padding-inline: 20px;
+  border: 0;
+  border-radius: var(--au-r-field);
+  background: var(--ll-blue);
+  color: #fff;
+  font-family: inherit;
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.au-submit:hover:not(:disabled) {
+  background: var(--ll-blue-600);
+}
+
+.au-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.au-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.au-legal {
+  margin: 12px 0 0;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--au-muted);
+  text-align: center;
+}
+
+.au-foot {
+  margin: 18px 0 0;
+  font-size: var(--text-base);
+  color: var(--au-muted);
+  text-align: center;
+}
+
+/* ======================================================= adaptation -- */
+
+@media (max-width: 1100px) {
+  .au-stage {
+    justify-content: center;
+  }
+
+  /* L'illustration est déjà largement couverte par la carte : la laisser
+     derrière ne montrerait qu'un fragment. On garde le fond teinté. */
+  .au-bg {
+    opacity: 0.35;
+  }
+}
+
+/* Téléphone : le fond est retiré, le formulaire occupe l'écran. */
+@media (max-width: 720px) {
+  .au-bg {
+    display: none;
+  }
+
+  .au-stage {
+    padding: 0;
+  }
+
+  .au-card {
+    width: 100%;
+    margin-block: 0;
+    padding: 22px 16px 28px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .au-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .au-phone {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+}

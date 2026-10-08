@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aperçu de marque — KINEDOK ACADÉMIE</title>
+<!--
+  Outil de validation de charte.
+  Affiche les quatre variantes du logo sur les quatre fonds réellement
+  utilisés par l'application : clair, sombre, pied de page, panneau de
+  connexion. Ouvrez ce fichier après avoir déposé les fichiers officiels
+  (public/brand/kinedok-logo*.png) pour vérifier leur rendu partout.
+-->
+<link rel="stylesheet" href="../src/styles/tokens.css">
+<style>
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--kinedok-text);
+    background: var(--kinedok-background);
+  }
+  header.page {
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--kinedok-border);
+  }
+  h1 { margin: 0 0 6px; font-size: 22px; }
+  p.lead { margin: 0; color: var(--kinedok-muted); font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 0; }
+  .panel { padding: 32px; display: flex; flex-direction: column; gap: 22px; min-height: 260px; }
+  .panel h2 {
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: .75;
+    font-weight: 600;
+  }
+  .row { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+  .clair { background: #fff; color: #1F2D3A; }
+  .sombre { background: #0E1519; color: #E8EFF3; }
+  .pied { background: var(--kinedok-footer-bg, #37474F); color: var(--kinedok-footer-text, #EDF3F7); }
+  .panneau {
+    background: linear-gradient(160deg, var(--kinedok-panel-from, #37474F) 0%, var(--kinedok-panel-to, #17838F) 100%);
+    color: #fff;
+  }
+  .h42 { height: 42px; width: auto; }   /* en-tête */
+  .h52 { height: 52px; width: auto; }   /* pied de page */
+  .h64 { height: 64px; width: auto; }
+  .h150 { height: 150px; width: auto; } /* pages de connexion */
+  .h34 { height: 34px; width: auto; }   /* petit usage */
+  .note {
+    font-size: 12px;
+    opacity: .7;
+    margin: 0;
+  }
+  footer.page {
+    padding: 24px 32px 40px;
+    border-top: 1px solid var(--kinedok-border);
+    font-size: 13px;
+    color: var(--kinedok-muted);
+  }
+  code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--kinedok-surface-alt);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header class="page">
+  <h1>Aperçu de marque — KINEDOK ACADÉMIE</h1>
+  <p class="lead">Les quatre variantes du logo, sur les quatre fonds utilisés par l’application.</p>
+</header>
+
+<div class="grid">
+
+  <section class="panel clair">
+    <h2>Fond clair — en-tête</h2>
+    <div class="row">
+      <img class="h42" src="../public/brand/kinedok-logo-compact.svg" alt="Variante compacte">
+      <img class="h34" src="../public/brand/kinedok-mark.svg" alt="Symbole seul">
+    </div>
+    <div class="row">
+      <img class="h64" src="../public/brand/kinedok-logo.svg" alt="Variante horizontale">
+    </div>
+    <p class="note">Variantes <code>compact</code>, <code>mark</code> et <code>horizontal</code>.</p>
+  </section>
+
+  <section class="panel sombre">
+    <h2>Fond sombre — en-tête en thème sombre</h2>
+    <div class="row">
+      <img class="h42" src="../public/brand/kinedok-logo-compact.svg" alt="Variante compacte">
+      <img class="h34" src="../public/brand/kinedok-mark.svg" alt="Symbole seul">
+    </div>
+    <div class="row">
+      <img class="h64" src="../public/brand/kinedok-logo.svg" alt="Variante horizontale">
+    </div>
+    <p class="note">Le logo monochrome turquoise ne demande ni pastille blanche ni variante « dark ».</p>
+  </section>
+
+  <section class="panel pied">
+    <h2>Pied de page</h2>
+    <div class="row">
+      <img class="h52" src="../public/brand/kinedok-logo.svg" alt="Variante horizontale">
+    </div>
+    <p class="note">Variante <code>horizontal</code>, baseline incluse, à 52 px de haut.</p>
+  </section>
+
+  <section class="panel panneau">
+    <h2>Pages de connexion et d’inscription</h2>
+    <div class="row">
+      <img class="h150" src="../public/brand/kinedok-logo-stacked.svg"
+           alt="Variante carrée" style="background:#fff;border-radius:16px;padding:14px">
+    </div>
+    <p class="note">Variante <code>stacked</code> sur pastille blanche : le panneau est déjà turquoise.</p>
+  </section>
+
+</div>
+
+<footer class="page">
+  Pour installer les fichiers officiels, déposez-les dans <code>public/brand/</code> sous les noms
+  <code>kinedok-logo-compact.png</code>, <code>kinedok-logo.png</code>,
+  <code>kinedok-logo-stacked.png</code> et <code>kinedok-mark.png</code>, puis rechargez cette page en
+  remplaçant <code>.svg</code> par <code>.png</code> — l’application, elle, les détecte automatiquement.
+</footer>
+
+</body>
+</html>

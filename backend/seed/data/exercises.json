@@ -1,0 +1,1830 @@
+[
+  {
+    "id": "exo-01",
+    "slug": "bird-dog",
+    "name": "Bird dog (quadrupédie alternée)",
+    "region": "rachis",
+    "objective": "controle",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Érecteurs du rachis",
+      "Multifides",
+      "Grand fessier",
+      "Transverse de l’abdomen"
+    ],
+    "equipment": [
+      "Tapis"
+    ],
+    "goal": "Améliorer le contrôle lombo-pelvien en position de charge légère.",
+    "steps": [
+      "En quadrupédie, mains sous les épaules, genoux sous les hanches.",
+      "Maintenir le rachis en position neutre, le regard vers le sol.",
+      "Étendre simultanément le bras droit et la jambe gauche, sans laisser le bassin basculer.",
+      "Revenir lentement et alterner."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 10 par côté",
+      "hold": "3 à 5 s",
+      "frequency": "4 à 5 fois par semaine"
+    },
+    "progression": "Ajouter une charge légère au poignet, ou réaliser sur surface instable.",
+    "regression": "Mobiliser uniquement le bras, puis uniquement la jambe.",
+    "precautions": [
+      "Éviter la cambrure lombaire excessive",
+      "Interrompre en cas d’irradiation dans la jambe"
+    ],
+    "pathologies": [
+      "lombalgie-commune",
+      "lombosciatique-hernie-discale"
+    ],
+    "tags": [
+      "contrôle moteur",
+      "lombaire",
+      "gainage"
+    ]
+  },
+  {
+    "id": "exo-02",
+    "slug": "pont-fessier",
+    "name": "Pont fessier",
+    "region": "hanche",
+    "objective": "force",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Grand fessier",
+      "Ischio-jambiers",
+      "Érecteurs lombaires"
+    ],
+    "equipment": [
+      "Tapis"
+    ],
+    "goal": "Renforcer les extenseurs de hanche et améliorer le contrôle du bassin.",
+    "steps": [
+      "En décubitus dorsal, genoux fléchis à 90°, pieds à plat.",
+      "Contracter les fessiers et décoller le bassin jusqu’à l’alignement cuisses-tronc.",
+      "Maintenir la position sans cambrer le bas du dos.",
+      "Redescendre lentement, vertèbre par vertèbre."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "12 à 15",
+      "hold": "2 à 3 s en haut",
+      "frequency": "3 à 4 fois par semaine"
+    },
+    "progression": "Pont unipodal, pieds surélevés, ou charge sur le bassin.",
+    "regression": "Amplitude partielle, pieds plus proches des fessiers.",
+    "precautions": [
+      "Éviter de pousser sur la nuque",
+      "Ne pas hyperextendre le rachis lombaire"
+    ],
+    "pathologies": [
+      "lombalgie-commune",
+      "gonarthrose",
+      "lombosciatique-hernie-discale"
+    ],
+    "tags": [
+      "fessiers",
+      "renforcement",
+      "bassin"
+    ]
+  },
+  {
+    "id": "exo-03",
+    "slug": "flexion-cranio-cervicale",
+    "name": "Flexion cranio-cervicale",
+    "region": "tete",
+    "objective": "controle",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Fléchisseurs profonds du cou (long du cou, long de la tête)"
+    ],
+    "equipment": [
+      "Tapis",
+      "Serviette roulée (facultatif)"
+    ],
+    "goal": "Restaurer l’endurance et le contrôle des fléchisseurs profonds cervicaux.",
+    "steps": [
+      "En décubitus dorsal, tête sur le plan, regard vers le plafond.",
+      "Réaliser un léger mouvement d’acquiescement (menton vers la poitrine, sans décoller la tête).",
+      "Maintenir la contraction douce sans contracter les superficiels.",
+      "Relâcher complètement entre les répétitions."
+    ],
+    "dosage": {
+      "sets": "2 à 3",
+      "reps": "10",
+      "hold": "10 s",
+      "frequency": "Quotidien"
+    },
+    "progression": "Augmenter le temps de maintien, puis réaliser assis contre un mur.",
+    "regression": "Réduire le maintien à 3-5 s, guidage manuel du thérapeute.",
+    "precautions": [
+      "Arrêter en cas de vertiges",
+      "Éviter la contraction des sterno-cléido-occipito-mastoïdiens"
+    ],
+    "pathologies": [
+      "cervicalgie-commune"
+    ],
+    "tags": [
+      "cervical",
+      "endurance",
+      "contrôle moteur"
+    ]
+  },
+  {
+    "id": "exo-04",
+    "slug": "retraction-scapulaire-elastique",
+    "name": "Rétraction scapulaire avec élastique",
+    "region": "epaule",
+    "objective": "force",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Trapèze moyen et inférieur",
+      "Rhomboïdes"
+    ],
+    "equipment": [
+      "Bande élastique"
+    ],
+    "goal": "Renforcer les stabilisateurs de la scapula et améliorer la posture scapulo-thoracique.",
+    "steps": [
+      "Debout, élastique fixé devant à hauteur de poitrine, coudes fléchis.",
+      "Tirer les coudes vers l’arrière en rapprochant les omoplates.",
+      "Maintenir la position 2 secondes sans hausser les épaules.",
+      "Revenir en contrôlant le retour."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "12 à 15",
+      "hold": "2 s",
+      "frequency": "3 à 4 fois par semaine"
+    },
+    "progression": "Élastique plus résistant, bras plus élevés, travail unilatéral.",
+    "regression": "Amplitude réduite, élastique plus souple, position assise.",
+    "precautions": [
+      "Éviter l’élévation compensatoire des épaules",
+      "Rester infra-douloureux"
+    ],
+    "pathologies": [
+      "cervicalgie-commune",
+      "tendinopathie-coiffe-rotateurs"
+    ],
+    "tags": [
+      "scapula",
+      "élastique",
+      "posture"
+    ]
+  },
+  {
+    "id": "exo-05",
+    "slug": "rotation-externe-elastique",
+    "name": "Rotation externe d’épaule avec élastique",
+    "region": "epaule",
+    "objective": "force",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Infra-épineux",
+      "Petit rond"
+    ],
+    "equipment": [
+      "Bande élastique",
+      "Serviette roulée"
+    ],
+    "goal": "Renforcer les rotateurs externes de la coiffe des rotateurs.",
+    "steps": [
+      "Coude au corps fléchi à 90°, serviette roulée entre le bras et le tronc.",
+      "Élastique fixé du côté opposé, à hauteur du coude.",
+      "Réaliser une rotation externe en gardant le coude fixe.",
+      "Revenir lentement en contrôlant le mouvement."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "10 à 15",
+      "hold": "1 à 2 s",
+      "frequency": "4 à 5 fois par semaine"
+    },
+    "progression": "Augmenter la résistance, puis travailler à 45° et 90° d’abduction.",
+    "regression": "Contraction isométrique contre le mur, sans élastique.",
+    "precautions": [
+      "Rester dans une amplitude non douloureuse",
+      "Éviter la rotation du tronc"
+    ],
+    "pathologies": [
+      "tendinopathie-coiffe-rotateurs"
+    ],
+    "tags": [
+      "coiffe",
+      "rotateurs",
+      "élastique"
+    ]
+  },
+  {
+    "id": "exo-06",
+    "slug": "pendulaire-codman",
+    "name": "Mouvements pendulaires (Codman)",
+    "region": "epaule",
+    "objective": "mobilite",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Détente globale de la ceinture scapulaire"
+    ],
+    "equipment": [
+      "Table ou chaise pour appui"
+    ],
+    "goal": "Entretenir la mobilité et diminuer la douleur en phase irritable.",
+    "steps": [
+      "Penché en avant, main opposée en appui sur une table.",
+      "Laisser pendre le bras atteint, complètement relâché.",
+      "Imprimer un mouvement de balancier par le tronc, sans contraction active du bras.",
+      "Réaliser des cercles dans les deux sens."
+    ],
+    "dosage": {
+      "sets": "2 à 3",
+      "reps": "30 à 60 s par direction",
+      "hold": "—",
+      "frequency": "Plusieurs fois par jour"
+    },
+    "progression": "Augmenter l’amplitude du balancier, puis passer au travail actif aidé.",
+    "regression": "Réduire l’amplitude et la durée.",
+    "precautions": [
+      "Ne pas forcer",
+      "Éviter en cas de douleur nocturne majorée après la séance"
+    ],
+    "pathologies": [
+      "capsulite-retractile",
+      "tendinopathie-coiffe-rotateurs"
+    ],
+    "tags": [
+      "mobilité",
+      "antalgie",
+      "épaule"
+    ]
+  },
+  {
+    "id": "exo-07",
+    "slug": "extension-poignet-excentrique",
+    "name": "Extension de poignet excentrique",
+    "region": "coude",
+    "objective": "force",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Court et long extenseurs radiaux du carpe",
+      "Extenseur ulnaire du carpe"
+    ],
+    "equipment": [
+      "Haltère léger (0,5 à 2 kg) ou barre lestée"
+    ],
+    "goal": "Restaurer la capacité de charge des extenseurs du poignet dans l’épicondylalgie latérale.",
+    "steps": [
+      "Avant-bras posé sur une table, poignet dans le vide, paume vers le sol.",
+      "Monter le poids avec l’aide de la main opposée.",
+      "Descendre lentement (3 à 4 secondes) avec la seule main atteinte.",
+      "Répéter en gardant une douleur tolérable (2 à 4 sur 10)."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "15",
+      "hold": "descente de 3 à 4 s",
+      "frequency": "Quotidien puis 5 fois par semaine"
+    },
+    "progression": "Augmenter la charge par paliers de 0,5 kg selon la douleur à 24 h.",
+    "regression": "Isométriques en extension contre résistance manuelle.",
+    "precautions": [
+      "Ne pas dépasser une douleur de 4 sur 10",
+      "Réévaluer la douleur le lendemain"
+    ],
+    "pathologies": [
+      "epicondylalgie-laterale"
+    ],
+    "tags": [
+      "excentrique",
+      "coude",
+      "tendinopathie"
+    ]
+  },
+  {
+    "id": "exo-08",
+    "slug": "squat-mur-isometrique",
+    "name": "Squat isométrique au mur",
+    "region": "genou",
+    "objective": "antalgie",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Quadriceps"
+    ],
+    "equipment": [
+      "Mur"
+    ],
+    "goal": "Obtenir un effet antalgique et maintenir la charge du quadriceps en phase irritable.",
+    "steps": [
+      "Dos au mur, pieds écartés de la largeur du bassin, à environ 50 cm du mur.",
+      "Glisser jusqu’à 60-70° de flexion de genou.",
+      "Maintenir la position, respiration libre.",
+      "Se relever et récupérer entre les séries."
+    ],
+    "dosage": {
+      "sets": "4 à 5",
+      "reps": "1",
+      "hold": "30 à 45 s",
+      "frequency": "Quotidien"
+    },
+    "progression": "Augmenter le temps de maintien, puis passer en appui unipodal.",
+    "regression": "Réduire l’angle de flexion et le temps de maintien.",
+    "precautions": [
+      "Éviter si la douleur augmente pendant le maintien",
+      "Surveiller la tension artérielle chez le patient à risque"
+    ],
+    "pathologies": [
+      "tendinopathie-patellaire",
+      "gonarthrose"
+    ],
+    "tags": [
+      "isométrique",
+      "quadriceps",
+      "antalgie"
+    ]
+  },
+  {
+    "id": "exo-09",
+    "slug": "squat-lourd-lent",
+    "name": "Squat lourd et lent",
+    "region": "genou",
+    "objective": "force",
+    "difficulty": "difficile",
+    "targetMuscles": [
+      "Quadriceps",
+      "Grand fessier",
+      "Ischio-jambiers"
+    ],
+    "equipment": [
+      "Barre ou haltères",
+      "Éventuellement rack"
+    ],
+    "goal": "Développer la capacité de charge du tendon patellaire et la force du quadriceps.",
+    "steps": [
+      "Position de squat, pieds à la largeur des épaules.",
+      "Descendre en 3 secondes jusqu’à 70-90° de flexion.",
+      "Remonter en 3 secondes, sans temps d’arrêt marqué.",
+      "Conserver une douleur inférieure ou égale à 3 sur 10."
+    ],
+    "dosage": {
+      "sets": "4",
+      "reps": "6 à 8",
+      "hold": "tempo 3-0-3",
+      "frequency": "3 fois par semaine"
+    },
+    "progression": "Augmenter la charge de 5 % lorsque les répétitions sont maîtrisées sans douleur résiduelle.",
+    "regression": "Squat au poids du corps ou sur box, amplitude réduite.",
+    "precautions": [
+      "Contrôle technique préalable indispensable",
+      "Adapter en cas de douleur à 24 h"
+    ],
+    "pathologies": [
+      "tendinopathie-patellaire",
+      "reconstruction-lca"
+    ],
+    "tags": [
+      "renforcement",
+      "tendon",
+      "charge"
+    ]
+  },
+  {
+    "id": "exo-10",
+    "slug": "fente-avant-controlee",
+    "name": "Fente avant contrôlée",
+    "region": "genou",
+    "objective": "controle",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Quadriceps",
+      "Fessiers",
+      "Stabilisateurs de hanche"
+    ],
+    "equipment": [
+      "Aucun",
+      "Haltères en progression"
+    ],
+    "goal": "Améliorer le contrôle du membre inférieur en charge asymétrique.",
+    "steps": [
+      "Debout, faire un pas en avant en gardant le tronc vertical.",
+      "Fléchir jusqu’à environ 90° de genou avant, genou aligné sur le pied.",
+      "Contrôler l’absence de valgus dynamique.",
+      "Revenir en poussant sur la jambe avant."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 12 par côté",
+      "hold": "—",
+      "frequency": "3 fois par semaine"
+    },
+    "progression": "Ajouter une charge, augmenter l’amplitude, fente marchée puis sautée.",
+    "regression": "Fente statique avec appui, amplitude réduite.",
+    "precautions": [
+      "Surveiller l’alignement du genou",
+      "Éviter en phase précoce post-opératoire"
+    ],
+    "pathologies": [
+      "reconstruction-lca",
+      "gonarthrose"
+    ],
+    "tags": [
+      "contrôle moteur",
+      "membre inférieur",
+      "valgus"
+    ]
+  },
+  {
+    "id": "exo-11",
+    "slug": "extension-genou-chaine-ouverte",
+    "name": "Extension de genou en chaîne ouverte",
+    "region": "genou",
+    "objective": "force",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Quadriceps (vaste médial, vaste latéral, droit fémoral)"
+    ],
+    "equipment": [
+      "Machine à quadriceps ou lest de cheville"
+    ],
+    "goal": "Cibler spécifiquement le déficit de force du quadriceps après chirurgie du genou.",
+    "steps": [
+      "Assis, genou fléchi, lest ou résistance à la cheville.",
+      "Étendre le genou dans l’amplitude autorisée par le protocole.",
+      "Maintenir brièvement l’extension.",
+      "Redescendre lentement en contrôlant."
+    ],
+    "dosage": {
+      "sets": "3 à 4",
+      "reps": "8 à 12",
+      "hold": "1 à 2 s",
+      "frequency": "2 à 3 fois par semaine"
+    },
+    "progression": "Élargir progressivement l’amplitude puis augmenter la charge.",
+    "regression": "Amplitude limitée (90° à 45°), contraction isométrique.",
+    "precautions": [
+      "Respecter les amplitudes autorisées après reconstruction du LCA",
+      "Éviter la douleur fémoro-patellaire"
+    ],
+    "pathologies": [
+      "reconstruction-lca"
+    ],
+    "tags": [
+      "quadriceps",
+      "chaîne ouverte",
+      "post-opératoire"
+    ]
+  },
+  {
+    "id": "exo-12",
+    "slug": "montee-talon-excentrique",
+    "name": "Montée-descente sur pointes excentrique",
+    "region": "cheville",
+    "objective": "force",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Triceps sural (gastrocnémiens, soléaire)"
+    ],
+    "equipment": [
+      "Marche ou step",
+      "Appui pour l’équilibre"
+    ],
+    "goal": "Restaurer la capacité de charge du tendon calcanéen.",
+    "steps": [
+      "Debout sur le bord d’une marche, avant-pieds en appui.",
+      "Monter sur les deux pointes.",
+      "Transférer le poids sur le pied atteint et descendre lentement (3 à 4 s).",
+      "Remonter avec les deux pieds."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "15",
+      "hold": "descente de 3 à 4 s",
+      "frequency": "Quotidien pendant 12 semaines"
+    },
+    "progression": "Ajouter une charge (sac à dos lesté), puis travail en énergie élastique.",
+    "regression": "Réaliser sur sol plat, amplitude réduite, appui bipodal.",
+    "precautions": [
+      "Limiter la flexion dorsale extrême dans les formes insertionnelles",
+      "Suivre la douleur à 24 h"
+    ],
+    "pathologies": [
+      "tendinopathie-achilleenne"
+    ],
+    "tags": [
+      "excentrique",
+      "Achille",
+      "triceps sural"
+    ]
+  },
+  {
+    "id": "exo-13",
+    "slug": "equilibre-unipodal-progressif",
+    "name": "Équilibre unipodal progressif",
+    "region": "cheville",
+    "objective": "proprioception",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Éverseurs de cheville",
+      "Stabilisateurs de hanche"
+    ],
+    "equipment": [
+      "Tapis",
+      "Coussin instable en progression"
+    ],
+    "goal": "Restaurer le contrôle neuromusculaire après entorse et prévenir les récidives.",
+    "steps": [
+      "Debout sur un pied, genou légèrement fléchi, regard devant.",
+      "Maintenir la position sans compensation du tronc.",
+      "Progresser en fermant les yeux, puis sur surface instable.",
+      "Ajouter une tâche : lancer de balle, mouvements du membre supérieur."
+    ],
+    "dosage": {
+      "sets": "3 à 4",
+      "reps": "1 par variante",
+      "hold": "30 s",
+      "frequency": "Quotidien"
+    },
+    "progression": "Yeux fermés, coussin, plateau instable, double tâche, puis saut avec réception unipodale.",
+    "regression": "Appui bipodal, appui digital léger sur un support.",
+    "precautions": [
+      "Sécuriser l’environnement",
+      "Éviter la fatigue excessive qui dégrade la qualité"
+    ],
+    "pathologies": [
+      "entorse-laterale-cheville",
+      "paralysie-cerebrale"
+    ],
+    "tags": [
+      "proprioception",
+      "équilibre",
+      "prévention"
+    ]
+  },
+  {
+    "id": "exo-14",
+    "slug": "marche-laterale-elastique",
+    "name": "Marche latérale avec élastique",
+    "region": "hanche",
+    "objective": "force",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Moyen fessier",
+      "Petit fessier"
+    ],
+    "equipment": [
+      "Bande élastique"
+    ],
+    "goal": "Renforcer les abducteurs de hanche et améliorer le contrôle frontal du bassin.",
+    "steps": [
+      "Élastique autour des chevilles ou au-dessus des genoux, genoux légèrement fléchis.",
+      "Réaliser des pas latéraux en gardant le bassin stable.",
+      "Éviter que les genoux ne se rapprochent.",
+      "Effectuer un aller-retour dans chaque direction."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "10 à 12 pas par direction",
+      "hold": "—",
+      "frequency": "3 à 4 fois par semaine"
+    },
+    "progression": "Élastique plus résistant, position plus fléchie, augmentation de la distance.",
+    "regression": "Sans élastique, amplitude réduite.",
+    "precautions": [
+      "Éviter la bascule du tronc",
+      "Arrêter en cas de douleur latérale de hanche"
+    ],
+    "pathologies": [
+      "gonarthrose",
+      "reconstruction-lca"
+    ],
+    "tags": [
+      "fessiers",
+      "élastique",
+      "contrôle frontal"
+    ]
+  },
+  {
+    "id": "exo-15",
+    "slug": "transfert-assis-debout",
+    "region": "global",
+    "name": "Transfert assis-debout répété",
+    "objective": "force",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Quadriceps",
+      "Grand fessier",
+      "Triceps sural"
+    ],
+    "equipment": [
+      "Chaise stable"
+    ],
+    "goal": "Restaurer la force fonctionnelle et l’autonomie des transferts.",
+    "steps": [
+      "Assis au bord de la chaise, pieds à plat, bras croisés si possible.",
+      "Se pencher légèrement en avant puis se lever sans élan.",
+      "Se rasseoir en contrôlant la descente.",
+      "Répéter en série, avec surveillance de la fatigue."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 12",
+      "hold": "—",
+      "frequency": "Quotidien"
+    },
+    "progression": "Chaise plus basse, sans appui des mains, avec charge, puis unipodal.",
+    "regression": "Chaise plus haute, appui des mains sur les accoudoirs.",
+    "precautions": [
+      "Sécuriser la chaise",
+      "Surveiller les vertiges au lever chez le sujet âgé"
+    ],
+    "pathologies": [
+      "gonarthrose",
+      "avc-hemiplegie",
+      "paralysie-cerebrale"
+    ],
+    "tags": [
+      "fonctionnel",
+      "gériatrie",
+      "transferts"
+    ]
+  },
+  {
+    "id": "exo-16",
+    "slug": "ventilation-dirigee-levres-pincees",
+    "name": "Ventilation dirigée à lèvres pincées",
+    "region": "thorax",
+    "objective": "endurance",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Diaphragme",
+      "Muscles expiratoires accessoires"
+    ],
+    "equipment": [
+      "Aucun"
+    ],
+    "goal": "Réduire la dyspnée et améliorer le contrôle ventilatoire à l’effort.",
+    "steps": [
+      "Assis, épaules relâchées, une main sur l’abdomen.",
+      "Inspirer par le nez sur 2 temps.",
+      "Expirer lentement lèvres pincées sur 4 temps, sans forcer.",
+      "Appliquer la technique pendant les activités essoufflantes (montée d’escaliers)."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 10 cycles",
+      "hold": "—",
+      "frequency": "Plusieurs fois par jour"
+    },
+    "progression": "Appliquer pendant la marche puis à l’effort croissant.",
+    "regression": "Réduire le nombre de cycles, position semi-assise.",
+    "precautions": [
+      "Arrêter en cas de vertiges",
+      "Ne pas forcer l’expiration"
+    ],
+    "pathologies": [
+      "bpco"
+    ],
+    "tags": [
+      "respiratoire",
+      "dyspnée",
+      "BPCO"
+    ]
+  },
+  {
+    "id": "exo-17",
+    "slug": "nordic-hamstring",
+    "name": "Exercice nordique des ischio-jambiers",
+    "region": "cuisse",
+    "objective": "force",
+    "difficulty": "difficile",
+    "targetMuscles": [
+      "Ischio-jambiers (biceps fémoral, semi-tendineux, semi-membraneux)"
+    ],
+    "equipment": [
+      "Tapis",
+      "Partenaire ou système de fixation des chevilles"
+    ],
+    "goal": "Développer la force excentrique des ischio-jambiers et réduire le risque de lésion et de récidive.",
+    "steps": [
+      "À genoux sur un tapis, chevilles maintenues par un partenaire ou un dispositif fixe.",
+      "Tronc et cuisses alignés, mains devant la poitrine.",
+      "Descendre le tronc vers l’avant le plus lentement possible en résistant à la chute.",
+      "Amortir avec les mains en fin de course, puis se repousser pour revenir sans forcer sur les ischio-jambiers."
+    ],
+    "dosage": {
+      "sets": "2 à 3",
+      "reps": "5 à 8",
+      "hold": "descente contrôlée de 3 à 5 s",
+      "frequency": "1 à 2 fois par semaine"
+    },
+    "progression": "Retarder progressivement le point de rupture, augmenter le nombre de répétitions puis ajouter une charge sur le tronc.",
+    "regression": "Amplitude réduite, aide des mains plus précoce, ou variante allongée (glissement talon).",
+    "precautions": [
+      "Courbatures marquées les premières séances : espacer les séances au début.",
+      "Ne pas introduire en phase aiguë d’une lésion musculaire.",
+      "Conserver l’alignement tronc-cuisses : ne pas casser au niveau des hanches."
+    ],
+    "pathologies": [
+      "lesion-ischio-jambiers"
+    ],
+    "tags": [
+      "excentrique",
+      "prévention",
+      "sprint",
+      "ischio-jambiers"
+    ]
+  },
+  {
+    "id": "exo-18",
+    "slug": "extension-active-ischio-jambiers-allonge",
+    "name": "Extension active en position allongée (« extender »)",
+    "region": "cuisse",
+    "objective": "mobilite",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Ischio-jambiers en position d’allongement"
+    ],
+    "equipment": [
+      "Tapis"
+    ],
+    "goal": "Restaurer la tolérance des ischio-jambiers à l’allongement après une lésion musculaire.",
+    "steps": [
+      "En décubitus dorsal, hanche du côté atteint fléchie à environ 90°, maintenue avec les mains.",
+      "Étendre lentement le genou jusqu’au seuil d’une tension tolérable, sans douleur vive.",
+      "Revenir doucement en flexion.",
+      "Progresser l’amplitude de séance en séance selon la tolérance."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "12",
+      "hold": "mouvement lent, sans maintien",
+      "frequency": "Quotidien"
+    },
+    "progression": "Augmenter l’angle de flexion de hanche, puis passer aux exercices en charge et excentriques.",
+    "regression": "Réduire l’amplitude d’extension et la flexion de hanche.",
+    "precautions": [
+      "Rester en dessous du seuil de douleur vive : une tension modérée est acceptable.",
+      "Arrêter en cas d’irradiation dans la jambe (origine neurale possible)."
+    ],
+    "pathologies": [
+      "lesion-ischio-jambiers"
+    ],
+    "tags": [
+      "post-lésionnel",
+      "allongement",
+      "ischio-jambiers"
+    ]
+  },
+  {
+    "id": "exo-19",
+    "slug": "abduction-hanche-decubitus-lateral",
+    "name": "Abduction de hanche en décubitus latéral",
+    "region": "hanche",
+    "objective": "force",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Moyen fessier",
+      "Petit fessier",
+      "Tenseur du fascia lata"
+    ],
+    "equipment": [
+      "Tapis",
+      "Lest de cheville en progression"
+    ],
+    "goal": "Renforcer les abducteurs de hanche pour améliorer la stabilité du bassin et la qualité de la marche.",
+    "steps": [
+      "Couché sur le côté, jambe du dessous fléchie, bassin perpendiculaire au sol.",
+      "Élever la jambe du dessus d’environ 30 à 40°, légèrement en arrière du plan du corps.",
+      "Garder le pied parallèle au sol, sans rotation externe de hanche.",
+      "Redescendre lentement sans relâcher complètement."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "12 à 15",
+      "hold": "2 s en haut",
+      "frequency": "4 à 5 fois par semaine"
+    },
+    "progression": "Ajouter un lest de cheville, puis passer en charge (marche latérale, appui unipodal).",
+    "regression": "Amplitude réduite, sans lest, en appui contre un mur pour guider le mouvement.",
+    "precautions": [
+      "Éviter la bascule du bassin vers l’arrière (compensation par le tenseur du fascia lata).",
+      "Après prothèse de hanche, respecter les précautions de la voie d’abord."
+    ],
+    "pathologies": [
+      "coxarthrose",
+      "prothese-totale-hanche",
+      "syndrome-douloureux-femoro-patellaire"
+    ],
+    "tags": [
+      "fessiers",
+      "stabilité du bassin",
+      "marche"
+    ]
+  },
+  {
+    "id": "exo-20",
+    "slug": "step-down-controle",
+    "name": "Descente de marche contrôlée (step-down)",
+    "region": "genou",
+    "objective": "controle",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Quadriceps",
+      "Moyen fessier",
+      "Grand fessier"
+    ],
+    "equipment": [
+      "Marche ou step de 15 à 20 cm"
+    ],
+    "goal": "Améliorer le contrôle excentrique du genou et de la hanche dans la descente, geste fréquemment douloureux.",
+    "steps": [
+      "Debout sur la marche, appui unipodal, mains libres ou en léger appui.",
+      "Descendre lentement le talon opposé vers le sol en contrôlant la flexion du genou d’appui.",
+      "Vérifier l’alignement genou-pied, sans effondrement du bassin ni valgus dynamique.",
+      "Remonter en poussant sur la jambe d’appui."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 12 par côté",
+      "hold": "descente de 3 s",
+      "frequency": "3 fois par semaine"
+    },
+    "progression": "Augmenter la hauteur de la marche, ajouter une charge tenue, puis enchaîner en dynamique.",
+    "regression": "Marche plus basse, appui manuel, amplitude partielle.",
+    "precautions": [
+      "Douleur tolérable maximale de 3 sur 10 pendant l’exercice.",
+      "Réduire la hauteur si le bassin s’effondre ou si le genou part en dedans."
+    ],
+    "pathologies": [
+      "syndrome-douloureux-femoro-patellaire",
+      "reconstruction-lca",
+      "gonarthrose"
+    ],
+    "tags": [
+      "contrôle moteur",
+      "excentrique",
+      "escaliers"
+    ]
+  },
+  {
+    "id": "exo-21",
+    "slug": "endurance-cycloergometre",
+    "name": "Endurance sur cycloergomètre",
+    "region": "global",
+    "objective": "endurance",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Quadriceps",
+      "Fessiers",
+      "Système cardio-respiratoire"
+    ],
+    "equipment": [
+      "Cycloergomètre ou vélo d’appartement",
+      "Cardiofréquencemètre ou échelle de Borg"
+    ],
+    "goal": "Améliorer la capacité aérobie et la tolérance à l’effort avec des contraintes articulaires réduites.",
+    "steps": [
+      "Régler la hauteur de selle : genou légèrement fléchi en position basse (environ 15 à 20°).",
+      "Échauffement de 5 minutes à faible résistance.",
+      "Maintenir une intensité correspondant à 12-14 sur l’échelle de Borg (effort modéré à soutenu).",
+      "Récupération active de 5 minutes en fin de séance."
+    ],
+    "dosage": {
+      "sets": "1",
+      "reps": "20 à 30 minutes",
+      "hold": "—",
+      "frequency": "3 fois par semaine"
+    },
+    "progression": "Augmenter d’abord la durée, puis l’intensité ; envisager un travail fractionné si bien toléré.",
+    "regression": "Séances fractionnées de 5 à 10 minutes réparties dans la journée.",
+    "precautions": [
+      "Adapter l’intensité en cas de désaturation, de douleur thoracique ou de dyspnée inhabituelle : arrêter et réévaluer.",
+      "Sclérose en plaques : privilégier un environnement frais et fractionner en cas de fatigue."
+    ],
+    "pathologies": [
+      "coxarthrose",
+      "gonarthrose",
+      "bpco",
+      "sclerose-en-plaques"
+    ],
+    "tags": [
+      "aérobie",
+      "réentraînement",
+      "faible impact"
+    ]
+  },
+  {
+    "id": "exo-22",
+    "slug": "glissement-nerf-median",
+    "name": "Glissement du nerf médian",
+    "region": "poignet",
+    "objective": "mobilite",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Interface neuro-méningée du nerf médian"
+    ],
+    "equipment": [
+      "Aucun"
+    ],
+    "goal": "Restaurer le glissement du nerf médian dans le canal carpien et réduire les paresthésies.",
+    "steps": [
+      "Bras le long du corps, coude fléchi, poignet en position neutre.",
+      "Étendre le coude en associant une extension du poignet et des doigts, jusqu’à la première sensation de tension.",
+      "Revenir immédiatement en flexion du poignet lorsque le coude fléchit : le mouvement est alterné, jamais maintenu.",
+      "Réaliser des mouvements lents et amples, sans reproduire de paresthésies persistantes."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "10",
+      "hold": "aucun maintien",
+      "frequency": "2 à 3 fois par jour"
+    },
+    "progression": "Augmenter l’amplitude et ajouter une inclinaison cervicale controlatérale.",
+    "regression": "Réduire l’amplitude, travailler coude fléchi uniquement.",
+    "precautions": [
+      "Aucun étirement maintenu : le nerf ne se traite pas comme un muscle.",
+      "Arrêter si les paresthésies persistent plus de quelques minutes après l’exercice."
+    ],
+    "pathologies": [
+      "syndrome-canal-carpien"
+    ],
+    "tags": [
+      "neurodynamique",
+      "nerf médian",
+      "canal carpien"
+    ]
+  },
+  {
+    "id": "exo-23",
+    "slug": "glissement-tendineux-doigts",
+    "name": "Glissement tendineux des doigts",
+    "region": "poignet",
+    "objective": "mobilite",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Fléchisseurs superficiels et profonds des doigts"
+    ],
+    "equipment": [
+      "Aucun"
+    ],
+    "goal": "Entretenir le glissement tendineux et la mobilité des doigts, notamment après chirurgie du canal carpien.",
+    "steps": [
+      "Main ouverte, doigts tendus, poignet neutre.",
+      "Passer par les positions successives : crochet, poing plat, poing complet.",
+      "Marquer une courte pause dans chaque position sans forcer.",
+      "Revenir à la main ouverte entre chaque série."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "10 cycles complets",
+      "hold": "2 à 3 s par position",
+      "frequency": "3 fois par jour"
+    },
+    "progression": "Ajouter une résistance légère (pâte de rééducation) une fois la mobilité indolore.",
+    "regression": "Limiter aux deux premières positions, amplitude partielle.",
+    "precautions": [
+      "Après chirurgie, respecter le protocole et la cicatrisation cutanée.",
+      "Œdème ou douleur croissante : réduire le volume et réévaluer."
+    ],
+    "pathologies": [
+      "syndrome-canal-carpien"
+    ],
+    "tags": [
+      "main",
+      "post-opératoire",
+      "mobilité"
+    ]
+  },
+  {
+    "id": "exo-24",
+    "slug": "contraction-perineale-progressive",
+    "name": "Contraction périnéale progressive",
+    "region": "global",
+    "objective": "force",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Plancher pelvien (élévateur de l’anus)"
+    ],
+    "equipment": [
+      "Aucun"
+    ],
+    "goal": "Renforcer le plancher pelvien après vérification de la qualité de la contraction.",
+    "steps": [
+      "Position confortable, allongée ou assise, respiration libre.",
+      "Réaliser une contraction ascendante du périnée, comme pour retenir un gaz, sans serrer les fesses ni les cuisses.",
+      "Maintenir la contraction en respirant normalement, puis relâcher complètement.",
+      "Respecter un temps de repos au moins égal au temps de contraction."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 12",
+      "hold": "5 à 8 s (progressif)",
+      "frequency": "3 fois par semaine minimum"
+    },
+    "progression": "Allonger le maintien, augmenter les répétitions, puis passer en position debout et à l’effort.",
+    "regression": "Maintien de 2 à 3 secondes, position allongée, guidage par le thérapeute.",
+    "precautions": [
+      "Ne pas pousser vers le bas (inversion de commande) : à vérifier avant tout renforcement.",
+      "Ne pas s’entraîner en interrompant le jet urinaire.",
+      "Douleur pelvienne : interrompre et réévaluer."
+    ],
+    "pathologies": [
+      "incontinence-urinaire-effort"
+    ],
+    "tags": [
+      "périnée",
+      "post-partum",
+      "renforcement"
+    ]
+  },
+  {
+    "id": "exo-25",
+    "slug": "verrouillage-perineal-effort",
+    "name": "Verrouillage périnéal avant l’effort",
+    "region": "global",
+    "objective": "controle",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Plancher pelvien",
+      "Muscles profonds du tronc"
+    ],
+    "equipment": [
+      "Aucun",
+      "Charge légère en progression"
+    ],
+    "goal": "Automatiser la contraction périnéale juste avant un effort pour prévenir les fuites.",
+    "steps": [
+      "Anticiper l’effort : contracter le périnée avant la toux, l’éternuement ou le port de charge.",
+      "Maintenir la contraction pendant toute la durée de l’effort.",
+      "Relâcher complètement après l’effort.",
+      "Répéter dans des situations de plus en plus proches du quotidien (soulever un sac, monter un escalier, sauter)."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "10 efforts simulés",
+      "hold": "durée de l’effort",
+      "frequency": "Quotidien"
+    },
+    "progression": "Augmenter la charge et l’imprévisibilité de l’effort, jusqu’aux activités sportives.",
+    "regression": "Efforts de faible intensité (toux légère), position allongée puis assise.",
+    "precautions": [
+      "Ne pas bloquer la respiration : le verrouillage n’est pas une manœuvre de Valsalva.",
+      "Reprendre l’apprentissage de la contraction si des fuites persistent malgré le verrouillage."
+    ],
+    "pathologies": [
+      "incontinence-urinaire-effort"
+    ],
+    "tags": [
+      "périnée",
+      "automatisation",
+      "effort"
+    ]
+  },
+  {
+    "id": "exo-26",
+    "slug": "renforcement-plantaire-avec-serviette",
+    "name": "Élévation sur pointes avec serviette sous les orteils",
+    "region": "cheville",
+    "objective": "force",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Triceps sural",
+      "Fléchisseurs des orteils",
+      "Muscles intrinsèques du pied"
+    ],
+    "equipment": [
+      "Marche ou step",
+      "Serviette roulée"
+    ],
+    "goal": "Charger progressivement le fascia plantaire et les fléchisseurs plantaires dans la fasciopathie plantaire.",
+    "steps": [
+      "Placer une serviette roulée sous les orteils, avant-pied en appui sur une marche.",
+      "Monter lentement sur la pointe du pied (3 secondes).",
+      "Marquer une pause de 2 secondes en position haute.",
+      "Redescendre lentement en 3 secondes sous le niveau de la marche."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 12",
+      "hold": "tempo 3-2-3",
+      "frequency": "Tous les deux jours"
+    },
+    "progression": "Passer en appui unipodal, puis ajouter une charge (sac à dos lesté) toutes les deux semaines.",
+    "regression": "Appui bipodal sur sol plat, sans serviette, amplitude réduite.",
+    "precautions": [
+      "Douleur du talon acceptable jusqu’à 3 sur 10, réévaluée le lendemain matin.",
+      "Réduire le volume si la douleur des premiers pas augmente pendant plus de deux jours."
+    ],
+    "pathologies": [
+      "fasciopathie-plantaire",
+      "tendinopathie-achilleenne"
+    ],
+    "tags": [
+      "charge progressive",
+      "talalgie",
+      "pied"
+    ]
+  },
+  {
+    "id": "exo-27",
+    "slug": "rotation-externe-90-90-elastique",
+    "name": "Rotation externe d’épaule en position 90/90",
+    "region": "epaule",
+    "objective": "controle",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Infra-épineux",
+      "Petit rond",
+      "Stabilisateurs de la scapula"
+    ],
+    "equipment": [
+      "Bande élastique"
+    ],
+    "goal": "Renforcer le contrôle des rotateurs en position d’armé, position à risque dans l’instabilité d’épaule.",
+    "steps": [
+      "Debout, élastique fixé devant à hauteur d’épaule, bras à 90° d’abduction et coude à 90°.",
+      "Réaliser une rotation externe contrôlée jusqu’à l’amplitude autorisée.",
+      "Maintenir l’alignement scapulaire, sans compensation du tronc.",
+      "Revenir lentement en contrôlant la rotation interne."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "10 à 12",
+      "hold": "2 s en fin de course",
+      "frequency": "3 à 4 fois par semaine"
+    },
+    "progression": "Augmenter la résistance et l’amplitude de rotation externe, puis ajouter des perturbations manuelles.",
+    "regression": "Travailler coude au corps ou à 45° d’abduction, amplitude réduite.",
+    "precautions": [
+      "Après luxation, respecter les amplitudes autorisées : la position d’armé est introduite en dernier.",
+      "Arrêter en cas d’appréhension ou de sensation d’instabilité."
+    ],
+    "pathologies": [
+      "instabilite-glenohumerale",
+      "tendinopathie-coiffe-rotateurs"
+    ],
+    "tags": [
+      "coiffe",
+      "instabilité",
+      "armé du bras"
+    ]
+  },
+  {
+    "id": "exo-28",
+    "slug": "marche-en-double-tache",
+    "name": "Marche en double tâche",
+    "region": "global",
+    "objective": "controle",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Contrôle postural global",
+      "Membres inférieurs"
+    ],
+    "equipment": [
+      "Parcours dégagé",
+      "Objets simples (balle, plots)"
+    ],
+    "goal": "Améliorer la marche dans des conditions proches du quotidien, où l’attention est partagée.",
+    "steps": [
+      "Marcher à vitesse confortable sur un parcours sécurisé.",
+      "Ajouter une tâche cognitive : compter à rebours, énumérer des mots, répondre à des questions simples.",
+      "Puis ajouter une tâche motrice : porter un plateau, manipuler une balle, contourner des plots.",
+      "Observer la dégradation éventuelle du schéma de marche et réduire la difficulté si elle survient."
+    ],
+    "dosage": {
+      "sets": "3 à 4",
+      "reps": "parcours de 20 à 30 m",
+      "hold": "—",
+      "frequency": "2 à 3 fois par semaine"
+    },
+    "progression": "Complexifier la tâche cognitive, réduire la largeur du parcours, ajouter des changements de direction.",
+    "regression": "Supprimer la double tâche, marcher avec appui ou accompagnement.",
+    "precautions": [
+      "Environnement sécurisé et surveillance rapprochée : le risque de chute augmente en double tâche.",
+      "Interrompre si la qualité de la marche se dégrade nettement."
+    ],
+    "pathologies": [
+      "avc-hemiplegie",
+      "sclerose-en-plaques"
+    ],
+    "tags": [
+      "double tâche",
+      "marche",
+      "prévention des chutes"
+    ]
+  },
+  {
+    "id": "exo-29",
+    "slug": "etirement-specifique-fascia-plantaire",
+    "name": "Étirement spécifique du fascia plantaire",
+    "region": "cheville",
+    "objective": "etirement",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Fascia plantaire",
+      "Fléchisseurs des orteils"
+    ],
+    "equipment": [
+      "Aucun"
+    ],
+    "goal": "Réduire la douleur des premiers pas du matin dans la fasciopathie plantaire.",
+    "steps": [
+      "Assis, croiser la jambe atteinte sur la jambe opposée.",
+      "Saisir la base des orteils et les amener en extension jusqu’à sentir la tension de l’arche plantaire.",
+      "Vérifier la mise en tension en palpant le fascia, qui doit être tendu sous les doigts.",
+      "Maintenir la position puis relâcher."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "1 par série",
+      "hold": "30 s",
+      "frequency": "Avant le premier lever, puis 2 à 3 fois par jour"
+    },
+    "progression": "Réaliser l’étirement en charge, en fente avant, une fois indolore.",
+    "regression": "Réduire la durée du maintien à 10 à 15 secondes.",
+    "precautions": [
+      "Étirement à réaliser avant les premiers pas du matin pour être efficace.",
+      "Ne pas remplacer le renforcement en charge : l’étirement seul est insuffisant."
+    ],
+    "pathologies": [
+      "fasciopathie-plantaire"
+    ],
+    "tags": [
+      "étirement",
+      "talalgie",
+      "fascia plantaire"
+    ]
+  },
+  {
+    "id": "exo-30",
+    "slug": "exercices-de-brandt-daroff",
+    "name": "Exercices de Brandt-Daroff",
+    "region": "tete",
+    "objective": "controle",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Système vestibulaire (habituation)"
+    ],
+    "equipment": [
+      "Lit ou table ferme"
+    ],
+    "goal": "Favoriser l’habituation vestibulaire et réduire les vertiges positionnels résiduels ou récidivants.",
+    "steps": [
+      "Assis au bord du lit, tourner la tête de 45° d’un côté.",
+      "Se coucher rapidement sur le côté opposé à la rotation, en gardant la tête tournée, et rester 30 secondes ou jusqu’à la fin du vertige.",
+      "Revenir en position assise et attendre 30 secondes.",
+      "Répéter de l’autre côté."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "5 cycles complets",
+      "hold": "30 s par position",
+      "frequency": "2 à 3 fois par jour, jusqu’à disparition des symptômes"
+    },
+    "progression": "Réduire progressivement la fréquence quotidienne dès que les vertiges s’estompent.",
+    "regression": "Réaliser les mouvements plus lentement et diminuer le nombre de cycles.",
+    "precautions": [
+      "Provoque volontairement un vertige bref : prévenir le patient et sécuriser l’environnement.",
+      "À réserver aux formes confirmées : une manœuvre de repositionnement est plus efficace en première intention.",
+      "Arrêter en cas de vertige prolongé, de céphalée ou de signes neurologiques."
+    ],
+    "pathologies": [
+      "vertige-positionnel-paroxystique-benin"
+    ],
+    "tags": [
+      "vestibulaire",
+      "habituation",
+      "auto-rééducation"
+    ]
+  },
+  {
+    "id": "exo-31",
+    "slug": "stabilisation-du-regard",
+    "name": "Stabilisation du regard (réflexe vestibulo-oculaire)",
+    "region": "tete",
+    "objective": "controle",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Réflexe vestibulo-oculaire",
+      "Muscles cervicaux"
+    ],
+    "equipment": [
+      "Cible visuelle (lettre ou point sur une carte)"
+    ],
+    "goal": "Améliorer la stabilité du regard pendant les mouvements de tête et réduire l’instabilité visuelle.",
+    "steps": [
+      "Fixer une cible tenue à environ 40 cm, à hauteur des yeux.",
+      "Tourner la tête horizontalement de gauche à droite en gardant la cible parfaitement nette.",
+      "Maintenir une amplitude confortable et une vitesse permettant de garder la cible nette.",
+      "Répéter dans le plan vertical."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "1 par plan",
+      "hold": "30 à 60 s de mouvement continu",
+      "frequency": "3 fois par jour"
+    },
+    "progression": "Augmenter la vitesse, passer en position debout, puis sur surface instable ou avec fond visuel chargé.",
+    "regression": "Diminuer la vitesse et la durée, travailler assis avec un fond uni.",
+    "precautions": [
+      "Une gêne modérée est attendue : elle doit s’estomper en quelques minutes après l’exercice.",
+      "Arrêter en cas de nausées importantes ou de céphalée persistante."
+    ],
+    "pathologies": [
+      "vertige-positionnel-paroxystique-benin",
+      "avc-hemiplegie"
+    ],
+    "tags": [
+      "vestibulaire",
+      "regard",
+      "instabilité"
+    ]
+  },
+  {
+    "id": "exo-32",
+    "slug": "marche-avec-indicage-rythmique",
+    "name": "Marche avec indiçage rythmique",
+    "region": "global",
+    "objective": "controle",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Membres inférieurs",
+      "Contrôle postural"
+    ],
+    "equipment": [
+      "Métronome ou application rythmique",
+      "Repères visuels au sol (bandes adhésives)"
+    ],
+    "goal": "Améliorer immédiatement la longueur de pas et la vitesse de marche, et franchir les épisodes de freezing.",
+    "steps": [
+      "Déterminer la cadence spontanée du patient, puis régler le métronome environ 10 % au-dessus.",
+      "Marcher en synchronisant chaque pas sur le signal sonore, consigne centrée sur des « grands pas ».",
+      "Ajouter des repères visuels au sol dans les zones de blocage (seuils de porte, demi-tours).",
+      "Enseigner une stratégie de déblocage : transfert du poids latéral, pas en arrière puis départ sur un grand pas."
+    ],
+    "dosage": {
+      "sets": "4 à 6",
+      "reps": "parcours de 20 à 30 m",
+      "hold": "—",
+      "frequency": "3 à 5 fois par semaine"
+    },
+    "progression": "Réduire progressivement l’indice sonore, complexifier le parcours, ajouter des demi-tours et une double tâche.",
+    "regression": "Marcher avec appui ou accompagnement, parcours court et dégagé, indiçage permanent.",
+    "precautions": [
+      "Programmer la séance pendant une phase « on » du traitement.",
+      "Sécuriser le parcours : le freezing survient surtout dans les passages étroits et les demi-tours.",
+      "Surveiller la fatigue et l’hypotension orthostatique."
+    ],
+    "pathologies": [
+      "maladie-de-parkinson"
+    ],
+    "tags": [
+      "Parkinson",
+      "indiçage",
+      "marche",
+      "freezing"
+    ]
+  },
+  {
+    "id": "exo-33",
+    "slug": "mouvements-de-grande-amplitude",
+    "name": "Mouvements de grande amplitude",
+    "region": "global",
+    "objective": "mobilite",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Chaînes d’extension du tronc et des membres"
+    ],
+    "equipment": [
+      "Chaise",
+      "Miroir (facultatif)"
+    ],
+    "goal": "Contrer la réduction d’amplitude du mouvement (bradykinésie) par un entraînement volontairement exagéré.",
+    "steps": [
+      "Réaliser des mouvements amples et volontairement exagérés : grands pas, grands balancements de bras, extension du tronc.",
+      "Insister sur l’amplitude maximale et sur l’effort perçu, avec des consignes de type « plus grand, plus fort ».",
+      "Associer un retour visuel au miroir ou une correction verbale immédiate.",
+      "Transférer ensuite l’amplitude aux gestes du quotidien (se lever, se retourner, écrire)."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 10 par mouvement",
+      "hold": "2 s en fin d’amplitude",
+      "frequency": "4 à 5 fois par semaine"
+    },
+    "progression": "Augmenter le nombre de répétitions et transférer vers des tâches complexes et fonctionnelles.",
+    "regression": "Réaliser assis, amplitudes réduites, guidage manuel.",
+    "precautions": [
+      "Surveiller l’équilibre lors des mouvements amples debout.",
+      "Adapter en cas d’hypotension orthostatique ou de fatigue marquée."
+    ],
+    "pathologies": [
+      "maladie-de-parkinson"
+    ],
+    "tags": [
+      "Parkinson",
+      "amplitude",
+      "bradykinésie"
+    ]
+  },
+  {
+    "id": "exo-34",
+    "slug": "extension-genou-passive-talon-sureleve",
+    "name": "Extension passive du genou, talon surélevé",
+    "region": "genou",
+    "objective": "mobilite",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Ischio-jambiers et structures postérieures du genou (mise en tension douce)"
+    ],
+    "equipment": [
+      "Coussin ou cale sous le talon",
+      "Charge légère (facultative)"
+    ],
+    "goal": "Récupérer l’extension complète du genou, objectif prioritaire après arthroplastie.",
+    "steps": [
+      "En décubitus dorsal ou assis allongé, poser le talon sur une cale, mollet et genou dans le vide.",
+      "Laisser le genou s’étendre sous l’effet de la pesanteur, cuisse relâchée.",
+      "Ajouter éventuellement une charge légère au-dessus de la rotule, sans douleur vive.",
+      "Alterner avec des contractions isométriques du quadriceps pour verrouiller l’extension acquise."
+    ],
+    "dosage": {
+      "sets": "3 à 4",
+      "reps": "1 par série",
+      "hold": "5 à 10 min",
+      "frequency": "Quotidien, plusieurs fois par jour"
+    },
+    "progression": "Augmenter la durée puis la charge ; associer un travail actif d’extension terminale.",
+    "regression": "Réduire la durée et supprimer la charge.",
+    "precautions": [
+      "Douleur tolérable : une tension postérieure est normale, une douleur vive ne l’est pas.",
+      "Surveiller l’œdème et les points d’appui cutanés.",
+      "Déficit d’extension persistant à six semaines : alerter le chirurgien."
+    ],
+    "pathologies": [
+      "prothese-totale-genou",
+      "reconstruction-lca"
+    ],
+    "tags": [
+      "extension",
+      "post-opératoire",
+      "genou"
+    ]
+  },
+  {
+    "id": "exo-35",
+    "slug": "flexion-genou-active-aidee",
+    "name": "Flexion active aidée du genou",
+    "region": "genou",
+    "objective": "mobilite",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Ischio-jambiers",
+      "Quadriceps (contrôle excentrique)"
+    ],
+    "equipment": [
+      "Chaise à roulettes, serviette ou mur"
+    ],
+    "goal": "Récupérer progressivement la flexion du genou après arthroplastie ou immobilisation.",
+    "steps": [
+      "Assis, pied posé sur une serviette ou sur le sol lisse.",
+      "Faire glisser le pied vers l’arrière pour fléchir le genou jusqu’au seuil de tension tolérable.",
+      "Maintenir quelques secondes, puis revenir en position de départ.",
+      "Variante : glissement du talon le long du mur en décubitus dorsal."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "10 à 15",
+      "hold": "5 à 10 s en fin d’amplitude",
+      "frequency": "2 à 3 fois par jour"
+    },
+    "progression": "Augmenter l’amplitude et la durée du maintien ; passer au vélo lorsque la flexion le permet.",
+    "regression": "Réduire l’amplitude, travailler en décharge complète.",
+    "precautions": [
+      "Ne pas forcer sur une articulation chaude et œdématiée : glacer et réévaluer.",
+      "Objectif de 110 à 120° à trois mois après prothèse : alerter si la progression stagne."
+    ],
+    "pathologies": [
+      "prothese-totale-genou",
+      "lesion-meniscale"
+    ],
+    "tags": [
+      "flexion",
+      "post-opératoire",
+      "genou"
+    ]
+  },
+  {
+    "id": "exo-36",
+    "slug": "auto-agrandissement-axial",
+    "name": "Auto-agrandissement axial et auto-correction",
+    "region": "rachis",
+    "objective": "controle",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Érecteurs du rachis",
+      "Muscles profonds du tronc"
+    ],
+    "equipment": [
+      "Miroir",
+      "Tapis"
+    ],
+    "goal": "Apprendre à l’adolescent une correction posturale tridimensionnelle active, reproductible au quotidien.",
+    "steps": [
+      "Debout devant un miroir, pieds à la largeur du bassin, bassin en position neutre.",
+      "Grandir le rachis en poussant le sommet du crâne vers le haut, sans monter les épaules ni cambrer.",
+      "Ajouter la correction spécifique de la courbure (translation du tronc, ouverture de la concavité) selon le schéma défini.",
+      "Maintenir la correction en respirant normalement, puis relâcher progressivement."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "8 à 10",
+      "hold": "10 à 20 s",
+      "frequency": "Quotidien"
+    },
+    "progression": "Maintenir la correction en position assise, à la marche, puis pendant une activité (port de sac, sport).",
+    "regression": "Travailler allongé ou assis avec guidage manuel et retour au miroir.",
+    "precautions": [
+      "La correction doit être active et indolore : aucune contrainte passive forcée.",
+      "Le programme est personnalisé selon le type de courbure : il ne se transpose pas d’un patient à l’autre."
+    ],
+    "pathologies": [
+      "scoliose-idiopathique-adolescent"
+    ],
+    "tags": [
+      "scoliose",
+      "posture",
+      "adolescent"
+    ]
+  },
+  {
+    "id": "exo-37",
+    "slug": "mobilite-rachidienne-globale",
+    "name": "Mobilité rachidienne globale et ampliation thoracique",
+    "region": "rachis",
+    "objective": "mobilite",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Rachis dans les trois plans",
+      "Muscles intercostaux",
+      "Diaphragme"
+    ],
+    "equipment": [
+      "Tapis",
+      "Bâton (facultatif)"
+    ],
+    "goal": "Entretenir la mobilité rachidienne et l’ampliation thoracique dans les rhumatismes inflammatoires.",
+    "steps": [
+      "Enchaîner flexion-extension, inclinaisons et rotations du rachis, en amplitude confortable.",
+      "Ajouter des extensions thoraciques en quadrupédie ou sur rouleau.",
+      "Associer des inspirations profondes en fin d’amplitude d’ouverture thoracique.",
+      "Terminer par des mouvements globaux amples, bras au-dessus de la tête."
+    ],
+    "dosage": {
+      "sets": "2",
+      "reps": "10 par direction",
+      "hold": "3 à 5 s",
+      "frequency": "Quotidien, matin de préférence"
+    },
+    "progression": "Augmenter l’amplitude et ajouter du renforcement postural en extension.",
+    "regression": "Amplitudes réduites, réalisation assise, en période de poussée.",
+    "precautions": [
+      "Adapter sans interrompre pendant les poussées inflammatoires.",
+      "Rachis ankylosé : éviter les mobilisations forcées, risque fracturaire."
+    ],
+    "pathologies": [
+      "spondyloarthrite-axiale",
+      "cervicalgie-commune"
+    ],
+    "tags": [
+      "rhumatisme inflammatoire",
+      "mobilité",
+      "respiration"
+    ]
+  },
+  {
+    "id": "exo-38",
+    "slug": "renforcement-assis-avec-elastique",
+    "name": "Renforcement des membres inférieurs assis, avec élastique",
+    "region": "global",
+    "objective": "force",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Quadriceps",
+      "Fléchisseurs de hanche",
+      "Triceps sural"
+    ],
+    "equipment": [
+      "Chaise stable",
+      "Bande élastique"
+    ],
+    "goal": "Renforcer les membres inférieurs à charge modérée chez le patient déconditionné ou fragile.",
+    "steps": [
+      "Assis, dos soutenu, élastique fixé à la cheville ou sous le pied.",
+      "Réaliser une extension de genou contrôlée, puis revenir lentement.",
+      "Alterner avec des flexions de hanche et des montées de pointes assises.",
+      "Respirer normalement : ne jamais bloquer la respiration pendant l’effort."
+    ],
+    "dosage": {
+      "sets": "2 à 3",
+      "reps": "10 à 15",
+      "hold": "1 à 2 s",
+      "frequency": "2 à 3 fois par semaine"
+    },
+    "progression": "Augmenter la résistance de l’élastique, puis passer aux exercices debout et aux levers de chaise.",
+    "regression": "Sans élastique, amplitude réduite, moins de répétitions.",
+    "precautions": [
+      "Insuffisance cardiaque : surveiller la dyspnée, la fréquence cardiaque et l’échelle de Borg ; proscrire le blocage respiratoire.",
+      "Interrompre en cas de douleur thoracique, de palpitations ou de vertiges."
+    ],
+    "pathologies": [
+      "insuffisance-cardiaque-chronique",
+      "fracture-extremite-superieure-femur",
+      "bpco"
+    ],
+    "tags": [
+      "renforcement",
+      "déconditionnement",
+      "réadaptation"
+    ]
+  },
+  {
+    "id": "exo-39",
+    "slug": "marche-fractionnee",
+    "name": "Marche fractionnée",
+    "region": "global",
+    "objective": "endurance",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Membres inférieurs",
+      "Système cardio-respiratoire"
+    ],
+    "equipment": [
+      "Parcours plat sécurisé",
+      "Chronomètre",
+      "Échelle de Borg"
+    ],
+    "goal": "Augmenter progressivement la distance de marche chez les patients limités par la dyspnée, la douleur ou la claudication.",
+    "steps": [
+      "Déterminer la distance ou la durée tolérée sans symptôme limitant.",
+      "Marcher jusqu’à environ 80 % de ce seuil, puis récupérer (assis ou penché en avant selon la pathologie).",
+      "Répéter la séquence plusieurs fois dans la séance.",
+      "Noter la distance totale cumulée et la sensation d’effort."
+    ],
+    "dosage": {
+      "sets": "4 à 6",
+      "reps": "séquences de 2 à 5 min",
+      "hold": "récupération de 1 à 2 min",
+      "frequency": "4 à 5 fois par semaine"
+    },
+    "progression": "Allonger les séquences avant d’allonger la distance totale, puis réduire les temps de récupération.",
+    "regression": "Séquences plus courtes, récupérations plus longues, parcours avec appuis.",
+    "precautions": [
+      "Sténose lombaire : utiliser les positions en flexion pour la récupération.",
+      "Insuffisance cardiaque : surveiller la dyspnée et arrêter en cas de douleur thoracique.",
+      "Adapter l’environnement en cas de forte chaleur."
+    ],
+    "pathologies": [
+      "stenose-lombaire",
+      "insuffisance-cardiaque-chronique",
+      "bpco"
+    ],
+    "tags": [
+      "endurance",
+      "marche",
+      "fractionné"
+    ]
+  },
+  {
+    "id": "exo-40",
+    "slug": "exercices-sous-compression-membre-superieur",
+    "name": "Exercices du membre supérieur sous compression",
+    "region": "epaule",
+    "objective": "mobilite",
+    "difficulty": "facile",
+    "targetMuscles": [
+      "Muscles du membre supérieur",
+      "Pompe musculaire favorisant le retour lymphatique"
+    ],
+    "equipment": [
+      "Manchon ou bandage de compression",
+      "Petits haltères ou élastique en progression"
+    ],
+    "goal": "Favoriser le retour lymphatique et entretenir la mobilité de l’épaule dans le lymphœdème.",
+    "steps": [
+      "Mettre en place la compression prescrite avant de débuter.",
+      "Enchaîner des mouvements amples et rythmés : ouverture-fermeture de la main, flexion-extension du coude, élévations d’épaule.",
+      "Progresser des mouvements distaux vers les mouvements proximaux.",
+      "Terminer par des mouvements respiratoires amples, qui participent au drainage."
+    ],
+    "dosage": {
+      "sets": "2 à 3",
+      "reps": "10 à 15 par mouvement",
+      "hold": "—",
+      "frequency": "Quotidien"
+    },
+    "progression": "Ajouter une résistance légère puis un renforcement progressif, toujours sous compression.",
+    "regression": "Mouvements sans résistance, amplitude réduite, en position assise.",
+    "precautions": [
+      "Ne jamais s’entraîner sans la compression prescrite.",
+      "Rougeur, chaleur ou fièvre : interrompre et orienter en urgence (érysipèle).",
+      "Augmenter la charge par paliers et surveiller les circonférences."
+    ],
+    "pathologies": [
+      "lymphoedeme-apres-cancer-du-sein"
+    ],
+    "tags": [
+      "lymphœdème",
+      "compression",
+      "épaule"
+    ]
+  },
+  {
+    "id": "exo-41",
+    "slug": "reeducation-faciale-devant-miroir",
+    "name": "Rééducation faciale analytique devant miroir",
+    "region": "tete",
+    "objective": "controle",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Muscles peauciers de la face (orbiculaires, zygomatiques, frontal)"
+    ],
+    "equipment": [
+      "Miroir"
+    ],
+    "goal": "Restaurer la symétrie et la précision des mimiques, en limitant les syncinésies.",
+    "steps": [
+      "Devant le miroir, réaliser des mouvements analytiques de faible intensité : hausser un sourcil, fermer doucement l’œil, esquisser un sourire.",
+      "Contrôler visuellement la symétrie et l’absence de mouvements parasites d’autres zones du visage.",
+      "Relâcher complètement entre chaque répétition.",
+      "Transférer ensuite vers des mimiques fonctionnelles : parler, souffler, mastiquer."
+    ],
+    "dosage": {
+      "sets": "2 à 3",
+      "reps": "5 à 10 par mouvement",
+      "hold": "3 s",
+      "frequency": "2 fois par jour, séances courtes"
+    },
+    "progression": "Augmenter la précision et la finesse du contrôle, puis intégrer des expressions complètes.",
+    "regression": "Diminuer l’intensité et le nombre de mouvements ; guidage manuel du thérapeute.",
+    "precautions": [
+      "Proscrire les contractions maximales et les grimaces forcées : elles favorisent les syncinésies.",
+      "Séances courtes et fréquentes plutôt que longues et intenses.",
+      "Poursuivre la protection oculaire tant que la fermeture est incomplète."
+    ],
+    "pathologies": [
+      "paralysie-faciale-peripherique"
+    ],
+    "tags": [
+      "paralysie faciale",
+      "miroir",
+      "précision"
+    ]
+  },
+  {
+    "id": "exo-42",
+    "slug": "renforcement-rotateurs-externes-hanche",
+    "name": "Renforcement des rotateurs externes de hanche",
+    "region": "hanche",
+    "objective": "force",
+    "difficulty": "modere",
+    "targetMuscles": [
+      "Pelvi-trochantériens",
+      "Moyen fessier (faisceau postérieur)",
+      "Grand fessier"
+    ],
+    "equipment": [
+      "Bande élastique",
+      "Tapis"
+    ],
+    "goal": "Renforcer les rotateurs de hanche pour améliorer le contrôle du membre inférieur et diminuer les contraintes antérieures.",
+    "steps": [
+      "Couché sur le côté, hanches et genoux fléchis à environ 45°, élastique autour des genoux.",
+      "Ouvrir le genou du dessus en rotation externe, sans laisser basculer le bassin en arrière.",
+      "Maintenir brièvement la position haute.",
+      "Redescendre lentement en contrôlant la résistance de l’élastique."
+    ],
+    "dosage": {
+      "sets": "3",
+      "reps": "12 à 15",
+      "hold": "2 s",
+      "frequency": "3 à 4 fois par semaine"
+    },
+    "progression": "Élastique plus résistant, puis exercices debout et en appui unipodal.",
+    "regression": "Sans élastique, amplitude réduite.",
+    "precautions": [
+      "Éviter la bascule du bassin, qui annule l’effet recherché.",
+      "Rester en dessous du seuil douloureux inguinal dans le syndrome fémoro-acétabulaire."
+    ],
+    "pathologies": [
+      "syndrome-femoro-acetabulaire",
+      "coxarthrose",
+      "syndrome-douloureux-femoro-patellaire"
+    ],
+    "tags": [
+      "hanche",
+      "rotateurs",
+      "contrôle"
+    ]
+  }
+]

@@ -1,0 +1,215 @@
+/* =====================================================================
+   KINEDOK ACADÉMIE — Design tokens
+   ---------------------------------------------------------------------
+   Point d'entrée UNIQUE de l'identité visuelle KINEDOK.
+   Pour aligner l'académie sur kinedokdz.com au pixel près, il suffit de
+   remplacer les valeurs ci-dessous : aucun composant ne code une couleur
+   en dur. Les mêmes noms de tokens sont repris dans tailwind.config.ts
+   (cf. docs/DESIGN-SYSTEM.md) lors du passage à Next.js.
+   ===================================================================== */
+
+:root {
+  /* --- Couleurs de marque (relevées sur le logo KINEDOK) ------------- */
+  --kinedok-primary: #2BBECD;
+  /* turquoise du chronomètre et de « dok » */
+  --kinedok-primary-600: #1FA6B6;
+  --kinedok-primary-700: #17838F;
+  --kinedok-primary-soft: #E4F7F9;
+  /* fonds de sections, badges */
+  --kinedok-primary-softer: #F1FBFC;
+
+  --kinedok-secondary: #37474F;
+  /* bleu ardoise du mot « Kine » */
+  --kinedok-secondary-600: #2B383F;
+  --kinedok-secondary-soft: #EDF1F3;
+
+  --kinedok-accent: #0FB3A6;
+  /* accent secondaire (progression) */
+
+  /* Ornements : soulignés, griffonnages, étoiles. Jamais un texte porteur
+     de sens — leur contraste sur blanc ne passerait pas les seuils. */
+  --kinedok-doodle: #F2B134;
+  --kinedok-doodle-soft: #FDF1D6;
+
+  /* Surfaces sombres permanentes : pied de page, panneau des pages de
+     connexion, toasts et boutons secondaires. Elles ne suivent PAS
+     l'inversion clair/sombre — sans quoi le pied de page deviendrait clair
+     avec un texte clair en thème sombre. */
+  --kinedok-footer-bg: #37474F;
+  --kinedok-footer-text: #EDF3F7;
+  --kinedok-footer-link: #C6D6E3;
+  --kinedok-footer-muted: #A6BACA;
+  --kinedok-footer-line: rgba(255, 255, 255, 0.14);
+  --kinedok-panel-from: #37474F;
+  --kinedok-panel-to: #17838F;
+  --kinedok-on-dark: #FFFFFF;
+
+  /* --- Surfaces & texte --------------------------------------------- */
+  --kinedok-background: #FFFFFF;
+  --kinedok-surface: #FFFFFF;
+  --kinedok-surface-alt: #F6FAFB;
+  --kinedok-surface-sunken: #EFF4F6;
+  --kinedok-text: #1F2D3A;
+  --kinedok-muted: #64748B;
+  --kinedok-border: #E2E8ED;
+  --kinedok-border-strong: #CBD5DD;
+
+  /* --- États --------------------------------------------------------- */
+  --kinedok-success: #167C56;
+  --kinedok-success-soft: #E6F5EF;
+  --kinedok-warning: #B45309;
+  --kinedok-warning-soft: #FDF3E4;
+  --kinedok-danger: #C02626;
+  --kinedok-danger-soft: #FBEBEB;
+  --kinedok-live: #D92D20;
+  /* badge « en direct » */
+  --kinedok-info: #1D6FA5;
+  --kinedok-info-soft: #E8F2F9;
+
+  /* --- Typographie ---------------------------------------------------- */
+  /* Même police que kinedok.dz : passer d'une plateforme à l'autre ne doit
+     pas se voir. L'arabe prend Cairo, dessinée avec les mêmes proportions
+     — Plus Jakarta Sans ne couvre pas l'alphabet. */
+  --font-sans: "Plus Jakarta Sans", "Segoe UI", Inter, "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-arabic: "Cairo", "Noto Naskh Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-mono: "Cascadia Mono", Consolas, "SF Mono", ui-monospace, monospace;
+  /* Manuscrite, réservée aux mots mis en relief. Le repli `cursive` suffit
+     si la police distante ne charge pas : le texte reste lisible, il perd
+     seulement son caractère. */
+  --font-script: "Caveat", "Segoe Script", "Bradley Hand", cursive;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 2.875rem;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* --- Espacement (échelle 4px) --------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* --- Rayons ---------------------------------------------------------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* --- Ombres (discrètes, registre médical) ---------------------------- */
+  --shadow-xs: 0 1px 2px rgba(31, 45, 58, 0.06);
+  --shadow-sm: 0 1px 3px rgba(31, 45, 58, 0.08), 0 1px 2px rgba(31, 45, 58, 0.04);
+  --shadow-md: 0 4px 12px rgba(31, 45, 58, 0.08);
+  --shadow-lg: 0 12px 32px rgba(31, 45, 58, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(35, 184, 199, 0.35);
+
+  /* --- Layout ---------------------------------------------------------- */
+  --container-max: 1200px;
+  --container-narrow: 780px;
+  --header-height: 68px;
+  --transition-fast: 120ms ease;
+  --transition: 200ms ease;
+}
+
+/* Mode sombre : suit le réglage système, sans changer le code composant. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --kinedok-primary: #35C7D6;
+    --kinedok-primary-600: #4FD4E1;
+    --kinedok-primary-700: #7FE1EA;
+    --kinedok-primary-soft: #123038;
+    --kinedok-primary-softer: #0E262C;
+
+    --kinedok-secondary: #A8BDD1;
+    --kinedok-secondary-600: #C3D3E1;
+    --kinedok-secondary-soft: #1B2732;
+
+    --kinedok-footer-bg: #0A1015;
+    --kinedok-footer-text: #E8EFF3;
+    --kinedok-footer-link: #AFC3D2;
+    --kinedok-footer-muted: #8397A6;
+    --kinedok-footer-line: rgba(255, 255, 255, 0.10);
+    --kinedok-panel-from: #0D171C;
+    --kinedok-panel-to: #10444E;
+
+    --kinedok-background: #0E1519;
+    --kinedok-surface: #141D23;
+    --kinedok-surface-alt: #111A20;
+    --kinedok-surface-sunken: #0B1216;
+    --kinedok-text: #E8EFF3;
+    --kinedok-muted: #97A8B4;
+    --kinedok-border: #24313A;
+    --kinedok-border-strong: #33444F;
+
+    --kinedok-success: #4ADE9E;
+    --kinedok-success-soft: #10281F;
+    --kinedok-warning: #F0B45E;
+    --kinedok-warning-soft: #2A2013;
+    --kinedok-danger: #F87171;
+    --kinedok-danger-soft: #2B1416;
+    --kinedok-live: #F87171;
+    --kinedok-info: #6BB6E4;
+    --kinedok-info-soft: #10222E;
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.45);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
+  }
+}
+
+:root[data-theme="dark"] {
+  --kinedok-primary: #35C7D6;
+  --kinedok-primary-600: #4FD4E1;
+  --kinedok-primary-700: #7FE1EA;
+  --kinedok-primary-soft: #123038;
+  --kinedok-primary-softer: #0E262C;
+  --kinedok-secondary: #A8BDD1;
+  --kinedok-secondary-600: #C3D3E1;
+  --kinedok-secondary-soft: #1B2732;
+  --kinedok-footer-bg: #0A1015;
+  --kinedok-footer-text: #E8EFF3;
+  --kinedok-footer-link: #AFC3D2;
+  --kinedok-footer-muted: #8397A6;
+  --kinedok-footer-line: rgba(255, 255, 255, 0.10);
+  --kinedok-panel-from: #0D171C;
+  --kinedok-panel-to: #10444E;
+  --kinedok-background: #0E1519;
+  --kinedok-surface: #141D23;
+  --kinedok-surface-alt: #111A20;
+  --kinedok-surface-sunken: #0B1216;
+  --kinedok-text: #E8EFF3;
+  --kinedok-muted: #97A8B4;
+  --kinedok-border: #24313A;
+  --kinedok-border-strong: #33444F;
+  --kinedok-success: #4ADE9E;
+  --kinedok-success-soft: #10281F;
+  --kinedok-warning: #F0B45E;
+  --kinedok-warning-soft: #2A2013;
+  --kinedok-danger: #F87171;
+  --kinedok-danger-soft: #2B1416;
+  --kinedok-live: #F87171;
+  --kinedok-info: #6BB6E4;
+  --kinedok-info-soft: #10222E;
+}

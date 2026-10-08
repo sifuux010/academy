@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 170" role="img" aria-label="KINEDOK">
+  <title>KINEDOK</title>
+  <!--
+    Version compacte (symbole + signature, sans baseline) : lisible dans
+    l'en-tête à 42 px de haut, là où la ligne « La Kiné, maintenant »
+    deviendrait illisible. Monochrome turquoise : fonctionne sur fond clair
+    comme sur fond sombre, sans variante supplémentaire.
+  -->
+  <defs>
+    <linearGradient id="kdCompact" gradientUnits="userSpaceOnUse" x1="10" y1="10" x2="560" y2="170">
+      <stop offset="0" stop-color="#45D6E2"/>
+      <stop offset="0.5" stop-color="#2BBECD"/>
+      <stop offset="1" stop-color="#1795A8"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(-4,-18) scale(0.86)">
+    <g fill="none" stroke="url(#kdCompact)" stroke-linecap="round">
+      <path d="M57.7 88.4 A76 76 0 1 1 57.7 175.6" stroke-width="15"/>
+      <path d="M48.6 158 A76 76 0 0 1 46.6 112.3" stroke-width="15"/>
+      <path d="M103 30 h34" stroke-width="16"/>
+      <path d="M120 36 v14" stroke-width="13"/>
+      <path d="M176 76 l16 -16" stroke-width="13"/>
+      <path d="M8 100 h52" stroke-width="11"/>
+      <path d="M2 128 h44" stroke-width="10"/>
+      <path d="M16 156 h42" stroke-width="9"/>
+    </g>
+    <g stroke="url(#kdCompact)" stroke-width="4.5" stroke-linecap="round" opacity=".85">
+      <path d="M174 132 h10"/><path d="M166.8 159 l8.6 5"/><path d="M147 178.8 l5 8.6"/>
+      <path d="M120 186 v10"/><path d="M93 178.8 l-5 8.6"/><path d="M73.2 159 l-8.6 5"/>
+      <path d="M66 132 h-10"/><path d="M73.2 105 l-8.6 -5"/><path d="M93 85.2 l-5 -8.6"/>
+      <path d="M120 78 v-10"/><path d="M147 85.2 l5 -8.6"/><path d="M166.8 105 l8.6 -5"/>
+    </g>
+    <g fill="url(#kdCompact)">
+      <circle cx="127" cy="88" r="13"/>
+      <path d="M58 188c46-18 78-46 94-84 4-9 0-16-7-16-6 0-10 4-14 12-15 32-40 58-73 88z"/>
+      <path d="M104 146c21-2 34 6 34 18 0 13-15 23-38 27 15-10 23-17 23-25 0-8-7-14-19-20z"/>
+    </g>
+    <g fill="url(#kdCompact)">
+      <path fill-rule="evenodd" d="M188 120a20 20 0 1 1-40 0 20 20 0 1 1 40 0z M192 120a16 16 0 1 0-32 0 16 16 0 1 0 32 0z"/>
+      <polygon points="183,112.5 184.8,117.6 190.1,117.7 185.9,120.9 187.4,126.1 183,123 178.6,126.1 180.1,120.9 175.9,117.7 181.2,117.6"/>
+      <path d="M150 66l2.4 5.8 5.8 2.4-5.8 2.4-2.4 5.8-2.4-5.8-5.8-2.4 5.8-2.4z" opacity=".9"/>
+    </g>
+  </g>
+
+  <text x="196" y="126" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-style="italic" font-size="92" font-weight="700" letter-spacing="-2"
+        fill="url(#kdCompact)">Kinedok</text>
+</svg>

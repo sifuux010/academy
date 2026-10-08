@@ -1,0 +1,29 @@
+# ------------------------------------------------------------- Front-end
+node_modules
+dist
+dist-ssr
+.vite
+*.local
+.DS_Store
+npm-debug.log*
+.tools
+
+# --------------------------------------------------------------- Backend
+backend/.venv/
+backend/.env
+backend/db.sqlite3
+backend/media/
+backend/staticfiles/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ------------------------------------------------------------- Secrets
+# Fichiers remplis avec de vrais identifiants. Seuls les `.example`,
+# qui n'en contiennent aucun, sont versionnés.
+backend/.env.*
+!backend/.env.example
+!backend/.env.production.example
+db/*.local.sql

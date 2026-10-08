@@ -1,0 +1,857 @@
+// =====================================================================
+//  KINEDOK ACADÉMIE — schéma PostgreSQL (Prisma)
+//  ---------------------------------------------------------------------
+//  Miroir exact du modèle utilisé par la version front-end livrée
+//  (src/data/*.ts + src/lib/storage.ts). Voir docs/DATABASE.md pour les
+//  commentaires de conception et les index recommandés.
+//
+//  Génération :  npx prisma migrate dev --name init
+//  Seed :        npx prisma db seed   (reprendre les objets de src/data/*.ts)
+// =====================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------- Rôles
+
+enum Role {
+  STUDENT
+  PHYSIOTHERAPIST
+  INSTRUCTOR
+  CONTENT_EDITOR
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum ProfileType {
+  STUDENT
+  PHYSIOTHERAPIST
+}
+
+enum UserStatus {
+  active
+  suspended
+  pending
+}
+
+enum Access {
+  free
+  premium
+}
+
+enum Level {
+  etudiant
+  debutant
+  intermediaire
+  avance
+  expert
+}
+
+enum Difficulty {
+  facile
+  modere
+  difficile
+}
+
+enum LessonType {
+  video
+  pdf
+  text
+  quiz
+}
+
+enum ToolType {
+  test
+  questionnaire
+  score
+  bilan
+}
+
+enum Locale {
+  fr
+  en
+  ar
+}
+
+// -------------------------------------------------------- Utilisateurs
+
+model User {
+  id            String      @id @default(uuid())
+  email         String      @unique
+  passwordHash  String                          // Argon2id côté serveur
+  firstName     String
+  lastName      String
+  phone         String?
+  country       String?
+  city          String?
+  profileType   ProfileType
+  role          Role        @default(PHYSIOTHERAPIST)
+  status        UserStatus  @default(active)
+  emailVerified Boolean     @default(false)
+  locale        Locale      @default(fr)
+  avatarUrl     String?
+  bio           String?     @db.Text
+  premium       Boolean     @default(false)
+  newsletter    Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  lastLoginAt   DateTime?
+
+  physiotherapistProfile PhysiotherapistProfile?
+  studentProfile         StudentProfile?
+  settings               UserSettings?
+
+  favorites     Favorite[]
+  downloads     Download[]
+  views         ResourceView[]
+  enrollments   Enrollment[]
+  progress      LessonProgress[]
+  quizAttempts  QuizAttempt[]
+  registrations WebinarRegistration[]
+  certificates  Certificate[]
+  searches      SearchHistory[]
+  reviews       Review[]
+  notifications Notification[]
+  sessions      Session[]
+  authoredAs    Author?     @relation("UserAuthor")
+
+  @@index([role, status])
+  @@index([country])
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  tokenHash String   @unique
+  userAgent String?
+  ip        String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model PhysiotherapistProfile {
+  id              String  @id @default(uuid())
+  userId          String  @unique
+  profStatus      String?
+  workplace       String?
+  experienceYears Int?
+  licenseNumber   String?
+  website         String?
+  linkedin        String?
+  expertise       String[]
+  languages       String[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StudentProfile {
+  id             String  @id @default(uuid())
+  userId         String  @unique
+  university     String?
+  academicYear   String?
+  graduationYear Int?
+  interests      String[]
+  languages      String[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserSettings {
+  id                String  @id @default(uuid())
+  userId            String  @unique
+  notifNewResources Boolean @default(true)
+  notifNewCourses   Boolean @default(true)
+  notifWebinars     Boolean @default(true)
+  notifNewsletter   Boolean @default(false)
+  notifProduct      Boolean @default(true)
+  publicProfile     Boolean @default(false)
+  showEmail         Boolean @default(false)
+  allowAnalytics    Boolean @default(true)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ------------------------------------------------------------ Taxonomies
+
+model BodyRegion {
+  id    String @id            // rachis, epaule, genou…
+  order Int    @default(0)
+
+  pathologies Pathology[]
+  resources   Resource[]
+  tools       ClinicalTool[]
+  exercises   Exercise[]
+  courses     Course[]
+  webinars    Webinar[]
+  labels      TermLabel[]
+}
+
+model Specialty {
+  id    String @id            // musculosquelettique, sport, neurologie…
+  order Int    @default(0)
+
+  pathologies Pathology[]
+  resources   Resource[]
+  tools       ClinicalTool[]
+  courses     Course[]
+  webinars    Webinar[]
+  labels      TermLabel[]
+}
+
+model ResourceCategory {
+  id    String @id            // revue, article, protocole, livre…
+  order Int    @default(0)
+
+  resources Resource[]
+  labels    TermLabel[]
+}
+
+model Tag {
+  id        String              @id @default(uuid())
+  slug      String              @unique
+  resources ResourceTag[]
+  exercises ExerciseTag[]
+}
+
+/// Libellés traduits des taxonomies (les clés seules vivent en base ;
+/// l'interface utilise les dictionnaires i18n, la base sert l'API publique).
+model TermLabel {
+  id                 String  @id @default(uuid())
+  locale             Locale
+  label              String
+  bodyRegionId       String?
+  specialtyId        String?
+  resourceCategoryId String?
+
+  bodyRegion       BodyRegion?       @relation(fields: [bodyRegionId], references: [id], onDelete: Cascade)
+  specialty        Specialty?        @relation(fields: [specialtyId], references: [id], onDelete: Cascade)
+  resourceCategory ResourceCategory? @relation(fields: [resourceCategoryId], references: [id], onDelete: Cascade)
+
+  @@unique([locale, bodyRegionId, specialtyId, resourceCategoryId])
+}
+
+// ------------------------------------------------------------ Pathologies
+
+model Pathology {
+  id           String   @id @default(uuid())
+  slug         String   @unique
+  name         String
+  summary      String   @db.Text
+  epidemiology String?  @db.Text
+  presentation String[]
+  redFlags     String[]
+  management   String[]
+  keyFacts     String[]
+  evidence     String?
+  aliases      String[]
+  regionId     String
+  specialtyId  String
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  region    BodyRegion @relation(fields: [regionId], references: [id])
+  specialty Specialty  @relation(fields: [specialtyId], references: [id])
+
+  resources    ResourcePathology[]
+  tools        ToolPathology[]
+  exercises    ExercisePathology[]
+  courses      CoursePathology[]
+  webinars     WebinarPathology[]
+  translations Translation[]
+
+  @@index([regionId, specialtyId])
+}
+
+// ---------------------------------------------------------------- Auteurs
+
+model Author {
+  id        String   @id @default(uuid())
+  slug      String   @unique
+  userId    String?  @unique
+  firstName String
+  lastName  String
+  title     String?
+  bio       String?  @db.Text
+  country   String?
+  city      String?
+  avatarUrl String?
+  expertise String[]
+
+  user      User?      @relation("UserAuthor", fields: [userId], references: [id], onDelete: SetNull)
+  resources Resource[]
+  courses   Course[]
+  webinars  Webinar[]
+}
+
+// ------------------------------------------------------- Bibliothèque
+
+model Resource {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  subtitle    String?
+  description String   @db.Text
+  abstract    String?  @db.Text
+  keyPoints   String[]
+  references  String[]
+  categoryId  String
+  authorId    String?
+  regionId    String?
+  specialtyId String?
+  level       Level    @default(intermediaire)
+  language    Locale   @default(fr)
+  access      Access   @default(free)
+  fileUrl     String?
+  fileFormat  String?  @default("pdf")
+  fileSizeKb  Int?
+  pages       Int?
+  views       Int      @default(0)
+  downloadCount Int    @default(0)
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category    ResourceCategory   @relation(fields: [categoryId], references: [id])
+  author      Author?            @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  region      BodyRegion?        @relation(fields: [regionId], references: [id])
+  specialty   Specialty?         @relation(fields: [specialtyId], references: [id])
+  tags        ResourceTag[]
+  pathologies ResourcePathology[]
+  favorites   Favorite[]
+  downloads   Download[]
+  views_      ResourceView[]
+  lessons     Lesson[]
+  translations Translation[]
+
+  @@index([published, publishedAt])
+  @@index([categoryId, regionId, specialtyId, level])
+}
+
+model ResourceTag {
+  resourceId String
+  tagId      String
+
+  resource Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  tag      Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([resourceId, tagId])
+}
+
+model ResourcePathology {
+  resourceId  String
+  pathologyId String
+
+  resource  Resource  @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  pathology Pathology @relation(fields: [pathologyId], references: [id], onDelete: Cascade)
+
+  @@id([resourceId, pathologyId])
+}
+
+// --------------------------------------------------------- Formations
+
+model Course {
+  id            String   @id @default(uuid())
+  slug          String   @unique
+  title         String
+  subtitle      String?
+  description   String   @db.Text
+  objectives    String[]
+  audience      String?  @db.Text
+  prerequisites String[]
+  instructorId  String?
+  regionId      String?
+  specialtyId   String?
+  level         Level    @default(intermediaire)
+  language      Locale   @default(fr)
+  access        Access   @default(free)
+  coverUrl      String?
+  durationMin   Int      @default(0)
+  certificate   Boolean  @default(true)
+  ratingAvg     Float    @default(0)
+  ratingCount   Int      @default(0)
+  enrolledCount Int      @default(0)
+  published     Boolean  @default(false)
+  publishedAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  instructor  Author?           @relation(fields: [instructorId], references: [id], onDelete: SetNull)
+  region      BodyRegion?       @relation(fields: [regionId], references: [id])
+  specialty   Specialty?        @relation(fields: [specialtyId], references: [id])
+  modules     CourseModule[]
+  pathologies CoursePathology[]
+  enrollments Enrollment[]
+  certificates Certificate[]
+  reviews     Review[]
+  favorites   Favorite[]
+  translations Translation[]
+
+  @@index([published, access, level])
+}
+
+model CoursePathology {
+  courseId    String
+  pathologyId String
+
+  course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  pathology Pathology @relation(fields: [pathologyId], references: [id], onDelete: Cascade)
+
+  @@id([courseId, pathologyId])
+}
+
+model CourseModule {
+  id       String  @id @default(uuid())
+  courseId String
+  title    String
+  position Int     @default(0)
+
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+
+  @@index([courseId, position])
+}
+
+model Lesson {
+  id          String     @id @default(uuid())
+  moduleId    String
+  title       String
+  type        LessonType
+  durationMin Int        @default(0)
+  position    Int        @default(0)
+  content     String?    @db.Text     // leçons de type `text`
+  videoUrl    String?
+  resourceId  String?                 // leçon adossée à une ressource PDF
+
+  module   CourseModule     @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  resource Resource?        @relation(fields: [resourceId], references: [id], onDelete: SetNull)
+  quiz     Quiz?
+  progress LessonProgress[]
+
+  @@index([moduleId, position])
+}
+
+model Quiz {
+  id        String @id @default(uuid())
+  lessonId  String @unique
+  passScore Int    @default(0)
+
+  lesson    Lesson         @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions QuizQuestion[]
+  attempts  QuizAttempt[]
+}
+
+model QuizQuestion {
+  id       String @id @default(uuid())
+  quizId   String
+  prompt   String @db.Text
+  position Int    @default(0)
+
+  quiz    Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  answers QuizAnswer[]
+}
+
+/// La réponse correcte n'est jamais exposée par l'API publique :
+/// la correction se fait côté serveur (POST /api/quiz/:id/attempt).
+model QuizAnswer {
+  id         String  @id @default(uuid())
+  questionId String
+  label      String
+  isCorrect  Boolean @default(false)
+  position   Int     @default(0)
+
+  question QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model QuizAttempt {
+  id        String   @id @default(uuid())
+  quizId    String
+  userId    String
+  score     Int
+  total     Int
+  passed    Boolean
+  createdAt DateTime @default(now())
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, quizId])
+}
+
+// ---------------------------------------------------------- Webinaires
+
+model Webinar {
+  id              String   @id @default(uuid())
+  slug            String   @unique
+  title           String
+  subtitle        String?
+  description     String   @db.Text
+  agenda          String[]
+  speakerId       String?
+  regionId        String?
+  specialtyId     String?
+  startsAt        DateTime
+  durationMin     Int      @default(60)
+  liveUrl         String?
+  replayUrl       String?
+  access          Access   @default(free)
+  certificate     Boolean  @default(true)
+  registeredCount Int      @default(0)
+  published       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  speaker     Author?               @relation(fields: [speakerId], references: [id], onDelete: SetNull)
+  region      BodyRegion?           @relation(fields: [regionId], references: [id])
+  specialty   Specialty?            @relation(fields: [specialtyId], references: [id])
+  pathologies WebinarPathology[]
+  registrations WebinarRegistration[]
+  favorites   Favorite[]
+  translations Translation[]
+
+  @@index([published, startsAt])
+}
+
+model WebinarPathology {
+  webinarId   String
+  pathologyId String
+
+  webinar   Webinar   @relation(fields: [webinarId], references: [id], onDelete: Cascade)
+  pathology Pathology @relation(fields: [pathologyId], references: [id], onDelete: Cascade)
+
+  @@id([webinarId, pathologyId])
+}
+
+model WebinarRegistration {
+  id         String    @id @default(uuid())
+  webinarId  String
+  userId     String
+  createdAt  DateTime  @default(now())
+  attendedAt DateTime?
+  reminded24 Boolean   @default(false)
+  reminded1  Boolean   @default(false)
+
+  webinar Webinar @relation(fields: [webinarId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([webinarId, userId])
+}
+
+// ------------------------------------------------------ Outils cliniques
+
+model ClinicalTool {
+  id                String   @id @default(uuid())
+  slug              String   @unique
+  name              String
+  subtitle          String?
+  description       String   @db.Text
+  type              ToolType
+  purpose           String   @db.Text
+  indications       String[]
+  contraindications String[]
+  equipment         String[]
+  procedure         String[]
+  scoring           String?  @db.Text
+  interpretation    String[]
+  psychometrics     String?  @db.Text
+  references        String[]
+  regionId          String?
+  specialtyId       String?
+  access            Access   @default(free)
+  fileUrl           String?
+  fileFormat        String?  @default("pdf")
+  fileSizeKb        Int?
+  downloadCount     Int      @default(0)
+  published         Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  region      BodyRegion?     @relation(fields: [regionId], references: [id])
+  specialty   Specialty?      @relation(fields: [specialtyId], references: [id])
+  pathologies ToolPathology[]
+  favorites   Favorite[]
+  downloads   Download[]
+  translations Translation[]
+
+  @@index([type, regionId, published])
+}
+
+model ToolPathology {
+  toolId      String
+  pathologyId String
+
+  tool      ClinicalTool @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  pathology Pathology    @relation(fields: [pathologyId], references: [id], onDelete: Cascade)
+
+  @@id([toolId, pathologyId])
+}
+
+// ----------------------------------------------------------- Exercices
+
+model Exercise {
+  id            String     @id @default(uuid())
+  slug          String     @unique
+  name          String
+  goal          String     @db.Text
+  regionId      String
+  objective     String                    // mobilite, force, proprioception…
+  difficulty    Difficulty @default(facile)
+  targetMuscles String[]
+  equipment     String[]
+  steps         String[]
+  sets          String?
+  reps          String?
+  hold          String?
+  frequency     String?
+  progression   String?    @db.Text
+  regression    String?    @db.Text
+  precautions   String[]
+  videoUrl      String?
+  imageUrl      String?
+  references    String[]
+  published     Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  region      BodyRegion          @relation(fields: [regionId], references: [id])
+  tags        ExerciseTag[]
+  pathologies ExercisePathology[]
+  favorites   Favorite[]
+  translations Translation[]
+
+  @@index([regionId, objective, difficulty])
+}
+
+model ExerciseTag {
+  exerciseId String
+  tagId      String
+
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  tag      Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([exerciseId, tagId])
+}
+
+model ExercisePathology {
+  exerciseId  String
+  pathologyId String
+
+  exercise  Exercise  @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  pathology Pathology @relation(fields: [pathologyId], references: [id], onDelete: Cascade)
+
+  @@id([exerciseId, pathologyId])
+}
+
+// ------------------------------------------------- Activité des membres
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  createdAt DateTime @default(now())
+
+  resourceId String?
+  courseId   String?
+  webinarId  String?
+  toolId     String?
+  exerciseId String?
+
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resource Resource?     @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  course   Course?       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  webinar  Webinar?      @relation(fields: [webinarId], references: [id], onDelete: Cascade)
+  tool     ClinicalTool? @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  exercise Exercise?     @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, resourceId, courseId, webinarId, toolId, exerciseId])
+  @@index([userId, createdAt])
+}
+
+model Download {
+  id         String   @id @default(uuid())
+  userId     String
+  resourceId String?
+  toolId     String?
+  createdAt  DateTime @default(now())
+
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resource Resource?     @relation(fields: [resourceId], references: [id], onDelete: SetNull)
+  tool     ClinicalTool? @relation(fields: [toolId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+}
+
+model ResourceView {
+  id         String   @id @default(uuid())
+  userId     String?
+  resourceId String
+  createdAt  DateTime @default(now())
+
+  user     User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  resource Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+
+  @@index([resourceId, createdAt])
+}
+
+model Enrollment {
+  id          String    @id @default(uuid())
+  userId      String
+  courseId    String
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+}
+
+model LessonProgress {
+  id          String    @id @default(uuid())
+  userId      String
+  lessonId    String
+  completedAt DateTime?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+}
+
+model Certificate {
+  id        String   @id @default(uuid())
+  userId    String
+  courseId  String
+  reference String   @unique
+  issuedAt  DateTime @default(now())
+  pdfUrl    String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  userId    String
+  courseId  String
+  rating    Int
+  comment   String?  @db.Text
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+}
+
+model SearchHistory {
+  id        String   @id @default(uuid())
+  userId    String
+  query     String
+  results   Int      @default(0)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String
+  kind      String
+  title     String
+  body      String?   @db.Text
+  url       String?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+}
+
+/// Journal d'événements produit (cf. src/lib/analytics.ts).
+model AnalyticsEvent {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String?
+  locale    Locale?
+  payload   Json?
+  createdAt DateTime @default(now())
+
+  @@index([name, createdAt])
+}
+
+// ------------------------------------------------------- Traductions
+
+/// Traductions de contenu (titre, sous-titre, description…). Les contenus
+/// scientifiques gardent leur titre d'origine ; une traduction n'est
+/// utilisée que si elle existe — même logique que `item.i18n` en front.
+model Translation {
+  id           String  @id @default(uuid())
+  locale       Locale
+  field        String                       // title | subtitle | description | summary
+  value        String  @db.Text
+
+  resourceId   String?
+  courseId     String?
+  webinarId    String?
+  toolId       String?
+  exerciseId   String?
+  pathologyId  String?
+
+  resource  Resource?     @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  course    Course?       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  webinar   Webinar?      @relation(fields: [webinarId], references: [id], onDelete: Cascade)
+  tool      ClinicalTool? @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  exercise  Exercise?     @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  pathology Pathology?    @relation(fields: [pathologyId], references: [id], onDelete: Cascade)
+
+  @@unique([locale, field, resourceId, courseId, webinarId, toolId, exerciseId, pathologyId])
+}
+
+// ------------------------------------------- Monétisation (préparation)
+
+enum PlanInterval {
+  month
+  year
+}
+
+model Plan {
+  id       String       @id @default(uuid())
+  slug     String       @unique          // student, professional, institution
+  name     String
+  priceDzd Int          @default(0)
+  interval PlanInterval @default(month)
+  features String[]
+  active   Boolean      @default(false)
+
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id        String    @id @default(uuid())
+  userId    String
+  planId    String
+  status    String    @default("inactive")
+  startedAt DateTime  @default(now())
+  endsAt    DateTime?
+  promoCode String?
+
+  plan Plan @relation(fields: [planId], references: [id])
+
+  @@index([userId, status])
+}

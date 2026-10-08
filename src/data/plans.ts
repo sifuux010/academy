@@ -1,0 +1,126 @@
+import type { Plan } from '../types';
+
+/* =====================================================================
+   Formules d'abonnement
+   ---------------------------------------------------------------------
+   Entièrement modifiables depuis l'administration (/admin/abonnements) :
+   libellé, prix, périodicité, avantages, accès premium, visibilité.
+   Table correspondante en production : `plans` (+ `subscriptions`),
+   cf. db/schema.prisma.
+
+   Aucun paiement n'est branché : le membre demande une formule, un
+   administrateur l'approuve. C'est volontaire — la validation manuelle
+   correspond aux usages (virement, versement, convention institutionnelle)
+   et laisse la porte ouverte à un prestataire de paiement plus tard.
+   ===================================================================== */
+
+export const plans: Plan[] = [
+  {
+    id: 'plan-01',
+    slug: 'decouverte',
+    name: 'Découverte',
+    tagline: 'Pour explorer la plateforme',
+    priceDzd: 0,
+    interval: 'free',
+    audience: 'all',
+    premium: false,
+    highlighted: false,
+    order: 1,
+    features: [
+      'Bibliothèque scientifique en accès libre',
+      'Outils cliniques gratuits : tests, questionnaires, scores',
+      'Webinaires en direct et replays',
+      'Favoris et historique de consultation',
+      'Suivi de progression des formations gratuites'
+    ],
+    limits: 'Formations et documents marqués « Premium » non inclus.',
+    published: true,
+    seed: true
+  },
+  {
+    id: 'plan-02',
+    slug: 'etudiant',
+    name: 'Étudiant',
+    tagline: 'Tarif réservé aux étudiants en kinésithérapie',
+    priceDzd: 900,
+    interval: 'month',
+    audience: 'STUDENT',
+    premium: true,
+    highlighted: false,
+    order: 2,
+    features: [
+      'Tout le contenu de la formule Découverte',
+      'Accès à l’ensemble des formations, y compris premium',
+      'Bilans et kits d’évaluation complets par pathologie',
+      'Certificats de réussite téléchargeables',
+      'Documents pédagogiques et e-books'
+    ],
+    limits: 'Justificatif de scolarité demandé à l’approbation.',
+    published: true,
+    seed: true
+  },
+  {
+    id: 'plan-03',
+    slug: 'professionnel',
+    name: 'Professionnel',
+    tagline: 'Pour les kinésithérapeutes en exercice',
+    priceDzd: 1900,
+    interval: 'month',
+    audience: 'PHYSIOTHERAPIST',
+    premium: true,
+    highlighted: true,
+    order: 3,
+    features: [
+      'Accès complet à la bibliothèque, aux formations et aux webinaires',
+      'Tous les outils cliniques, bilans et kits par pathologie',
+      'Masterclass et contenus avancés',
+      'Certificats et attestations de participation',
+      'Nouveautés scientifiques par e-mail'
+    ],
+    limits: '',
+    published: true,
+    seed: true
+  },
+  {
+    id: 'plan-04',
+    slug: 'professionnel-annuel',
+    name: 'Professionnel — annuel',
+    tagline: 'Deux mois offerts par rapport au mensuel',
+    priceDzd: 19000,
+    interval: 'year',
+    audience: 'PHYSIOTHERAPIST',
+    premium: true,
+    highlighted: false,
+    order: 4,
+    features: [
+      'Tous les avantages de la formule Professionnelle',
+      'Engagement annuel, deux mois offerts',
+      'Accès prioritaire aux places de webinaires',
+      'Facture annuelle unique'
+    ],
+    limits: '',
+    published: true,
+    seed: true
+  },
+  {
+    id: 'plan-05',
+    slug: 'institution',
+    name: 'Institution',
+    tagline: 'Écoles, instituts et centres de rééducation',
+    priceDzd: 0,
+    interval: 'quote',
+    audience: 'all',
+    premium: true,
+    highlighted: false,
+    order: 5,
+    features: [
+      'Accès pour un groupe d’étudiants ou de praticiens',
+      'Comptes gérés et suivi de progression collectif',
+      'Sessions de formation dédiées sur demande',
+      'Convention et facturation institutionnelle'
+    ],
+    limits: 'Tarif sur devis, selon le nombre de comptes.',
+    published: true,
+    seed: true
+  }
+];

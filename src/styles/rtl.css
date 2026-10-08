@@ -1,0 +1,63 @@
+/* =====================================================================
+   KINEDOK ACADÉMIE — Adaptations RTL (arabe)
+   ---------------------------------------------------------------------
+   La quasi-totalité de la mise en page utilise déjà des propriétés
+   logiques (margin-inline, inset-inline, text-align: start), donc le
+   basculement `dir="rtl"` est natif. Ce fichier ne traite que les cas
+   qui ne peuvent PAS être exprimés logiquement : icônes directionnelles,
+   dégradés, ombres orientées et exceptions typographiques.
+   ===================================================================== */
+
+html[dir="rtl"] { text-align: right; }
+
+/* Icônes directionnelles : flèches, chevrons de navigation, « suivant ».
+   Les icônes non directionnelles (recherche, cœur, horloge…) ne doivent
+   PAS être retournées → on cible explicitement .icon-flip. */
+html[dir="rtl"] .icon-flip { transform: scaleX(-1); }
+
+/* Le séparateur de fil d'Ariane est un chevron : il suit la direction. */
+html[dir="rtl"] .breadcrumb .sep { transform: scaleX(-1); display: inline-block; }
+
+/* Dégradés du héros : on inverse le point d'origine du halo. */
+html[dir="rtl"] .hero {
+  background:
+    radial-gradient(1100px 420px at 85% -10%, var(--kinedok-primary-soft), transparent 62%),
+    linear-gradient(180deg, var(--kinedok-surface-alt) 0%, var(--kinedok-background) 100%);
+}
+html[dir="rtl"] .card-thumb { background: linear-gradient(225deg, var(--kinedok-primary) 0%, var(--kinedok-secondary) 100%); }
+
+/* Les chiffres, durées, tailles de fichiers et codes restent en LTR
+   même à l'intérieur d'un texte arabe (évite « 2024/03 » inversé). */
+html[dir="rtl"] .ltr-nums,
+html[dir="rtl"] time,
+html[dir="rtl"] .file-size,
+html[dir="rtl"] code {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+/* Le lecteur vidéo et les barres de progression conservent leur sens de
+   lecture visuel (gauche → droite) : une progression est une métaphore
+   temporelle, pas textuelle. */
+html[dir="rtl"] .progress { direction: ltr; }
+
+/* Interligne un peu plus généreux : l'arabe a des diacritiques hautes. */
+html[dir="rtl"] body { line-height: 1.75; }
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3 { letter-spacing: 0; line-height: 1.4; }
+
+/* Le tiroir mobile s'ouvre depuis le bord de départ en RTL : géré par
+   inset-inline-end, rien à faire ici — on ajuste seulement l'ombre. */
+html[dir="rtl"] .mobile-panel { box-shadow: -12px 0 32px rgba(31, 45, 58, 0.12); }
+
+/* Tableaux : alignement des cellules numériques */
+html[dir="rtl"] table.data td.num { direction: ltr; text-align: right; }
+
+/* L'écran d'authentification garde sa carte à droite, même en arabe.
+
+   Le volet gauche est une image : son illustration et son titre y sont
+   gravés, et le texte latin ne peut pas être retourné. Laisser la carte
+   passer à gauche — ce que ferait `justify-content: flex-end` en RTL — la
+   poserait donc sur l'illustration. La carte reste à droite, où l'arabe
+   commence sa lecture : c'est aussi la meilleure place pour elle. */
+html[dir="rtl"] .au-stage { justify-content: flex-start; }

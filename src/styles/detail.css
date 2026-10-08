@@ -1,0 +1,243 @@
+/* =====================================================================
+   En-tête de fiche détaillée (`dh-`)
+   ---------------------------------------------------------------------
+   Bandeau teinté — signature, titre, intervenants, action — suivi d'une
+   barre de repères posée à cheval sur son bas.
+
+   Sur mobile, l'action principale est répétée dans une barre collée en
+   bas de l'écran : la décision reste à portée de pouce une fois la fiche
+   parcourue. Elle est masquée à l'impression.
+   ===================================================================== */
+
+/* =====================================================================
+   En-tête de fiche détaillée
+   ===================================================================== */
+
+.dh {
+  margin-block-end: var(--space-8, 32px);
+}
+
+.dh-band {
+  background: #f3f8fc;
+  border-radius: 12px 12px 0 0;
+}
+
+.dh-band-inner {
+  padding: var(--space-8, 32px) var(--space-8, 32px) var(--space-10, 40px);
+}
+
+.dh-signature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  margin-block-end: var(--space-4, 16px);
+  font-weight: var(--weight-semibold);
+  color: var(--kinedok-secondary);
+}
+
+.dh-signature img {
+  height: 30px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.dh-eyebrow {
+  margin: 0 0 var(--space-2, 8px);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.02em;
+  color: var(--kinedok-primary-700);
+}
+
+.dh-title {
+  margin: 0;
+  font-size: clamp(1.9rem, 1.3rem + 2.2vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: #11212b;
+}
+
+.dh-subtitle {
+  margin: var(--space-3, 12px) 0 0;
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: var(--kinedok-text);
+  max-width: 62ch;
+}
+
+.dh-desc {
+  margin: var(--space-2, 8px) 0 0;
+  color: var(--kinedok-muted);
+  max-width: 68ch;
+}
+
+.dh-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 8px);
+  margin-block-start: var(--space-4, 16px);
+}
+
+/* Intervenants : portraits superposés, puis les noms en toutes lettres.
+   Les portraits sont décoratifs — les noms portent l'information. */
+.dh-people {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  margin-block-start: var(--space-5, 20px);
+  flex-wrap: wrap;
+}
+
+.dh-avatars {
+  display: inline-flex;
+}
+
+.dh-avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--kinedok-surface);
+  background: var(--kinedok-primary);
+  color: var(--kinedok-on-dark);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  overflow: hidden;
+}
+
+.dh-avatar + .dh-avatar {
+  margin-inline-start: -10px;
+}
+
+.dh-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dh-people-names {
+  font-size: var(--text-base);
+  color: var(--kinedok-text);
+}
+
+.dh-people-label {
+  color: var(--kinedok-muted);
+  margin-inline-end: var(--space-2, 8px);
+}
+
+.dh-action {
+  margin-block-start: var(--space-6, 24px);
+}
+
+.dh-action-note {
+  margin: var(--space-3, 12px) 0 0;
+  font-size: var(--text-sm);
+  color: var(--kinedok-muted);
+}
+
+/* Barre de repères, à cheval sur le bas du bandeau. */
+.dh-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--space-5, 20px);
+  width: calc(100% - 64px);
+  margin-inline: auto;
+  margin-block-start: -28px;
+  padding: var(--space-5, 20px) var(--space-6, 24px);
+  background: var(--kinedok-surface);
+  border: 1px solid var(--kinedok-border);
+  border-radius: 12px;
+  box-shadow: 0 2px 14px rgb(15 35 50 / 9%);
+}
+
+.dh-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dh-fact + .dh-fact {
+  border-inline-start: 1px solid var(--kinedok-border);
+  padding-inline-start: var(--space-5, 20px);
+}
+
+.dh-fact-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.125rem;
+  font-weight: var(--weight-bold);
+  color: #11212b;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+.dh-fact-value .icon {
+  color: var(--kinedok-warning);
+}
+
+.dh-fact-label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--kinedok-text);
+}
+
+.dh-fact-hint {
+  font-size: var(--text-xs);
+  color: var(--kinedok-muted);
+}
+
+/* Rappel de l'action, collé en bas sur mobile uniquement. */
+.dh-sticky {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .dh-band-inner {
+    padding: var(--space-6, 24px) var(--space-5, 20px) var(--space-8, 32px);
+  }
+
+  .dh-facts {
+    width: calc(100% - 24px);
+    grid-template-columns: 1fr;
+    gap: var(--space-3, 12px);
+  }
+
+  .dh-fact + .dh-fact {
+    border-inline-start: 0;
+    border-block-start: 1px solid var(--kinedok-border);
+    padding-inline-start: 0;
+    padding-block-start: var(--space-3, 12px);
+  }
+
+  .dh-sticky {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 40;
+    display: block;
+    padding: var(--space-3, 12px) var(--space-4, 16px)
+      calc(var(--space-3, 12px) + env(safe-area-inset-bottom));
+    background: var(--kinedok-surface);
+    border-block-start: 1px solid var(--kinedok-border);
+    box-shadow: 0 -2px 14px rgb(15 35 50 / 10%);
+  }
+
+  .dh-sticky .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media print {
+  .dh-sticky {
+    display: none;
+  }
+}
+
+/* =====================================================================
+   Barre d'écosystème, au-dessus de l'en-tête
+   ===================================================================== */
+

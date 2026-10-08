@@ -1,0 +1,1979 @@
+/* =====================================================================
+   Page d'accueil — langage visuel
+   ---------------------------------------------------------------------
+   Classes préfixées `lp-`. La charte d'origine garde ses noms ; les deux
+   cohabitent le temps que les autres écrans soient repris.
+
+   Quatre partis pris, tenus partout :
+
+   - **la carte est l'unité.** Tout contenu est une carte : vignette en
+     haut, signature, titre, socle. On apprend à la lire une fois.
+   - **l'ombre sépare, pas le trait.** Les blocs flottent sur un fond très
+     clair ; une page tracée au filet gris paraît administrative.
+   - **une action par carte, toujours au même endroit.** Le rond fléché en
+     bas à droite dit « ceci s'ouvre » sans qu'on ait à lire.
+   - **la couleur porte un sens.** Dégradés de marque pour les surfaces
+     promotionnelles, pastels pour le classement, gris pour le reste.
+     Rien n'est coloré par décoration.
+
+   Le dégradé bleu→turquoise reprend celui du modèle en partant du
+   turquoise KINEDOK : la structure est empruntée, l'identité reste celle
+   de la marque.
+   ===================================================================== */
+
+:root {
+  --lp-max: 1240px;
+  --lp-gutter: 24px;
+  --lp-gap: 26px;
+  --lp-hero-gap: 34px;
+
+  --lp-r-sm: 10px;
+  --lp-r: 14px;
+  --lp-r-lg: 20px;
+
+  --lp-ink: #16202b;
+  --lp-line: #e8edf1;
+  --lp-bg: #f7fafc;
+
+  /* Dégradé de marque, repris par les bandeaux et les panneaux. */
+  --lp-grad: linear-gradient(118deg, #15607f 0%, #1a8fa8 48%, #2bbecd 100%);
+  --lp-grad-soft: linear-gradient(118deg, #eef7fb 0%, #e6f5f8 55%, #e9f6f2 100%);
+
+  /* Pastels des parcours — assez proches pour faire famille, assez
+     distincts pour se compter d'un coup d'œil. */
+  --lp-pastel-1: #eef0fd;
+  --lp-pastel-2: #fdf3e5;
+  --lp-pastel-3: #e8f5fa;
+  --lp-pastel-4: #eef8f0;
+
+  --lp-shadow: 0 1px 2px rgb(16 32 45 / 6%), 0 6px 20px rgb(16 32 45 / 7%);
+  --lp-shadow-hi: 0 2px 6px rgb(16 32 45 / 8%), 0 14px 34px rgb(16 32 45 / 13%);
+}
+
+.lp {
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  padding-block: 20px 76px;
+  background: var(--lp-bg);
+}
+
+.lp-wrap {
+  width: min(var(--lp-max), 100% - (2 * var(--lp-gutter)));
+  margin-inline: auto;
+}
+
+/* ---------------------------------------------------------- titres -- */
+
+.lp-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-block-end: 18px;
+}
+
+.lp-head-title {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.015em;
+  color: var(--lp-ink);
+}
+
+.lp-head-sub {
+  margin: 5px 0 0;
+  font-size: var(--text-base);
+  color: var(--kinedok-muted);
+}
+
+/* « Tout voir » : discret, mais toujours à la même place. */
+.lp-head-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--kinedok-primary-700);
+  text-decoration: none;
+}
+
+.lp-head-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --------------------------------------------------------- boutons -- */
+
+.lp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.lp-btn:hover {
+  transform: translateY(-1px);
+}
+
+.lp-btn-primary {
+  background: var(--kinedok-primary-700);
+  color: #fff;
+}
+
+.lp-btn-primary:hover {
+  background: var(--kinedok-secondary);
+}
+
+.lp-btn-light {
+  background: #fff;
+  color: var(--lp-ink);
+}
+
+.lp-btn-outline {
+  border-color: var(--kinedok-border-strong);
+  background: #fff;
+  color: var(--lp-ink);
+}
+
+.lp-btn-outline:hover {
+  border-color: var(--kinedok-primary-700);
+  color: var(--kinedok-primary-700);
+}
+
+/* Rond fléché : l'action d'une carte, toujours en bas à droite. */
+.lp-go {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--kinedok-primary-soft);
+  color: var(--kinedok-primary-700);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lp-card:hover .lp-go,
+.lp-path:hover .lp-go {
+  background: var(--kinedok-primary-700);
+  color: #fff;
+}
+
+/* =====================================================================
+   1. Bannières
+   ===================================================================== */
+
+.lp-hero {
+  /* Plus large que la grille : le carrousel est la première chose vue,
+     il a le droit de déborder un peu. */
+  width: min(1480px, 100% - (2 * var(--lp-gutter)));
+  margin-inline: auto;
+}
+
+.lp-hero-track {
+  display: grid;
+  grid-auto-flow: column;
+  /* Deux cartes pleine largeur, la suivante hors champ. Une fraction
+     simple se partagerait entre toutes les bannières. */
+  grid-auto-columns: calc((100% - var(--lp-hero-gap)) / 2);
+  /* Le carrousel respire plus que les grilles : deux visuels côte à côte
+     ont besoin d'être nettement séparés pour ne pas se lire comme un
+     seul bandeau. */
+  gap: var(--lp-hero-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* Le dépassement du dernier élément ne doit pas coller au bord. */
+  scroll-padding-inline: 0;
+}
+
+.lp-hero-track::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+   La bannière est une carte à fond uni : le visuel y est posé découpé,
+   il ne sert plus de fond. Un aplat tient le contraste du titre quelle
+   que soit l'image, là où une photo pleine carte obligeait à superposer
+   un voile et laissait le texte à la merci du cadrage.
+
+   Grand écran : visuel à gauche, texte à droite. Téléphone : texte en
+   haut, visuel dessous — l'ordre du document met déjà le texte en
+   premier, seul `order` le déplace.
+*/
+.lp-banner {
+  position: relative;
+  scroll-snap-align: start;
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 16px;
+  min-height: 286px;
+  /* Pas de marge basse : le visuel vient toucher le bord de la carte,
+     comme un sujet posé dessus plutôt qu'une vignette encadrée. */
+  padding: 26px 30px 0;
+  border-radius: var(--lp-r-lg);
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+}
+
+.lp-banner-body {
+  padding-block-end: 26px;
+}
+
+/* Le visuel suit le texte : il se place donc a droite sans intervention.
+   Il deborde la gouttiere de ce cote — il est decoupe, il n'a pas besoin
+   d'une marge pour exister. */
+.lp-banner-art {
+  align-self: end;
+  min-width: 0;
+  margin-inline-end: -30px;
+}
+
+/* `contain` : un visuel decoupe ne se recadre pas, il se pose. */
+.lp-banner-image {
+  display: block;
+  width: 100%;
+  max-height: 268px;
+  object-fit: contain;
+  object-position: right bottom;
+}
+
+
+
+.lp-banner-body {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  /* Mesure de lecture : au-delà, un titre de bannière devient un
+     paragraphe. */
+  max-width: 34ch;
+}
+
+/* Pastille de catégorie, en tête de bannière. */
+.lp-banner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-block-end: 14px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  /* Assez opaque pour détacher le libellé du visuel : à 20 %, le texte
+     blanc se confondait avec le voile sur les images sombres. */
+  background: rgb(255 255 255 / 28%);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(4px);
+}
+
+.lp-banner-logo {
+  height: 24px;
+  max-width: 140px;
+  object-fit: contain;
+  margin-block-end: 14px;
+}
+
+.lp-banner-title {
+  margin: 0;
+  /* `h2` porte la couleur d'encre du site : sans cette reprise, le titre
+     resterait sombre sur les aplats fonces. */
+  color: inherit;
+  font-size: clamp(1.25rem, 0.95rem + 0.85vw, 1.55rem);
+  line-height: 1.2;
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.025em;
+  /* Deux lignes au plus. Sans cette borne, un titre long dépassait la
+     hauteur imposée par le format et se faisait rogner. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lp-banner-text {
+  margin: 10px 0 0;
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  opacity: 0.92;
+  /* Deux lignes au plus : une accroche plus longue repousserait le
+     bouton hors du format voulu. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lp-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-block-start: 16px;
+}
+
+/* Le libellé du bouton ne doit pas se briser : dans une colonne étroite,
+   « Explorer la bibliothèque » passait à la ligne et débordait. */
+.lp-banner-actions .lp-btn {
+  padding: 9px 18px;
+  white-space: nowrap;
+}
+
+/* Aplats unis, pas dégradés : le visuel découpé porte déjà le relief. */
+.lp-hero-dark { background: #0E566A; }
+.lp-hero-brand { background: #1F9A8A; }
+.lp-hero-slate { background: #24323B; }
+.lp-hero-sand { background: #FDF2DF; }
+.lp-hero-mint { background: #E4F4F1; }
+
+/* Les deux aplats clairs reprennent l'encre du site — du blanc dessus ne
+   passerait aucun seuil de contraste. */
+.lp-hero-sand,
+.lp-hero-mint {
+  color: var(--lp-ink);
+}
+
+.lp-hero-sand .lp-banner-text,
+.lp-hero-mint .lp-banner-text,
+.lp-hero-sand .lp-banner-badge,
+.lp-hero-mint .lp-banner-badge {
+  color: #41525C;
+}
+
+.lp-hero-sand .lp-banner-badge,
+.lp-hero-mint .lp-banner-badge {
+  background: rgb(255 255 255 / 70%);
+}
+
+/* Visuel clair : le texte passe en encre, et le voile en blanc. */
+.lp-hero-light {
+  background: #f3f1ea;
+  color: var(--lp-ink);
+}
+
+.lp-hero-light .lp-banner-badge {
+  background: rgb(22 32 43 / 9%);
+  color: var(--lp-ink);
+}
+
+/* Sur un visuel clair, le bouton blanc disparaîtrait : il passe en plein. */
+.lp-hero-light .lp-btn-light {
+  background: var(--kinedok-primary-700);
+  color: #fff;
+}
+
+/*
+ * En RTL, le texte passe à droite — là où se trouve le sujet. On retourne
+ * donc l'image : le sujet revient à gauche, la zone libre à droite. Un
+ * visuel décoratif supporte ce miroir, et c'est préférable à du texte
+ * posé sur un visage.
+ */
+[dir='rtl'] .lp-banner-image {
+  object-position: left bottom;
+}
+
+/* Décor : disques translucides côté opposé au texte. Aucun fichier à
+   charger, et le motif suit la couleur du texte. */
+/* Decor des bannieres sans visuel. Il porte `lp-banner-pattern` : le
+   selectionner par cette classe laisse `.lp-banner-art` au vrai visuel,
+   qui est dans le flux et non pose en absolu. */
+.lp-banner-pattern {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.lp-banner-pattern::before,
+.lp-banner-pattern::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+}
+
+.lp-banner-pattern::before {
+  inset-block-start: -24%;
+  inset-inline-end: -12%;
+  width: 290px;
+  height: 290px;
+  background: radial-gradient(circle at 35% 35%, rgb(255 255 255 / 70%), transparent 62%);
+}
+
+.lp-banner-pattern::after {
+  inset-block-end: -30%;
+  inset-inline-end: 24%;
+  width: 200px;
+  height: 200px;
+  border: 1.5px solid currentColor;
+}
+
+.lp-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-block-start: 16px;
+}
+
+.lp-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #ccd6dc;
+  cursor: pointer;
+  transition: width 0.18s ease, background 0.18s ease;
+}
+
+.lp-dot.is-active {
+  width: 28px;
+  background: var(--kinedok-primary-700);
+}
+
+/* =====================================================================
+   3. Carte de contenu
+   ===================================================================== */
+
+.lp-card {
+  position: relative;
+  scroll-snap-align: start;
+  display: flex;
+  background: #fff;
+  border-radius: var(--lp-r);
+  box-shadow: var(--lp-shadow);
+  overflow: hidden;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.lp-card:hover {
+  box-shadow: var(--lp-shadow-hi);
+  transform: translateY(-3px);
+}
+
+.lp-card:focus-within {
+  outline: 2px solid var(--kinedok-primary-700);
+  outline-offset: 2px;
+}
+
+.lp-card-link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lp-card-link:focus-visible {
+  outline: none;
+}
+
+.lp-card-sponsored {
+  box-shadow: 0 0 0 1.5px var(--kinedok-primary), var(--lp-shadow);
+}
+
+/* -------------------------------------------------------- vignette -- */
+
+.lp-cover {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--kinedok-surface-sunken);
+}
+
+.lp-cover-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.lp-card:hover .lp-cover-img {
+  transform: scale(1.05);
+}
+
+.lp-cover-tags {
+  position: absolute;
+  inset-block-start: 10px;
+  inset-inline-start: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  z-index: 1;
+}
+
+.lp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  background: rgb(255 255 255 / 94%);
+  color: var(--lp-ink);
+  backdrop-filter: blur(4px);
+}
+
+.lp-badge-sponsored { background: #fff; color: var(--kinedok-primary-700); }
+.lp-badge-premium { background: #ffdf9e; color: #7a5200; }
+.lp-badge-progress { background: var(--kinedok-primary-700); color: #fff; }
+
+.lp-live {
+  position: absolute;
+  inset-block-end: 10px;
+  inset-inline-end: 10px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  background: rgb(255 255 255 / 94%);
+  color: var(--lp-ink);
+  backdrop-filter: blur(4px);
+}
+
+.lp-live-live { background: var(--kinedok-live); color: #fff; }
+.lp-live-upcoming { background: var(--lp-ink); color: #fff; }
+.lp-live-replay { background: var(--kinedok-primary-soft); color: var(--kinedok-primary-700); }
+.lp-live-past { background: #e9eef1; color: var(--kinedok-muted); }
+
+.lp-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: lp-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes lp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ------------------------------------------------------------ corps -- */
+
+.lp-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 16px;
+}
+
+/* Signature : pastille portant l'initiale, puis le nom. */
+.lp-card-partner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--kinedok-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lp-card-avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--kinedok-primary-soft);
+  color: var(--kinedok-primary-700);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+}
+
+.lp-card-title {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  color: var(--lp-ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lp-card-note {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--kinedok-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Socle : collé en bas pour que les pieds d'une rangée s'alignent. */
+.lp-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-block-start: auto;
+  padding-block-start: 10px;
+}
+
+.lp-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 10px;
+  min-width: 0;
+  font-size: var(--text-xs);
+}
+
+.lp-card-dim,
+.lp-card-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--kinedok-muted);
+}
+
+.lp-card-date {
+  font-weight: var(--weight-semibold);
+  color: var(--lp-ink);
+}
+
+.lp-card-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: var(--weight-semibold);
+  color: var(--lp-ink);
+}
+
+.lp-card-rating .icon {
+  color: #e8a33d;
+}
+
+/* ------------------------------------------------------ progression -- */
+
+.lp-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-block-start: auto;
+  padding-block-start: 12px;
+}
+
+.lp-progress-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: #e6ecf0;
+  overflow: hidden;
+}
+
+.lp-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--lp-grad);
+}
+
+.lp-progress-value {
+  flex: none;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--lp-ink);
+}
+
+/* =====================================================================
+   4. Grilles et rails
+   ===================================================================== */
+
+.lp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--lp-gap);
+}
+
+.lp-rail {
+  position: relative;
+}
+
+.lp-rail-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(262px, 1fr);
+  gap: var(--lp-gap);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  /* Marge négative compensée : l'ombre et le survol des cartes ne sont
+     pas rognés par le conteneur qui défile. */
+  padding: 4px 4px 10px;
+  margin: -4px -4px -10px;
+  scrollbar-width: none;
+}
+
+.lp-rail-track::-webkit-scrollbar {
+  display: none;
+}
+
+.lp-rail-track:focus-visible {
+  outline: 2px solid var(--kinedok-primary-700);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+.lp-rail-arrow {
+  position: absolute;
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  z-index: 3;
+  display: none;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--lp-line);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--lp-ink);
+  cursor: pointer;
+  box-shadow: var(--lp-shadow);
+}
+
+.lp-rail-arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lp-rail-arrow-start { inset-inline-start: -8px; }
+.lp-rail-arrow-end { inset-inline-end: -8px; }
+
+/* Les flèches remplacent la barre de défilement : elles doivent donc
+   apparaître dès qu'un pointeur est probable, pas seulement sur les très
+   grands écrans. */
+@media (min-width: 760px) {
+  .lp-rail-arrow { display: grid; }
+}
+
+@media (min-width: 1340px) {
+  .lp-rail-arrow-start { inset-inline-start: -18px; }
+  .lp-rail-arrow-end { inset-inline-end: -18px; }
+}
+
+/* =====================================================================
+   5. Panneau à onglets
+   ===================================================================== */
+
+.lp-panel {
+  padding: 30px;
+  border-radius: var(--lp-r-lg);
+  background: var(--lp-grad-soft);
+}
+
+.lp-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.015em;
+  color: var(--kinedok-primary-700);
+}
+
+.lp-panel-sub {
+  margin: 7px 0 18px;
+  color: var(--kinedok-text);
+  opacity: 0.78;
+}
+
+.lp-panel-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-block-end: 20px;
+}
+
+.lp-panel-tab {
+  padding: 8px 17px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--kinedok-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lp-panel-tab:hover {
+  border-color: var(--kinedok-primary);
+}
+
+.lp-panel-tab.is-active {
+  background: var(--kinedok-primary-700);
+  border-color: var(--kinedok-primary-700);
+  color: #fff;
+}
+
+/* =====================================================================
+   6. Parcours — cartes pastel
+   ===================================================================== */
+
+.lp-paths {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--lp-gap);
+}
+
+/*
+   Carte blanche, filet clair, ombre discrete. L'aplat pastel plein
+   donnait quatre grands rectangles colores dont la couleur ne voulait
+   rien dire ; elle ne subsiste que sur la pastille de rubrique, ou elle
+   sert enfin a distinguer une section d'une autre.
+*/
+.lp-path {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--lp-line);
+  border-radius: var(--lp-r);
+  background: var(--kinedok-surface);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.lp-path:hover {
+  transform: translateY(-3px);
+  border-color: transparent;
+  box-shadow: var(--lp-shadow-hi);
+}
+
+.lp-path-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--lp-ink);
+}
+
+.lp-path-1 .lp-path-tag { background: var(--lp-pastel-1); }
+.lp-path-2 .lp-path-tag { background: var(--lp-pastel-2); }
+.lp-path-3 .lp-path-tag { background: var(--lp-pastel-3); }
+.lp-path-4 .lp-path-tag { background: var(--lp-pastel-4); }
+
+.lp-path-title {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: var(--weight-bold);
+  line-height: 1.3;
+  color: var(--lp-ink);
+}
+
+.lp-path-text {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--kinedok-muted);
+}
+
+.lp-path-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-block-start: auto;
+  padding-block-start: 14px;
+}
+
+.lp-path-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: var(--text-xs);
+  color: var(--kinedok-muted);
+}
+
+/* =====================================================================
+   Tuiles d'orientation
+   ===================================================================== */
+
+.lp-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--lp-gap);
+}
+
+/*
+   Fond blanc et filet clair, comme partout ailleurs depuis la refonte.
+   Les trois aplats pastel donnaient trois couleurs qui ne disaient rien :
+   les tuiles mènent toutes au même genre de page.
+*/
+.lp-tile {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 112px;
+  padding: 20px 22px;
+  border: 1px solid var(--lp-line);
+  border-radius: var(--lp-r);
+  background: var(--kinedok-surface);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.lp-tile:hover {
+  transform: translateY(-3px);
+  border-color: transparent;
+  box-shadow: var(--lp-shadow-hi);
+}
+
+.lp-tile-body strong {
+  display: block;
+  font-size: 1.0625rem;
+  font-weight: var(--weight-bold);
+  color: var(--lp-ink);
+}
+
+.lp-tile-body span {
+  display: block;
+  margin-block-start: 5px;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--kinedok-muted);
+}
+
+/* Toutes les icônes dans la sarcelle de la plateforme, pleine opacité :
+   atténuées, elles passaient pour désactivées. */
+.lp-tile-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--kinedok-primary-soft);
+  color: var(--kinedok-primary-700);
+}
+
+/* Pastille de garantie dans un socle de carte — « Certificat ». */
+.lp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-weight: var(--weight-semibold);
+  color: var(--kinedok-success);
+  background: var(--kinedok-success-soft);
+}
+
+/* =====================================================================
+   7. Bandeau promotionnel sombre
+   ===================================================================== */
+
+/*
+   Recherche guidée.
+
+   Dégradé de marque — et non plus le bleu nuit, qui en faisait le seul
+   bloc sombre de la page et coupait la lecture en deux. Deux disques très
+   pâles posés hors cadre donnent le relief ; ils remplacent le halo
+   flouté, qui sur fond foncé bavait en une tache grise.
+*/
+.lp-promo {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 40px;
+  border-radius: 22px;
+  background: linear-gradient(128deg, #0E566A 0%, #16798A 52%, #1F9A8A 100%);
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Disques de décor, comme sur la bande d'inscription : les deux blocs se
+   répondent d'un bout à l'autre de la page. */
+.lp-promo::before,
+.lp-promo::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 7%);
+  pointer-events: none;
+}
+
+.lp-promo::before {
+  inset-block-start: -110px;
+  inset-inline-end: -70px;
+  width: 280px;
+  height: 280px;
+}
+
+.lp-promo::after {
+  inset-block-end: -130px;
+  inset-inline-start: 34%;
+  width: 230px;
+  height: 230px;
+  background: rgb(255 255 255 / 5%);
+}
+
+.lp-promo > * {
+  position: relative;
+  z-index: 1;
+}
+
+.lp-promo-title {
+  margin: 12px 0 0;
+  font-size: clamp(1.4rem, 1.05rem + 1.3vw, 1.9rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+}
+
+.lp-promo-text {
+  margin: 10px 0 0;
+  max-width: 52ch;
+  opacity: 0.86;
+  line-height: 1.55;
+}
+
+/* Liste de garanties : la coche porte le sens, le texte le détail. */
+.lp-promo-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+
+.lp-promo-points li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  opacity: 0.92;
+}
+
+.lp-promo-points .icon {
+  color: #6fe3c5;
+}
+
+/* Champ de recherche, posé dans le bandeau. */
+.lp-promo-search {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 7px 7px 18px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 8px 26px rgb(0 0 0 / 22%);
+}
+
+.lp-promo-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--text-base);
+  color: var(--lp-ink);
+}
+
+.lp-promo-search input:focus {
+  outline: none;
+}
+
+.lp-promo-search button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--kinedok-primary-700);
+  color: #fff;
+  cursor: pointer;
+}
+
+.lp-promo-search button:hover {
+  background: var(--kinedok-secondary);
+}
+
+.lp-promo-aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Le halo flouté a été retiré : sur le dégradé il ne donnait qu'une tache
+   grise. Le décor vient maintenant des deux disques de `.lp-promo`. */
+.lp-promo-glow {
+  display: none;
+}
+
+.lp-promo-hint {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-size: var(--text-xs);
+  opacity: 0.74;
+}
+
+/* =====================================================================
+   8. Partenaires, pastilles, compteurs
+   ===================================================================== */
+
+.lp-partners-title {
+  margin: 0 0 14px;
+  font-size: 1.0625rem;
+  font-weight: var(--weight-bold);
+  color: var(--lp-ink);
+}
+
+/*
+   Rangées de pastilles : partenaires, spécialités, recherches fréquentes.
+
+   Sur grand écran elles se replient sur plusieurs lignes — il y a la
+   place. Sur téléphone elles défilent en une seule ligne, comme les
+   filtres des listes : repliées, douze pastilles occupaient quatre
+   lignes et repoussaient la section suivante hors de l'écran.
+*/
+.lp-partners-list,
+.lp-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 760px) {
+  .lp-partners-list,
+  .lp-pill-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* La rangée file jusqu'aux bords : une pastille à moitié visible dit
+       qu'il y en a d'autres. */
+    margin-inline: calc(-1 * var(--lp-gutter));
+    padding-inline: var(--lp-gutter);
+  }
+
+  .lp-partners-list::-webkit-scrollbar,
+  .lp-pill-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lp-partners-list > li,
+  .lp-pill-list > li {
+    flex: none;
+    scroll-snap-align: start;
+  }
+
+  .lp-partner-chip,
+  .lp-pill {
+    white-space: nowrap;
+  }
+}
+
+.lp-partner-chip,
+.lp-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 17px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: var(--lp-shadow);
+  color: var(--lp-ink);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transition: box-shadow 0.15s ease, color 0.15s ease;
+}
+
+.lp-pill:hover {
+  box-shadow: var(--lp-shadow-hi);
+  color: var(--kinedok-primary-700);
+}
+
+.lp-pill .icon,
+.lp-partner-chip .icon {
+  color: var(--kinedok-primary-700);
+}
+
+.lp-partner-logo {
+  height: 18px;
+  max-width: 70px;
+  object-fit: contain;
+}
+
+.lp-counters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--lp-gap);
+}
+
+.lp-counter {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 18px 20px;
+  border-radius: var(--lp-r);
+  background: #fff;
+  box-shadow: var(--lp-shadow);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.lp-counter:hover {
+  box-shadow: var(--lp-shadow-hi);
+}
+
+.lp-counter strong {
+  font-size: 1.5rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.02em;
+  color: var(--kinedok-primary-700);
+}
+
+.lp-counter span {
+  font-size: var(--text-sm);
+  color: var(--kinedok-muted);
+}
+
+/* =====================================================================
+   9. Appel à l'inscription
+   ===================================================================== */
+
+/* =====================================================================
+   Bande d'inscription
+   ---------------------------------------------------------------------
+   Un panneau posé dans la grille, pas une bande pleine largeur : à cette
+   place, un aplat qui file d'un bord à l'autre coupe la page en deux
+   juste avant le pied, et l'œil le lit comme une fin.
+
+   Dégradé de marque plutôt qu'aplat vif : sur 1200 px de large, le
+   turquoise pur devient criard et le texte blanc s'y fatigue.
+   ===================================================================== */
+
+.lp-join {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+  gap: 44px;
+  padding: 44px 48px;
+  border-radius: 22px;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(128deg, #0E566A 0%, #16798A 52%, #1F9A8A 100%);
+  color: #fff;
+}
+
+.lp-join-main {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.lp-join-eyebrow {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 14%);
+  color: var(--kinedok-doodle);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lp-join-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 1.15rem + 1.8vw, 2.3rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+.lp-join-text {
+  max-width: 46ch;
+  margin: 12px 0 0;
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: rgb(255 255 255 / 80%);
+}
+
+/* ----------------------------------------------------- le formulaire */
+
+.lp-join-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-block-start: 26px;
+}
+
+.lp-join-input {
+  flex: 1 1 240px;
+  min-width: 0;
+  height: 52px;
+  padding-inline: 18px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 13px;
+  /* Champ sombre translucide plutôt que blanc : un rectangle blanc sur le
+     dégradé attirait l'œil avant le titre. */
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+  font-family: inherit;
+  font-size: var(--text-md);
+}
+
+.lp-join-input::placeholder {
+  color: rgb(255 255 255 / 62%);
+}
+
+.lp-join-input:focus {
+  outline: none;
+  border-color: rgb(255 255 255 / 55%);
+  background: rgb(255 255 255 / 18%);
+}
+
+.lp-join-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex: none;
+  height: 52px;
+  padding-inline: 26px;
+  border: 0;
+  border-radius: 13px;
+  background: var(--kinedok-doodle);
+  color: #3A2B07;
+  font-family: inherit;
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  transition: filter var(--transition-fast), translate var(--transition-fast);
+}
+
+.lp-join-send:hover {
+  filter: brightness(1.07);
+  translate: 0 -1px;
+}
+
+.lp-join-alt {
+  margin: 14px 0 0;
+  font-size: var(--text-base);
+  color: rgb(255 255 255 / 72%);
+}
+
+.lp-join-alt a {
+  color: #fff;
+  font-weight: var(--weight-semibold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ------------------------------------------------- ce que ça ouvre -- */
+
+.lp-join-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-join-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: rgb(255 255 255 / 90%);
+}
+
+.lp-join-check {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin-block-start: 1px;
+  border-radius: 50%;
+  background: var(--kinedok-doodle);
+  color: #3A2B07;
+}
+
+/* ------------------------------------------------------------ décor -- */
+
+.lp-join-orb {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 7%);
+  pointer-events: none;
+}
+
+.lp-join-orb-1 {
+  inset-block-start: -90px;
+  inset-inline-end: -60px;
+  width: 260px;
+  height: 260px;
+}
+
+.lp-join-orb-2 {
+  inset-block-end: -120px;
+  inset-inline-start: 38%;
+  width: 220px;
+  height: 220px;
+  background: rgb(255 255 255 / 5%);
+}
+
+@media (max-width: 900px) {
+  .lp-join {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding: 32px 26px;
+  }
+
+  .lp-join-list {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .lp-join {
+    padding: 26px 20px;
+  }
+
+  .lp-join-send {
+    flex: 1 1 100%;
+  }
+}
+
+/* =====================================================================
+   En-tête — recherche
+   ===================================================================== */
+
+/* La recherche prend la place disponible au centre de l'en-tête. */
+.site-header .header-search {
+  flex: 1 1 260px;
+  max-width: 560px;
+}
+
+.site-header .header-search input {
+  padding-block: 11px;
+  padding-inline: 42px 52px;
+  border-color: var(--kinedok-border-strong);
+  border-radius: 999px;
+  background: #fff;
+  font-size: var(--text-base);
+}
+
+.site-header .header-search input::placeholder {
+  color: var(--kinedok-muted);
+}
+
+/* Bouton rond collé au bord interne du champ. */
+.site-header .header-search .search-submit {
+  position: absolute;
+  inset-inline-end: 5px;
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--kinedok-primary-700);
+  color: #fff;
+  cursor: pointer;
+}
+
+.site-header .header-search .search-submit:hover {
+  background: var(--kinedok-secondary);
+}
+
+/* =====================================================================
+   Mobile
+   ===================================================================== */
+
+@media (max-width: 1180px) {
+  .lp-grid { grid-template-columns: repeat(2, 1fr); }
+  .lp-paths { grid-template-columns: 1fr; }
+  .lp-promo { grid-template-columns: 1fr; }
+
+  /* Une bannière par vue : à deux, la colonne de texte tomberait sous
+     200 px et le titre se briserait en quatre lignes. */
+  .lp-hero-track {
+    grid-auto-columns: 92%;
+  }
+
+  .lp-banner {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  :root { --lp-gutter: 16px; }
+
+  .lp { gap: 38px; }
+  .lp-grid { grid-template-columns: 1fr; }
+
+  /* Deux tuiles de front, la troisième pleine largeur dessous : à trois
+     colonnes les libellés se brisaient mot à mot. */
+  .lp-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .lp-tiles > :nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .lp-tile {
+    min-height: 0;
+    padding: 16px;
+  }
+  .lp-counters { grid-template-columns: repeat(2, 1fr); }
+  /* La carte se resserre et laisse voir le bord de la suivante : sans ce
+     reste visible, rien ne dit que le carrousel continue. */
+  .lp-hero-track { grid-auto-columns: 82%; }
+  .lp-banner { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: 22px 20px 0; }
+  /* Le visuel repasse sous le texte et vient toucher le bas de la carte. */
+  .lp-banner-art { margin-block-start: 14px; margin-inline-end: 0; }
+  .lp-banner-image { max-height: 220px; margin-inline: auto; object-position: center bottom; }
+  .lp-banner-body { max-width: none; padding-block-end: 0; }
+  .lp-rail-track { grid-auto-columns: 80%; }
+  .lp-panel { padding: 20px; }
+  .lp-promo { padding: 24px; }
+}
+
+/* Mouvement réduit : plus aucune animation ni défilement animé. */
+@media (prefers-reduced-motion: reduce) {
+  .lp-hero-track,
+  .lp-rail-track {
+    scroll-behavior: auto;
+  }
+
+  .lp-live-dot { animation: none; }
+
+  .lp-card,
+  .lp-btn,
+  .lp-path,
+  .lp-pill,
+  .lp-counter,
+  .lp-cover-img {
+    transition: none;
+  }
+
+  .lp-card:hover,
+  .lp-path:hover,
+  .lp-btn:hover {
+    transform: none;
+  }
+
+  .lp-card:hover .lp-cover-img {
+    transform: none;
+  }
+}
+
+/* =====================================================================
+   Ornements
+   ---------------------------------------------------------------------
+   Griffonnages, soulignés, mots manuscrits. Tout est décoratif : la page
+   garde son sens si l'on retire ce fichier.
+   ===================================================================== */
+
+/* Surtitre : petites capitales colorées, au-dessus d'un titre. */
+.lp-eyebrow {
+  margin: 0 0 7px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kinedok-doodle);
+}
+
+/* Mot mis en relief. La manuscrite est plus petite que le texte courant
+   à taille égale : on la remonte d'un cran pour qu'elle pèse pareil. */
+.lp-accent {
+  font-family: var(--font-script);
+  font-size: 1.28em;
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--kinedok-primary-700);
+}
+
+/* Trait tracé sous le mot : en `::after`, il suit la largeur réelle, donc
+   la traduction. Le gabarit vient d'un SVG encodé — pas de requête. */
+.lp-accent-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.lp-accent-underline::after {
+  content: '';
+  position: absolute;
+  inset-inline: -2%;
+  inset-block-end: -0.22em;
+  height: 0.34em;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' fill='none' stroke='%23F2B134' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M2 8c14-7 26-7 40 0s26 7 40 0 26-7 38-1'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+/* Surlignage plein, pour un mot sur fond clair. */
+.lp-mark {
+  padding: 0 0.22em;
+  border-radius: 4px;
+  background: var(--kinedok-doodle-soft);
+  box-decoration-break: clone;
+}
+
+.lp-doodle {
+  color: var(--kinedok-doodle);
+  pointer-events: none;
+}
+
+.lp-blob {
+  pointer-events: none;
+}
+
+/* Positions courantes des griffonnages. */
+.lp-doodle-head {
+  position: absolute;
+  inset-block-start: -16px;
+  /* Reste dans la gouttière : au-delà, l'ornement pousse la page. */
+  inset-inline-end: -10px;
+  width: 34px;
+}
+
+.lp-doodle-aside {
+  flex: none;
+  width: 56px;
+  opacity: 0.9;
+}
+
+.lp-head-deco {
+  position: relative;
+}
+
+/* ------------------------------------------------- fonds alternés -- */
+
+/* Une page entièrement blanche n'a pas de respiration : les sections
+   alternent entre blanc, crème et bleu très clair, ce qui marque les
+   paliers sans ajouter un seul filet. */
+.lp-tint {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  padding-block: 44px;
+}
+
+.lp-tint-cream { background: #fdf8ef; }
+.lp-tint-blue { background: #eef6fb; }
+.lp-tint-white { background: #fff; }
+
+/* Un bloc teinté occupe toute la largeur : son contenu reste dans la
+   grille, mais le fond file jusqu'aux bords. */
+.lp-tint > .lp-wrap {
+  margin-inline: auto;
+}
+
+/* ----------------------------------------------- décor des bannières -- */
+
+.lp-banner-blob {
+  position: absolute;
+  inset-block-start: -22%;
+  inset-inline-end: -8%;
+  width: 62%;
+  color: rgb(255 255 255 / 12%);
+  z-index: 0;
+}
+
+.lp-banner-dots {
+  position: absolute;
+  inset-block-end: 16px;
+  inset-inline-start: 18px;
+  width: 54px;
+  color: rgb(255 255 255 / 40%);
+  z-index: 0;
+}
+
+@media (max-width: 760px) {
+  .lp-doodle-head,
+  .lp-doodle-aside {
+    display: none;
+  }
+
+  .lp-tint {
+    padding-block: 32px;
+  }
+}
+
+/* L'arabe ne prend pas la manuscrite : Caveat ne couvre pas l'alphabet et
+   le repli serait illisible. Le mot garde sa police et n'est marqué que
+   par la couleur et le trait. */
+[dir='rtl'] .lp-accent {
+  font-family: var(--font-arabic);
+  font-size: 1em;
+  font-weight: var(--weight-bold);
+  line-height: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-doodle,
+  .lp-blob {
+    animation: none;
+  }
+}
+
+
+/* =====================================================================
+   Garde-fou horizontal
+   ---------------------------------------------------------------------
+   `clip` borne la page sans créer de conteneur de défilement : les
+   éléments `position: sticky` (en-tête, colonnes latérales) continuent de
+   fonctionner, ce que `overflow-x: hidden` casserait.
+   ===================================================================== */
+
+body {
+  overflow-x: clip;
+}
+
+/* =====================================================================
+   Panneaux groupés
+   ---------------------------------------------------------------------
+   Plusieurs rayons côte à côte sous un seul titre. Chaque panneau est un
+   aplat bleu très pâle qui porte son titre et trois lignes compactes :
+   l'aplat regroupe, les lignes blanches se détachent dessus.
+
+   Trois panneaux tiennent sur un grand écran ; au-delà, la rangée défile
+   comme n'importe quel rail.
+   ===================================================================== */
+
+.lp-rail-panels .lp-rail-track {
+  /* Un panneau porte trois lignes de texte : il lui faut une largeur de
+     lecture, pas celle d'une carte. */
+  grid-auto-columns: minmax(392px, 1fr);
+}
+
+/* La section groupee deborde la grille de lecture, comme le carrousel de
+   bannieres : trois panneaux de 392 px n'y tiendraient pas. */
+.lp-groups {
+  width: min(1480px, 100% - (2 * var(--lp-gutter)));
+  margin-inline: auto;
+}
+
+/* Les pastilles se posent sous le rail, centrees — celles des bannieres
+   restent alignees a gauche, sous leur premiere carte. */
+.lp-rail-dots {
+  justify-content: center;
+  margin-block-start: 18px;
+}
+
+.lp-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--lp-r);
+  background: #eaf2fd;
+  scroll-snap-align: start;
+}
+
+.lp-group-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.01em;
+  color: var(--lp-ink);
+}
+
+.lp-group-title a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lp-group-title a:hover {
+  color: var(--kinedok-primary-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lp-group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ---------------------------------------------------- ligne compacte -- */
+
+.lp-mini {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--kinedok-surface);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.lp-mini:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--lp-shadow);
+}
+
+/* Vignette en 4/3 plutôt qu'en carré : les couverture de rubrique sont
+   des photos en paysage, et un carré leur coupe les bords. */
+.lp-mini-thumb {
+  flex: none;
+  width: 62px;
+  height: 46px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--kinedok-surface-sunken);
+}
+
+.lp-mini-thumb .lp-cover-img {
+  width: 100%;
+  height: 100%;
+}
+
+.lp-mini-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+/* La signature tient sur une ligne : deux noms longs côte à côte feraient
+   grandir la ligne d'un cran sur trois. */
+.lp-mini-sign {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: var(--text-sm);
+  color: var(--lp-ink);
+}
+
+.lp-mini-sign-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lp-mini-avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 17px;
+  height: 17px;
+  border-radius: 4px;
+  background: var(--kinedok-primary-soft);
+  color: var(--kinedok-primary-700);
+  font-size: 9px;
+  font-weight: var(--weight-bold);
+}
+
+.lp-mini-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  line-height: 1.32;
+  color: var(--lp-ink);
+}
+
+.lp-mini:hover .lp-mini-title {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.lp-mini-meta {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: var(--text-sm);
+  color: var(--kinedok-muted);
+}
+
+.lp-mini-star {
+  color: var(--kinedok-doodle);
+  fill: var(--kinedok-doodle);
+}
+
+@media (max-width: 640px) {
+  /* Le panneau occupe presque tout l'écran : à 276 px, les titres des
+     lignes se brisaient en trois. Le reste visible à droite suffit à dire
+     que la rangée continue. */
+  .lp-rail-panels .lp-rail-track {
+    grid-auto-columns: 88%;
+  }
+
+  .lp-group {
+    padding: 14px;
+  }
+}

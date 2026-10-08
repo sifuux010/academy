@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 224" role="img" aria-label="KINEDOK">
+  <title>KINEDOK</title>
+  <!--
+    Symbole KINEDOK : chronomètre en mouvement, silhouette en course,
+    croissant et étoile. Reproduction vectorielle du logo de marque.
+
+    Deux points techniques à conserver en cas de retouche :
+    1. gradientUnits="userSpaceOnUse" est indispensable : en unités de boîte
+       englobante, les traits parfaitement horizontaux ou verticaux (poussoir,
+       lignes de vitesse) ont une boîte plate et ne sont pas peints du tout.
+    2. Le cadran est centré en (120,132), rayon 76, volontairement ouvert du
+       côté gauche pour laisser passer les lignes de vitesse.
+
+    Fichier officiel : déposez-le sous assets/img/kinedok-mark.png
+    (cf. docs/DESIGN-SYSTEM.md § « Remplacer le logo »).
+  -->
+  <defs>
+    <linearGradient id="kdMark" gradientUnits="userSpaceOnUse" x1="20" y1="30" x2="200" y2="215">
+      <stop offset="0" stop-color="#45D6E2"/>
+      <stop offset="0.5" stop-color="#2BBECD"/>
+      <stop offset="1" stop-color="#1795A8"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="none" stroke="url(#kdMark)" stroke-linecap="round">
+    <!-- cadran : grand arc (215° → 145°, sens horaire) -->
+    <path d="M57.7 88.4 A76 76 0 1 1 57.7 175.6" stroke-width="15"/>
+    <!-- segment gauche isolé (160° → 195°) -->
+    <path d="M48.6 158 A76 76 0 0 1 46.6 112.3" stroke-width="15"/>
+    <!-- poussoir supérieur -->
+    <path d="M103 30 h34" stroke-width="16"/>
+    <path d="M120 36 v14" stroke-width="13"/>
+    <!-- couronne latérale (1h30) -->
+    <path d="M176 76 l16 -16" stroke-width="13"/>
+    <!-- lignes de vitesse -->
+    <path d="M8 100 h52" stroke-width="11"/>
+    <path d="M2 128 h44" stroke-width="10"/>
+    <path d="M16 156 h42" stroke-width="9"/>
+  </g>
+
+  <!-- graduations du cadran -->
+  <g stroke="url(#kdMark)" stroke-width="4.5" stroke-linecap="round" opacity=".85">
+    <path d="M174 132 h10"/>
+    <path d="M166.8 159 l8.6 5"/>
+    <path d="M147 178.8 l5 8.6"/>
+    <path d="M120 186 v10"/>
+    <path d="M93 178.8 l-5 8.6"/>
+    <path d="M73.2 159 l-8.6 5"/>
+    <path d="M66 132 h-10"/>
+    <path d="M73.2 105 l-8.6 -5"/>
+    <path d="M93 85.2 l-5 -8.6"/>
+    <path d="M120 78 v-10"/>
+    <path d="M147 85.2 l5 -8.6"/>
+    <path d="M166.8 105 l8.6 -5"/>
+  </g>
+
+  <!-- silhouette en course : tête, grand élan, jambe arrière -->
+  <g fill="url(#kdMark)">
+    <circle cx="127" cy="88" r="13"/>
+    <path d="M58 188c46-18 78-46 94-84 4-9 0-16-7-16-6 0-10 4-14 12-15 32-40 58-73 88z"/>
+    <path d="M104 146c21-2 34 6 34 18 0 13-15 23-38 27 15-10 23-17 23-25 0-8-7-14-19-20z"/>
+  </g>
+
+  <!-- croissant et étoiles -->
+  <g fill="url(#kdMark)">
+    <path fill-rule="evenodd" d="M188 120a20 20 0 1 1-40 0 20 20 0 1 1 40 0z M192 120a16 16 0 1 0-32 0 16 16 0 1 0 32 0z"/>
+    <polygon points="183,112.5 184.8,117.6 190.1,117.7 185.9,120.9 187.4,126.1 183,123 178.6,126.1 180.1,120.9 175.9,117.7 181.2,117.6"/>
+    <path d="M150 66l2.4 5.8 5.8 2.4-5.8 2.4-2.4 5.8-2.4-5.8-5.8-2.4 5.8-2.4z" opacity=".9"/>
+  </g>
+</svg>

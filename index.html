@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>KINEDOK ACADÉMIE — Apprendre. Comprendre. Pratiquer.</title>
+  <meta name="description"
+    content="Plateforme scientifique et pratique dédiée aux kinésithérapeutes et aux étudiants en kinésithérapie : bibliothèque scientifique, formations, webinaires et outils cliniques." />
+  <meta name="theme-color" content="#2BBECD" />
+  <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
+
+    <!-- Police manuscrite des mots mis en relief. `display=swap` : le texte
+         s'affiche aussitôt dans la police de repli, rien n'attend. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+  <meta property="og:site_name" content="KINEDOK ACADÉMIE" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="KINEDOK ACADÉMIE" />
+  <meta property="og:description"
+    content="Bibliothèque scientifique, formations, webinaires et outils pratiques pour la kinésithérapie." />
+  <meta property="og:image" content="/brand/kinedok-logo-stacked.svg" />
+
+  <!-- Applique l'apparence mémorisée avant le premier rendu (évite un flash clair/sombre) -->
+  <script>
+    (function () {
+      try {
+        var mode = window.localStorage.getItem('ka.theme');
+        if (mode === 'light' || mode === 'dark') document.documentElement.setAttribute('data-theme', mode);
+      } catch (e) { }
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
