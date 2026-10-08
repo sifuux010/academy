@@ -8,6 +8,7 @@ app_name = "content"
 
 urlpatterns = [
     # Les routes fixes passent avant la route générique <section>.
+    path("bootstrap/", views.BootstrapView.as_view(), name="bootstrap"),
     path("taxonomies/", views.TaxonomiesView.as_view(), name="taxonomies"),
     path("authors/", views.AuthorsView.as_view(), name="authors"),
     path("search/", views.GlobalSearchView.as_view(), name="search"),

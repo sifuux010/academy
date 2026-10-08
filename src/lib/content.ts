@@ -50,11 +50,17 @@ const SEED: Store = {
 
 export const COLLECTIONS = Object.keys(SEED) as Collection[];
 
+/* Source de base des contenus. Au départ : le jeu compilé (affichage
+   immédiat au premier rendu). Après `hydrateContent()` : les données
+   réelles de l'API (identifiants UUID, slugs, publications à jour) — le
+   bundle ne sert plus que de cache de premier affichage. */
+let baseStore: Store = SEED;
+
 /* ----------------------------------------------------- initialisation */
 
 /** Applique le calque d'administration (créations, éditions, suppressions). */
 function applyOverlay<K extends Collection>(collection: K): ItemMap[K][] {
-  const base = SEED[collection];
+  const base = baseStore[collection];
   const layer = getContentOverlay()[collection];
   if (!layer) return base.slice();
   let out: ItemMap[K][] = base.slice();
@@ -85,6 +91,30 @@ let state: Store = buildAll();
 
 export function initContent(): void {
   state = buildAll();
+}
+
+/**
+ * Remplace le jeu compilé par les contenus réels de l'API, puis reconstruit
+ * le magasin (calque d'administration réappliqué). Appelé une fois au
+ * démarrage ; en cas d'échec réseau, le bundle reste affiché.
+ */
+export async function hydrateContent(): Promise<void> {
+  const { get } = await import('./api');
+  try {
+    const data = await get<Partial<Store>>('/content/bootstrap/');
+    const next = { ...baseStore };
+    (Object.keys(SEED) as Collection[]).forEach((collection) => {
+      const items = data[collection];
+      if (Array.isArray(items) && items.length) {
+        (next as Record<Collection, unknown>)[collection] = items;
+      }
+    });
+    baseStore = next;
+    state = buildAll();
+    notify();
+  } catch {
+    /* Réseau indisponible : on garde le jeu compilé déjà affiché. */
+  }
 }
 
 function rebuild(collection: Collection): void {

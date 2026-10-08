@@ -13,7 +13,7 @@ import { BrowserRouter } from 'react-router';
 import { App } from './App';
 import { hydrateSession } from './lib/auth';
 import { detectOfficialLogos } from './lib/brand';
-import { initContent } from './lib/content';
+import { hydrateContent, initContent } from './lib/content';
 import { ensureVersion } from './lib/storage';
 import { ThemeProvider } from './theme/ThemeContext';
 import './styles/index.css';
@@ -36,8 +36,12 @@ ensureVersion();
 initContent();
 detectOfficialLogos();
 
+// Les contenus réels de l'API arrivent en tâche de fond : le jeu compilé est
+// déjà affiché, la bascule se fait via notify() sans bloquer le rendu.
+void hydrateContent().catch((error: unknown) => console.error('[app] contenus', error));
+
+// La session, en revanche, est attendue avant le premier rendu : cela évite
+// un clignotement « déconnecté » de l'en-tête au rechargement.
 hydrateSession()
-  .catch((error: unknown) => {
-    console.error('[app] amorçage', error);
-  })
+  .catch((error: unknown) => console.error('[app] session', error))
   .finally(render);

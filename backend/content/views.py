@@ -284,6 +284,23 @@ class StatsView(APIView):
         )
 
 
+def plan_payload(plan: Plan) -> dict:
+    return {
+        "id": str(plan.id),
+        "slug": plan.slug,
+        "name": plan.name,
+        "tagline": plan.tagline,
+        "priceDzd": plan.price_dzd,
+        "interval": plan.interval,
+        "audience": plan.audience,
+        "features": plan.features,
+        "limits": plan.limits,
+        "premium": plan.premium,
+        "highlighted": plan.highlighted,
+        "order": plan.order,
+    }
+
+
 class PlansView(APIView):
     """Formules d'abonnement — page publique de comparaison."""
 
@@ -292,24 +309,56 @@ class PlansView(APIView):
     def get(self, request):
         plans = Plan.objects.filter(published=True).order_by("order", "price_dzd")
         return Response(
+            {"items": [plan_payload(p) for p in plans], "total": plans.count()}
+        )
+
+
+class BootstrapView(APIView):
+    """
+    Tout le contenu publié, en une réponse — source d'amorçage du front-end.
+
+    Le front remplit son magasin en mémoire avec ceci au démarrage : les
+    pages gardent leurs lectures synchrones (`list` / `getById`) tout en
+    s'appuyant sur les données réelles de la base (identifiants UUID, slugs),
+    au lieu du jeu figé compilé dans le bundle. Les sérialiseurs « détail »
+    sont utilisés pour que les fiches disposent de leurs champs complets
+    (modules et leçons des formations, points-clés des ressources…).
+    """
+
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        ctx = {"request": request}
+
+        def dump(section: str, queryset):
+            return SERIALIZERS[section][1](queryset, many=True, context=ctx).data
+
+        resources = visible(SECTIONS["resources"]).prefetch_related(
+            "key_point_set", "reference_set"
+        )
+        courses = visible(SECTIONS["courses"]).prefetch_related(
+            "modules__lessons__quiz__questions__answers"
+        )
+        pathologies = visible(SECTIONS["pathologies"]).select_related(
+            "region", "specialty"
+        )
+
+        return Response(
             {
-                "items": [
-                    {
-                        "id": str(plan.id),
-                        "slug": plan.slug,
-                        "name": plan.name,
-                        "tagline": plan.tagline,
-                        "priceDzd": plan.price_dzd,
-                        "interval": plan.interval,
-                        "audience": plan.audience,
-                        "features": plan.features,
-                        "limits": plan.limits,
-                        "premium": plan.premium,
-                        "highlighted": plan.highlighted,
-                        "order": plan.order,
-                    }
-                    for plan in plans
+                "resources": dump("resources", resources),
+                "courses": dump("courses", courses),
+                "webinars": dump("webinars", visible(SECTIONS["webinars"])),
+                "tools": dump("tools", visible(SECTIONS["tools"])),
+                "exercises": dump("exercises", visible(SECTIONS["exercises"])),
+                "pathologies": dump("pathologies", pathologies),
+                "authors": AuthorSerializer(
+                    Author.objects.all(), many=True, context=ctx
+                ).data,
+                "plans": [
+                    plan_payload(p)
+                    for p in Plan.objects.filter(published=True).order_by(
+                        "order", "price_dzd"
+                    )
                 ],
-                "total": plans.count(),
             }
         )
