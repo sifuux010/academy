@@ -2,7 +2,7 @@ import { Fragment, type ReactNode } from 'react';
 import { Link } from 'react-router';
 import { useI18n } from '../../i18n/I18nContext';
 import { initials } from '../../lib/format';
-import { safeExternalUrl } from '../../lib/html';
+import { safeImageUrl } from '../../lib/html';
 import { Icon, type IconName } from '../icons/Icon';
 
 export function SectionHead({
@@ -127,10 +127,11 @@ interface AvatarUser {
 
 export function Avatar({ user, size }: { user?: AvatarUser | null; size?: 'sm' | 'lg' }) {
   const className = size === 'lg' ? 'avatar avatar-lg' : size === 'sm' ? 'avatar avatar-sm' : 'avatar';
-  if (user?.avatar) {
+  const src = safeImageUrl(user?.avatar);
+  if (src) {
     return (
       <span className={className}>
-        <img src={safeExternalUrl(user.avatar)} alt="" />
+        <img src={src} alt="" />
       </span>
     );
   }

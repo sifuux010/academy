@@ -13,10 +13,10 @@ purement statique.
 """
 
 from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.http import HttpResponse, JsonResponse
 from django.urls import include, path, re_path
+from django.views.static import serve as serve_static
 
 admin.site.site_header = "KINEDOK ACADÉMIE"
 admin.site.site_title = "KINEDOK ACADÉMIE"
@@ -35,7 +35,17 @@ urlpatterns = [
     path("api/promotions/", include("promotions.urls")),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Fichiers téléversés (avatars…). `static()` ne sert rien quand DEBUG=False ;
+# derrière Passenger (cPanel), toutes les requêtes passent par Django, donc on
+# sert MEDIA explicitement — volume faible (images de profil).
+_media_prefix = settings.MEDIA_URL.lstrip("/")
+urlpatterns += [
+    re_path(
+        rf"^{_media_prefix}(?P<path>.*)$",
+        serve_static,
+        {"document_root": settings.MEDIA_ROOT},
+    ),
+]
 
 if not settings.DEBUG:
     _index_path = settings.FRONTEND_DIST_DIR / "index.html"

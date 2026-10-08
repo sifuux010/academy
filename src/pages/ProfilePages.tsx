@@ -28,11 +28,11 @@ import { useSeo } from '../hooks/useSeo';
 import { useI18n } from '../i18n/I18nContext';
 import { settings as readSettings, summary, updateSettings } from '../lib/activity';
 import {
-  changeEmail,
   changePassword,
   deleteAccount,
   isValidEmail,
   updateProfile,
+  uploadAvatar,
   type AuthFailure
 } from '../lib/auth';
 import { titleOf } from '../lib/content';
@@ -243,7 +243,7 @@ export function ProfilePage() {
     reader.readAsDataURL(file);
   };
 
-  const onSave = () => {
+  const onSave = async () => {
     const email = field('email', user.email);
     const next: Record<string, string> = {};
     if (!field('firstName', user.firstName).trim()) next.firstName = t('auth.errors.required');
@@ -252,34 +252,37 @@ export function ProfilePage() {
     setErrors(next);
     if (Object.keys(next).length) return;
 
-    if (email.toLowerCase() !== user.email.toLowerCase()) {
-      const failure: AuthFailure | null = changeEmail(email);
-      if (failure) {
-        setErrors(translateErrors(failure.fields, t));
-        return;
-      }
+    try {
+      // La photo (data URL) part d'abord sur son point d'entrée dédié.
+      if (avatar) await uploadAvatar(avatar);
+
+      await updateProfile({
+        email,
+        firstName: field('firstName', user.firstName),
+        lastName: field('lastName', user.lastName),
+        phone: field('phone', user.phone),
+        country: field('country', user.country),
+        city: field('city', user.city),
+        ...(isStudent
+          ? {
+              university: field('university', user.university),
+              academicYear: field('academicYear', user.academicYear),
+              graduationYear: field('graduationYear', user.graduationYear)
+            }
+          : {
+              profStatus: field('profStatus', user.profStatus),
+              workplace: field('workplace', user.workplace),
+              experienceYears: field('experienceYears', user.experienceYears),
+              licenseNumber: field('licenseNumber', user.licenseNumber)
+            })
+      });
+    } catch (error) {
+      const failure = error as AuthFailure;
+      if (failure.fields) setErrors(translateErrors(failure.fields, t));
+      else toast(t(failure.message ?? 'common.toast.genericError'), 'error');
+      return;
     }
 
-    updateProfile({
-      ...(avatar ? { avatar } : {}),
-      firstName: field('firstName', user.firstName),
-      lastName: field('lastName', user.lastName),
-      phone: field('phone', user.phone),
-      country: field('country', user.country),
-      city: field('city', user.city),
-      ...(isStudent
-        ? {
-            university: field('university', user.university),
-            academicYear: field('academicYear', user.academicYear),
-            graduationYear: field('graduationYear', user.graduationYear)
-          }
-        : {
-            profStatus: field('profStatus', user.profStatus),
-            workplace: field('workplace', user.workplace),
-            experienceYears: field('experienceYears', user.experienceYears),
-            licenseNumber: field('licenseNumber', user.licenseNumber)
-          })
-    });
     toast(t('common.toast.saved'), 'success');
     setEditing(false);
     setForm({});
@@ -529,13 +532,17 @@ export function SettingsPage() {
   };
 
   const onDeleteAccount = () => {
-    const confirmDelete = () => {
+    const confirmDelete = async () => {
       if ((deleteRef.current?.value ?? '').trim() !== t('profile.danger.deleteConfirmWord')) {
         toast(t('common.toast.genericError'), 'error');
         return;
       }
-      deleteAccount();
+      const ok = await deleteAccount();
       modal.close();
+      if (!ok) {
+        toast(t('common.toast.genericError'), 'error');
+        return;
+      }
       toast(t('profile.danger.deleted'), 'success');
       navigate(href(''));
     };

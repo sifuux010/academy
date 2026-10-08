@@ -31,3 +31,16 @@ export function safeExternalUrl(value: string | undefined | null): string {
   const v = String(value ?? '').trim();
   return /^https?:\/\//i.test(v) ? v : '#';
 }
+
+/**
+ * Sources d'image sûres : http(s), chemin relatif de même origine
+ * (`/media/...`, pour les avatars téléversés) et `data:image/...`
+ * (prévisualisation locale avant envoi). Tout le reste est écarté.
+ */
+export function safeImageUrl(value: string | undefined | null): string {
+  const v = String(value ?? '').trim();
+  if (/^https?:\/\//i.test(v)) return v;
+  if (/^data:image\//i.test(v)) return v;
+  if (/^\/[^/]/.test(v)) return v;
+  return '';
+}

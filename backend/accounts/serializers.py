@@ -225,6 +225,7 @@ class LoginSerializer(serializers.Serializer):
 class ProfileUpdateSerializer(serializers.Serializer):
     """Mise à jour du profil — aucun champ sensible (rôle, statut, premium)."""
 
+    email = serializers.EmailField(required=False)
     first_name = serializers.CharField(max_length=120, required=False)
     last_name = serializers.CharField(max_length=120, required=False)
     phone = serializers.CharField(max_length=40, required=False, allow_blank=True)
@@ -251,6 +252,15 @@ class ProfileUpdateSerializer(serializers.Serializer):
     interests = serializers.ListField(child=serializers.CharField(), required=False)
 
     languages = serializers.ListField(child=serializers.CharField(), required=False)
+
+    def validate_email(self, value: str) -> str:
+        value = value.lower().strip()
+        qs = User.objects.filter(email=value)
+        if self.instance is not None:
+            qs = qs.exclude(pk=self.instance.pk)
+        if qs.exists():
+            raise serializers.ValidationError("auth.errors.emailTaken")
+        return value
 
     def update(self, user: User, validated):
         physio_patch, student_patch, shared_patch = {}, {}, {}

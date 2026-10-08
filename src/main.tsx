@@ -3,15 +3,15 @@
    ---------------------------------------------------------------------
    1. Magasin local (migration de version) et contenus (démo + calque)
    2. Détection des fichiers de logo officiels déposés dans public/brand/
-   3. Comptes de démonstration créés AVANT le premier rendu (la dérivation
-      PBKDF2 est asynchrone) afin que la connexion fonctionne d'emblée
+   3. Compte courant chargé depuis l'API (GET /auth/me/) AVANT le premier
+      rendu, pour éviter un clignotement « déconnecté » au rechargement
    4. Rendu : thème → routeur → application
    ===================================================================== */
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 import { App } from './App';
-import { seedDemoUsers } from './lib/auth';
+import { hydrateSession } from './lib/auth';
 import { detectOfficialLogos } from './lib/brand';
 import { initContent } from './lib/content';
 import { ensureVersion } from './lib/storage';
@@ -36,7 +36,7 @@ ensureVersion();
 initContent();
 detectOfficialLogos();
 
-seedDemoUsers()
+hydrateSession()
   .catch((error: unknown) => {
     console.error('[app] amorçage', error);
   })

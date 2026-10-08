@@ -6,8 +6,16 @@ CSRF, puis envoie son jeton dans l'en-tête `X-CSRFToken` sur chaque requête
 d'écriture. Aucun jeton n'est stocké en JavaScript.
 """
 
+import base64
+import binascii
+import re
+import uuid
+
+from django.conf import settings as django_settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.tokens import default_token_generator
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from django.db import transaction
 from django.middleware.csrf import get_token
 from django.utils.encoding import force_bytes, force_str
@@ -111,7 +119,9 @@ class MeView(APIView):
         return Response(user_payload(request.user))
 
     def patch(self, request):
-        serializer = ProfileUpdateSerializer(data=request.data, partial=True)
+        serializer = ProfileUpdateSerializer(
+            instance=request.user, data=request.data, partial=True
+        )
         serializer.is_valid(raise_exception=True)
         user = serializer.update(request.user, serializer.validated_data)
         return Response(user_payload(user))
@@ -121,6 +131,59 @@ class MeView(APIView):
         logout(request)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+AVATAR_MIME_EXT = {
+    "image/png": "png",
+    "image/jpeg": "jpg",
+    "image/webp": "webp",
+    "image/gif": "gif",
+}
+AVATAR_MAX_BYTES = 3 * 1024 * 1024
+AVATAR_DATA_URL = re.compile(r"^data:(image/[\w.+-]+);base64,(.+)$", re.DOTALL)
+
+
+class AvatarView(APIView):
+    """Téléversement de la photo de profil (data URL base64 → fichier MEDIA)."""
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        match = AVATAR_DATA_URL.match(str(request.data.get("data_url", "")))
+        if not match:
+            return Response(
+                {"detail": "profile.avatar.invalid"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        ext = AVATAR_MIME_EXT.get(match.group(1))
+        if ext is None:
+            return Response(
+                {"detail": "profile.avatar.invalid"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        try:
+            raw = base64.b64decode(match.group(2), validate=True)
+        except (binascii.Error, ValueError):
+            return Response(
+                {"detail": "profile.avatar.invalid"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        if not raw or len(raw) > AVATAR_MAX_BYTES:
+            return Response(
+                {"detail": "profile.avatar.tooLarge"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        name = f"avatars/{request.user.id}-{uuid.uuid4().hex[:8]}.{ext}"
+        saved = default_storage.save(name, ContentFile(raw))
+        url = django_settings.MEDIA_URL + saved
+        if not url.startswith("/"):
+            url = "/" + url
+
+        user = request.user
+        user.avatar_url = url
+        user.save(update_fields=["avatar_url", "updated_at"])
+        return Response(user_payload(user))
 
 
 class SettingsView(APIView):
