@@ -2058,16 +2058,29 @@ body {
 /* ============================================================
    Filtrer par domaine — grille de cartes (sous le hero)
    ============================================================ */
+/* Mobile/tablette : carrousel à défilement, ~1,5 à 2 cartes en vue, sans
+   flèches. Bureau (≥1024px) : grille de 3 par ligne. */
 .dom-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  display: flex;
   gap: var(--space-4);
   margin-block-start: var(--space-6);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--lp-gutter, 16px);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-block-end: 6px;
+}
+
+.dom-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .dom-card {
   position: relative;
   display: block;
+  flex: 0 0 clamp(250px, 64%, 320px);
+  scroll-snap-align: start;
   background: var(--kinedok-surface);
   border: 1px solid var(--kinedok-border);
   border-radius: var(--radius-lg);
@@ -2081,12 +2094,11 @@ body {
   text-decoration: none;
 }
 
+/* La média ne découpe plus la pastille : l'image porte elle-même ses coins
+   arrondis, la pastille déborde librement sous l'image. */
 .dom-card-media {
   position: relative;
-  height: 132px;
-  border-start-start-radius: var(--radius-lg);
-  border-start-end-radius: var(--radius-lg);
-  overflow: hidden;
+  height: 196px;
 }
 
 .dom-card-media img {
@@ -2094,22 +2106,39 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-start-start-radius: var(--radius-lg);
+  border-start-end-radius: var(--radius-lg);
 }
 
 .dom-card-badge {
   position: absolute;
-  inset-block-end: -22px;
+  inset-block-end: -23px;
   inset-inline-start: 16px;
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: var(--kinedok-surface);
   color: var(--kinedok-primary);
   box-shadow: var(--shadow-md);
   border: 1px solid var(--kinedok-border);
-  z-index: 2;
+  z-index: 3;
+}
+
+@media (min-width: 1024px) {
+  .dom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: visible;
+    scroll-snap-type: none;
+    padding-block-end: 0;
+  }
+
+  .dom-card {
+    flex: none;
+    scroll-snap-align: none;
+  }
 }
 
 .dom-card-body {
