@@ -22,6 +22,9 @@ export const en: Dictionary = {
     },
     nav: {
       home: 'Home',
+      journey: 'My path',
+      sectionResources: 'Resources',
+      sectionSettings: 'Settings',
       subscriptions: 'Plans',
       library: 'Library',
       courses: 'Courses',

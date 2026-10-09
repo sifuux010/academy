@@ -18,8 +18,9 @@ import { canManageContent, logout } from '../../lib/auth';
 import { globalSearch } from '../../lib/search';
 import { useToast } from '../feedback/ToastProvider';
 import { ResultRow } from '../cards/Cards';
-import { Icon } from '../icons/Icon';
+import { Icon, type IconName } from '../icons/Icon';
 import { Avatar, LanguageSwitch, Logo, ThemeChoice, ThemeToggle } from '../ui';
+import logoUrl from '../../assets/logo.jpg';
 
 export const MAIN_SITE = 'https://kinedokdz.com/';
 
@@ -31,6 +32,26 @@ export const NAV: { path: string; key: string }[] = [
   { path: 'outils', key: 'common.nav.tools' },
   { path: 'pathologies', key: 'common.nav.pathologies' },
   { path: 'exercices', key: 'common.nav.exercises' }
+];
+
+/* Menu mobile : deux groupes (navigation principale puis ressources), comme
+   la maquette. `auth` masque l'entrée tant que le membre n'est pas connecté. */
+type DrawerItem = { path: string; key: string; icon: IconName; auth?: boolean };
+
+const DRAWER_MAIN: DrawerItem[] = [
+  { path: '', key: 'common.nav.home', icon: 'home' },
+  { path: 'bibliotheque', key: 'common.nav.library', icon: 'library' },
+  { path: 'dashboard/formations', key: 'common.nav.journey', icon: 'activity', auth: true },
+  { path: 'a-propos', key: 'common.footer.about', icon: 'info' }
+];
+
+const DRAWER_RESOURCES: DrawerItem[] = [
+  { path: 'formations', key: 'common.nav.courses', icon: 'graduation' },
+  { path: 'webinaires', key: 'common.nav.webinars', icon: 'playCircle' },
+  { path: 'outils', key: 'common.nav.tools', icon: 'tools' },
+  { path: 'pathologies', key: 'common.nav.pathologies', icon: 'stethoscope' },
+  { path: 'exercices', key: 'common.nav.exercises', icon: 'dumbbell' },
+  { path: 'dashboard', key: 'common.account.dashboard', icon: 'chart', auth: true }
 ];
 
 /** Chemin courant sans le préfixe de langue ni la barre finale. */
@@ -209,12 +230,12 @@ export function Header() {
           if (event.target === event.currentTarget) setDrawerOpen(false);
         }}
       >
-        <div className="mobile-panel" role="dialog" aria-modal="true" aria-label={t('common.nav.menu')}>
-          <div className="row-between">
-            <strong>{t('common.brand.name')}</strong>
+        <div className="mdrawer" role="dialog" aria-modal="true" aria-label={t('common.nav.menu')}>
+          <div className="mdrawer-head">
+            <img className="mdrawer-logo" src={logoUrl} alt={t('common.brand.name')} />
             <button
               type="button"
-              className="icon-btn"
+              className="mdrawer-close"
               onClick={() => setDrawerOpen(false)}
               aria-label={t('common.nav.closeMenu')}
               autoFocus
@@ -222,9 +243,30 @@ export function Header() {
               <Icon name="close" size={18} />
             </button>
           </div>
-          <div className="header-search" style={{ display: 'block' }}>
+
+          {user ? (
+            <Link className="mdrawer-user" to={href('profil')}>
+              <Avatar user={user} size="sm" />
+              <span className="mdrawer-user-info">
+                <strong>{user.firstName} {user.lastName}</strong>
+                <span>{t(`common.roles.${user.role}`)}</span>
+              </span>
+              <Icon name="chevronRight" size={18} className="icon-flip" />
+            </Link>
+          ) : (
+            <div className="mdrawer-auth">
+              <Link className="btn btn-primary btn-block" to={href('inscription')}>
+                {t('common.actions.register')}
+              </Link>
+              <Link className="btn btn-outline btn-block" to={href('connexion')}>
+                {t('common.actions.login')}
+              </Link>
+            </div>
+          )}
+
+          <div className="mdrawer-search">
             <span className="search-icon">
-              <Icon name="search" size={16} />
+              <Icon name="search" size={18} />
             </span>
             <label className="sr-only" htmlFor="mobile-search">
               {t('search.ariaLabel')}
@@ -242,46 +284,72 @@ export function Header() {
               }}
             />
           </div>
-          <nav aria-label={t('common.nav.menu')}>
-            {NAV.map((item) => (
-              <Link key={item.path} to={href(item.path)}>
-                {t(item.key)}
+
+          <nav className="mdrawer-nav" aria-label={t('common.nav.menu')}>
+            {DRAWER_MAIN.filter((item) => !item.auth || user).map((item) => (
+              <Link
+                key={item.path}
+                to={href(item.path)}
+                className={`mdrawer-item${isActive(item.path) ? ' is-active' : ''}`}
+                aria-current={isActive(item.path) ? 'page' : undefined}
+              >
+                <Icon name={item.icon} size={20} className="mdrawer-item-icon" />
+                <span className="mdrawer-item-label">{t(item.key)}</span>
+                <Icon name="chevronRight" size={18} className="mdrawer-item-chevron icon-flip" />
               </Link>
             ))}
-            {user ? (
-              <>
-                <div className="nav-sep" />
-                <Link to={href('dashboard')}>{t('common.account.dashboard')}</Link>
-                <Link to={href('profil')}>{t('common.account.profile')}</Link>
-                {isAdmin ? <Link to={href('admin')}>{t('common.nav.admin')}</Link> : null}
-              </>
+
+            <p className="mdrawer-section">{t('common.nav.sectionResources')}</p>
+            {DRAWER_RESOURCES.filter((item) => !item.auth || user).map((item) => (
+              <Link
+                key={item.path}
+                to={href(item.path)}
+                className={`mdrawer-item${isActive(item.path) ? ' is-active' : ''}`}
+                aria-current={isActive(item.path) ? 'page' : undefined}
+              >
+                <Icon name={item.icon} size={20} className="mdrawer-item-icon" />
+                <span className="mdrawer-item-label">{t(item.key)}</span>
+                <Icon name="chevronRight" size={18} className="mdrawer-item-chevron icon-flip" />
+              </Link>
+            ))}
+
+            {isAdmin ? (
+              <Link
+                to={href('admin')}
+                className={`mdrawer-item${isActive('admin') ? ' is-active' : ''}`}
+              >
+                <Icon name="shield" size={20} className="mdrawer-item-icon" />
+                <span className="mdrawer-item-label">{t('common.nav.admin')}</span>
+                <Icon name="chevronRight" size={18} className="mdrawer-item-chevron icon-flip" />
+              </Link>
             ) : null}
           </nav>
-          <div className="nav-sep" />
-          <LanguageSwitch />
-          <div className="mt-4">
-            <p className="label">{t('common.theme.label')}</p>
+
+          <p className="mdrawer-section">{t('common.nav.sectionSettings')}</p>
+          <div className="mdrawer-setting">
+            <Icon name="globe" size={20} className="mdrawer-item-icon" />
+            <span className="mdrawer-item-label">{t('common.footer.language')}</span>
+            <LanguageSwitch />
+          </div>
+          <div className="mdrawer-setting">
+            <Icon name="sun" size={20} className="mdrawer-item-icon" />
+            <span className="mdrawer-item-label">{t('common.theme.label')}</span>
             <ThemeChoice />
           </div>
-          <div className="row-wrap mt-4">
-            {user ? (
-              <button type="button" className="btn btn-outline btn-block" onClick={onLogout}>
-                {t('common.actions.logout')}
+
+          {user ? (
+            <div className="mdrawer-foot">
+              <Link to={href('profil')} className="mdrawer-item">
+                <Icon name="user" size={20} className="mdrawer-item-icon" />
+                <span className="mdrawer-item-label">{t('common.account.profile')}</span>
+                <Icon name="chevronRight" size={18} className="mdrawer-item-chevron icon-flip" />
+              </Link>
+              <button type="button" className="mdrawer-item mdrawer-logout" onClick={onLogout}>
+                <Icon name="logout" size={20} className="mdrawer-item-icon" />
+                <span className="mdrawer-item-label">{t('common.actions.logout')}</span>
               </button>
-            ) : (
-              <>
-                <Link className="btn btn-primary btn-block" to={href('inscription')}>
-                  {t('common.actions.register')}
-                </Link>
-                <Link className="btn btn-outline btn-block" to={href('connexion')}>
-                  {t('common.actions.login')}
-                </Link>
-              </>
-            )}
-          </div>
-          <a className="text-sm mt-8" href={MAIN_SITE} target="_blank" rel="noopener noreferrer">
-            {t('common.nav.mainSite')} <Icon name="external" size={14} />
-          </a>
+            </div>
+          ) : null}
         </div>
       </div>,
       document.body

@@ -24,6 +24,9 @@ export const fr = {
     },
     nav: {
       home: 'Accueil',
+      journey: 'Parcours',
+      sectionResources: 'Ressources',
+      sectionSettings: 'Paramètres',
       subscriptions: 'Abonnements',
       library: 'Bibliothèque',
       courses: 'Formations',

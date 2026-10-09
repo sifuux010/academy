@@ -22,6 +22,9 @@ export const ar: Dictionary = {
     },
     nav: {
       home: 'الرئيسية',
+      journey: 'المسار',
+      sectionResources: 'الموارد',
+      sectionSettings: 'الإعدادات',
       subscriptions: 'الاشتراكات',
       library: 'المكتبة',
       courses: 'التكوينات',
