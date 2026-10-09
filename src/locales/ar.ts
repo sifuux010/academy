@@ -1148,6 +1148,18 @@ export const ar: Dictionary = {
     partners: 'يدرّسون على المنصّة',
     categories: 'استكشف حسب التخصّص',
     categoriesSub: 'اختر مجالًا، ونجمع لك كلّ ما يتعلّق به.',
+    domainsEyebrow: 'تصفّح',
+    domainsTitle: 'التصفية حسب',
+    domainsAccent: 'المجال',
+    domainsSub: 'محتوى منظّم حسب المجال، من التقييم الأولي إلى البروتوكول الموصى به.',
+    domainsCount: '{count} مورد',
+    domains: {
+      general: 'الطب العام',
+      pneumology: 'أمراض الرئة',
+      cardiology: 'أمراض القلب',
+      neurology: 'طب الأعصاب',
+      pharmacology: 'علم الأدوية'
+    },
     careerTitle: 'طوّر كفاءتك في تخصّصك',
     careerSubtitle: 'دورات وبروتوكولات وتقييمات مجمّعة حسب مجال الممارسة.',
     trending: 'عمليات بحث شائعة',

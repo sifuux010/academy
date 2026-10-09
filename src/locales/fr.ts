@@ -1163,6 +1163,18 @@ export const fr = {
     partners: 'Ils enseignent sur la plateforme',
     categories: 'Explorer par spécialité',
     categoriesSub: 'Choisissez un domaine, nous réunissons tout ce qui s’y rapporte.',
+    domainsEyebrow: 'Parcourir',
+    domainsTitle: 'Filtrer par',
+    domainsAccent: 'domaine',
+    domainsSub: 'Des contenus structurés par domaine, de l’évaluation initiale au protocole recommandé.',
+    domainsCount: '{count} ressources',
+    domains: {
+      general: 'Médecine générale',
+      pneumology: 'Pneumologie',
+      cardiology: 'Cardiologie',
+      neurology: 'Neurologie',
+      pharmacology: 'Pharmacologie'
+    },
     careerTitle: 'Montez en compétence dans votre spécialité',
     careerSubtitle: 'Formations, protocoles et bilans réunis par domaine de pratique.',
     trending: 'Recherches fréquentes',

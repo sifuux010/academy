@@ -25,6 +25,7 @@ import {
   CareerPanel,
   CategoryPills,
   Counters,
+  DomainShowcase,
   PartnerStrip,
   ShelfGroups,
   TrendingSearches
@@ -71,6 +72,8 @@ export function HomePage() {
   return (
     <div className="lp">
       <Hero banners={data.banners} />
+
+      <DomainShowcase />
 
       <ContinueLearning entries={continuing} />
 

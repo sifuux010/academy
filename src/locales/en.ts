@@ -1148,6 +1148,18 @@ export const en: Dictionary = {
     partners: 'They teach on the platform',
     categories: 'Explore by specialty',
     categoriesSub: 'Pick a field and we gather everything related to it.',
+    domainsEyebrow: 'Browse',
+    domainsTitle: 'Filter by',
+    domainsAccent: 'field',
+    domainsSub: 'Content structured by field, from first assessment to the recommended protocol.',
+    domainsCount: '{count} resources',
+    domains: {
+      general: 'General medicine',
+      pneumology: 'Pulmonology',
+      cardiology: 'Cardiology',
+      neurology: 'Neurology',
+      pharmacology: 'Pharmacology'
+    },
     careerTitle: 'Build expertise in your specialty',
     careerSubtitle: 'Courses, protocols and assessments grouped by field of practice.',
     trending: 'Trending searches',

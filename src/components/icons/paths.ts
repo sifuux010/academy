@@ -18,6 +18,8 @@ export const ICON_PATHS = {
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3.5 2"/>',
     tools: '<path d="M14.5 5.5a3.5 3.5 0 0 0 4.6 4.6l-8.7 8.7a2.4 2.4 0 0 1-3.4-3.4z"/><path d="M5 5l3 3"/>',
     stethoscope: '<path d="M6 3v5a4 4 0 0 0 8 0V3"/><path d="M10 12v3a4 4 0 0 0 8 0v-2"/><circle cx="18" cy="9" r="2"/>',
+    lungs: '<path d="M12 4v8"/><path d="M8.5 8c0 3-.5 4-2 6-1.2 1.6-2.5 2-3 2-.8 0-1-1-1-3 0-3 1-6 3-7 1.6-.8 3 .3 3 2z"/><path d="M15.5 8c0 3 .5 4 2 6 1.2 1.6 2.5 2 3 2 .8 0 1-1 1-3 0-3-1-6-3-7-1.6-.8-3 .3-3 2z"/>',
+    pills: '<rect x="3" y="10" width="11" height="6" rx="3" transform="rotate(-45 8.5 13)"/><path d="M8.5 7.5 13 12"/><circle cx="16.5" cy="16.5" r="4.5"/>',
     download: '<path d="M12 4v11M7.5 11l4.5 4.5 4.5-4.5"/><path d="M5 19h14"/>',
     heart: '<path d="M12 20s-7-4.4-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7 2.8C19 15.6 12 20 12 20z"/>',
     share: '<circle cx="17" cy="6" r="2.5"/><circle cx="7" cy="12" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M9.3 10.8l5.4-3.2M9.3 13.2l5.4 3.2"/>',

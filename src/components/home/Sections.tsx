@@ -15,6 +15,11 @@ import { ContentCard, MiniRow } from './ContentCard';
 import { Accent, Doodle, Eyebrow } from './Decor';
 import { Rail } from './Rail';
 import type { HomePartner, HomeShelf, HomeSponsored } from '../../hooks/useHomeData';
+import domGeneral from '../../assets/speciallities/photo_2026-10-09_01-28-35.jpg';
+import domCardiology from '../../assets/speciallities/photo_2026-10-09_01-28-39.jpg';
+import domPneumology from '../../assets/speciallities/photo_2026-10-09_01-28-43.jpg';
+import domNeurology from '../../assets/speciallities/photo_2026-10-09_01-28-47.jpg';
+import domPharmacology from '../../assets/speciallities/photo_2026-10-09_01-28-50.jpg';
 
 /** Transforme un chemin interne (`/outils`) en URL préfixée par la langue. */
 function useTarget() {
@@ -68,6 +73,53 @@ export function SectionHead({
         {subtitle ? <p className="lp-head-sub">{subtitle}</p> : null}
       </div>
     </header>
+  );
+}
+
+/* ------------------------------------------- filtrer par domaine -- */
+
+const DOMAIN_CARDS: { key: string; icon: IconName; image: string; count: number }[] = [
+  { key: 'general', icon: 'stethoscope', image: domGeneral, count: 8 },
+  { key: 'pneumology', icon: 'lungs', image: domPneumology, count: 6 },
+  { key: 'cardiology', icon: 'heart', image: domCardiology, count: 7 },
+  { key: 'neurology', icon: 'brain', image: domNeurology, count: 5 },
+  { key: 'pharmacology', icon: 'pills', image: domPharmacology, count: 6 }
+];
+
+export function DomainShowcase() {
+  const { t, href } = useI18n();
+  return (
+    <section className="lp-wrap">
+      <SectionHead
+        eyebrow={t('showcase.domainsEyebrow')}
+        title={t('showcase.domainsTitle')}
+        accent={t('showcase.domainsAccent')}
+        subtitle={t('showcase.domainsSub')}
+        doodle="sparkle"
+      />
+      <div className="dom-grid">
+        {DOMAIN_CARDS.map((card) => (
+          <Link key={card.key} className="dom-card" to={href('bibliotheque')}>
+            <div className="dom-card-media">
+              <img src={card.image} alt="" loading="lazy" />
+              <span className="dom-card-badge">
+                <Icon name={card.icon} size={20} />
+              </span>
+            </div>
+            <div className="dom-card-body">
+              <h3 className="dom-card-title">{t(`showcase.domains.${card.key}`)}</h3>
+              <p className="dom-card-meta">
+                <Icon name="clock" size={14} />
+                {t('showcase.domainsCount', { count: card.count })}
+              </p>
+              <span className="dom-card-go" aria-hidden="true">
+                <Icon name="arrowRight" size={16} className="icon-flip" />
+              </span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 
