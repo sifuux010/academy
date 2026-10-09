@@ -7,12 +7,15 @@
    ===================================================================== */
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { Icon } from '../icons/Icon';
+import { Icon, type IconName } from '../icons/Icon';
 import { useI18n } from '../../i18n/I18nContext';
 import { recordSearch } from '../../lib/activity';
 import { Accent, Doodle, Eyebrow } from './Decor';
 import { ContentCard } from './ContentCard';
 import type { HomeShelf, HomeShelfItem } from '../../hooks/useHomeData';
+import pathBooks from '../../assets/paths/books-set.png';
+import pathNotes from '../../assets/paths/notes.png';
+import pathCertificates from '../../assets/paths/certificates.png';
 
 /* =====================================================================
    Reprendre sa progression
@@ -83,6 +86,20 @@ const SECTION_PATH: Record<string, string> = {
   pathologies: 'pathologies'
 };
 
+/* Les trois bannières de parcours : chacune a sa teinte, son illustration,
+   ses icônes et son libellé d'état (position fixe, comme la maquette). */
+const PATH_VARIANTS: {
+  image: string;
+  badgeIcon: IconName;
+  metaIcon: IconName;
+  statusIcon: IconName;
+  statusKey: string;
+}[] = [
+  { image: pathBooks, badgeIcon: 'book', metaIcon: 'book', statusIcon: 'clock', statusKey: 'showcase.pathsStatusUpdated' },
+  { image: pathNotes, badgeIcon: 'sparkles', metaIcon: 'book', statusIcon: 'clock', statusKey: 'showcase.pathsStatusWeek' },
+  { image: pathCertificates, badgeIcon: 'graduation', metaIcon: 'playCircle', statusIcon: 'chart', statusKey: 'showcase.pathsStatusPopular' }
+];
+
 export function LearningPaths({ shelves }: { shelves: HomeShelf[] }) {
   const { t, href } = useI18n();
   const withItems = shelves.filter((shelf) => shelf.items.length);
@@ -107,32 +124,44 @@ export function LearningPaths({ shelves }: { shelves: HomeShelf[] }) {
       </header>
 
       <div className="lp-paths">
-        {withItems.slice(0, 3).map((shelf, index) => (
-          <Link
-            key={shelf.key}
-            className={`lp-path lp-path-${(index % 4) + 1}`}
-            to={
-              shelf.ctaHref?.startsWith('/')
-                ? href(shelf.ctaHref.slice(1))
-                : href(SECTION_PATH[shelf.section] ?? 'bibliotheque')
-            }
-          >
-            <span className="lp-path-tag">
-              <Icon name="layers" size={13} />
-              {t(`common.nav.${SECTION_NAV[shelf.section] ?? 'library'}`)}
-            </span>
-            <h3 className="lp-path-title">{shelf.title}</h3>
-            <p className="lp-path-text">{shelf.subtitle}</p>
-            <span className="lp-path-foot">
-              <span className="lp-path-meta">
-                {t('showcase.pathsCourses', { count: String(shelf.items.length) })}
-              </span>
+        {withItems.slice(0, 3).map((shelf, index) => {
+          const variant = PATH_VARIANTS[index % PATH_VARIANTS.length];
+          return (
+            <Link
+              key={shelf.key}
+              className={`lp-path lp-path-${(index % PATH_VARIANTS.length) + 1}`}
+              to={
+                shelf.ctaHref?.startsWith('/')
+                  ? href(shelf.ctaHref.slice(1))
+                  : href(SECTION_PATH[shelf.section] ?? 'bibliotheque')
+              }
+            >
+              <div className="lp-path-body">
+                <span className="lp-path-tag">
+                  <Icon name={variant.badgeIcon} size={14} />
+                  {t(`common.nav.${SECTION_NAV[shelf.section] ?? 'library'}`)}
+                </span>
+                <h3 className="lp-path-title">{shelf.title}</h3>
+                <p className="lp-path-text">{shelf.subtitle}</p>
+                <span className="lp-path-foot">
+                  <span className="lp-path-meta">
+                    <Icon name={variant.metaIcon} size={15} />
+                    {t('showcase.pathsResources', { count: String(shelf.items.length) })}
+                  </span>
+                  <span className="lp-path-divider" aria-hidden="true" />
+                  <span className="lp-path-meta">
+                    <Icon name={variant.statusIcon} size={15} />
+                    {t(variant.statusKey)}
+                  </span>
+                </span>
+              </div>
+              <img className="lp-path-art" src={variant.image} alt="" loading="lazy" />
               <span className="lp-go" aria-hidden="true">
-                <Icon name="arrowRight" size={16} className="icon-flip" />
+                <Icon name="arrowRight" size={20} className="icon-flip" />
               </span>
-            </span>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
     </section>
   );
