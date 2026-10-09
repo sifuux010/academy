@@ -199,11 +199,23 @@ function intOrNull(value: unknown): number | null {
 let cachedUser: PublicUser | null = null;
 let hydrated = false;
 
+/* L'activité du membre (favoris, progression, certificats…) est chargée
+   après la session. Import dynamique : `activity.ts` dépend de `auth.ts`,
+   on évite ainsi le cycle d'imports. */
+function syncActivity(): void {
+  void import('./activity').then((m) => m.hydrateActivity()).catch(() => undefined);
+}
+
+function clearActivity(): void {
+  void import('./activity').then((m) => m.resetActivity()).catch(() => undefined);
+}
+
 /** Charge le compte courant au démarrage de l'application. */
 export async function hydrateSession(): Promise<void> {
   try {
     const data = await get<ApiUser>('/auth/me/');
     cachedUser = mapUser(data);
+    syncActivity();
   } catch {
     cachedUser = null;
   } finally {
@@ -263,6 +275,7 @@ export async function register(payload: RegisterPayload): Promise<PublicUser> {
     const data = await post<ApiUser>('/auth/register/', body);
     cachedUser = mapUser(data);
     notify();
+    syncActivity();
     track('registration', { profileType: cachedUser.profileType, country: cachedUser.country });
     return cachedUser;
   } catch (error) {
@@ -279,6 +292,7 @@ export async function login(email: string, password: string, remember: boolean):
     });
     cachedUser = mapUser(data);
     notify();
+    syncActivity();
     track('login', { userId: cachedUser.id });
     return cachedUser;
   } catch (error) {
@@ -289,6 +303,7 @@ export async function login(email: string, password: string, remember: boolean):
 export function logout(): void {
   const user = cachedUser;
   cachedUser = null;
+  clearActivity();
   notify();
   void post('/auth/logout/').catch(() => undefined);
   if (user) track('logout', { userId: user.id });
@@ -404,6 +419,7 @@ export async function deleteAccount(): Promise<boolean> {
   try {
     await api('/auth/me/', { method: 'DELETE' });
     cachedUser = null;
+    clearActivity();
     notify();
     return true;
   } catch {

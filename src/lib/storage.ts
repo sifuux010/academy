@@ -152,35 +152,51 @@ export function defaultUserState(): UserState {
   };
 }
 
-export function getUserState(userId?: string | null): UserState {
+/* L'état d'activité du membre connecté vit désormais en mémoire : il est
+   chargé depuis l'API au démarrage (`hydrateActivity`) et à chaque
+   connexion, et les mutations sont persistées côté serveur par `activity.ts`.
+   Le `userId` des signatures n'est plus utilisé (un seul compte à la fois)
+   mais est conservé pour ne pas toucher les appelants. */
+let activityState: UserState = defaultUserState();
+
+export function getUserState(_userId?: string | null): UserState {
+  return activityState;
+}
+
+/** Remplace l'état d'activité (hydratation depuis l'API). */
+export function setActivityState(state: UserState, options: WriteOptions = {}): void {
   const base = defaultUserState();
-  if (!userId) return base;
-  const stored = read<Partial<UserState> | null>(`userState.${userId}`, null);
-  if (!stored) return base;
-  return {
+  activityState = {
     ...base,
-    ...stored,
+    ...state,
     settings: {
-      notifications: { ...base.settings.notifications, ...(stored.settings?.notifications ?? {}) },
-      privacy: { ...base.settings.privacy, ...(stored.settings?.privacy ?? {}) }
+      notifications: { ...base.settings.notifications, ...(state.settings?.notifications ?? {}) },
+      privacy: { ...base.settings.privacy, ...(state.settings?.privacy ?? {}) }
     }
   };
+  if (!options.silent) notify();
 }
 
-export function setUserState(userId: string, state: UserState, options: WriteOptions = {}): boolean {
-  return write(`userState.${userId}`, state, options);
+/** Réinitialise l'état à la déconnexion. */
+export function resetActivityState(options: WriteOptions = {}): void {
+  activityState = defaultUserState();
+  if (!options.silent) notify();
 }
 
-/** Mutation atomique : mutateUserState(id, (state) => { state.x = … }) */
+export function setUserState(_userId: string, state: UserState, options: WriteOptions = {}): boolean {
+  setActivityState(state, options);
+  return true;
+}
+
+/** Mutation atomique en mémoire : mutateUserState(id, (state) => { state.x = … }) */
 export function mutateUserState(
-  userId: string,
+  _userId: string,
   mutator: (state: UserState) => void,
   options: WriteOptions = {}
 ): UserState {
-  const state = getUserState(userId);
-  mutator(state);
-  setUserState(userId, state, options);
-  return state;
+  mutator(activityState);
+  if (!options.silent) notify();
+  return activityState;
 }
 
 /* ------------------------------------------ calque de contenus (admin) */

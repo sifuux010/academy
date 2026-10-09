@@ -10,10 +10,17 @@ import type { Certificate, EntryRef, QuizScore, UserSettings, UserState } from '
 import type { Collection } from '../model/common';
 import type { AnyItem, Course, Lesson, Webinar, WebinarStatus } from '../model/content';
 import { track } from './analytics';
+import { api, post } from './api';
 import { currentUser } from './auth';
 import { courseStats, getById, lessonsOf, published, searchText, webinarStatus } from './content';
 import { normalize } from './format';
-import { defaultUserState, getUserState, mutateUserState } from './storage';
+import {
+  defaultUserState,
+  getUserState,
+  mutateUserState,
+  resetActivityState,
+  setActivityState
+} from './storage';
 
 export interface RequiresAuth {
   requiresAuth: true;
@@ -23,6 +30,34 @@ const REQUIRES_AUTH: RequiresAuth = { requiresAuth: true };
 
 export function needsAuth(result: unknown): result is RequiresAuth {
   return typeof result === 'object' && result !== null && 'requiresAuth' in result;
+}
+
+/* --------------------------------------------- synchronisation serveur */
+
+/** Charge l'état d'activité du membre connecté depuis l'API. */
+export async function hydrateActivity(): Promise<void> {
+  if (!currentUser()) {
+    resetActivityState({ silent: true });
+    return;
+  }
+  try {
+    const data = await api<UserState>('/activity/state/');
+    setActivityState(data);
+  } catch {
+    /* Hors ligne : on garde l'état courant. */
+  }
+}
+
+/** Vide l'état à la déconnexion. */
+export function resetActivity(): void {
+  resetActivityState();
+}
+
+/** Persiste une mutation côté serveur ; en cas d'échec, resynchronise. */
+function sync(path: string, body: unknown): void {
+  void post(path, body).catch(() => {
+    void hydrateActivity();
+  });
 }
 
 function state(): UserState {
@@ -70,6 +105,7 @@ export function toggleFavorite(collection: Collection, id: string): RequiresAuth
     }
   });
   track(added ? 'favorite_added' : 'favorite_removed', { collection, id });
+  sync('/activity/favorites/toggle/', { collection, id });
   return { added };
 }
 
@@ -87,6 +123,7 @@ export function recordView(collection: Collection, id: string): void {
     s.viewed.unshift({ collection, id, at: new Date().toISOString() });
     if (s.viewed.length > 60) s.viewed = s.viewed.slice(0, 60);
   }, true);
+  if (collection === 'resources') sync('/activity/views/', { id });
 }
 
 export function recordDownload(collection: Collection, id: string): void {
@@ -96,6 +133,9 @@ export function recordDownload(collection: Collection, id: string): void {
     s.downloads.unshift({ collection, id, at: new Date().toISOString() });
     if (s.downloads.length > 80) s.downloads = s.downloads.slice(0, 80);
   });
+  if (collection === 'resources' || collection === 'tools') {
+    sync('/activity/downloads/', { collection, id });
+  }
 }
 
 export function downloads(): ItemEntry[] {
@@ -116,6 +156,7 @@ export function enroll(courseId: string): RequiresAuth | { enrolled: boolean; al
     if (!s.progress[courseId]) s.progress[courseId] = {};
   });
   track('course_started', { courseId });
+  sync('/activity/enroll/', { courseId });
   return { enrolled: true };
 }
 
@@ -194,7 +235,28 @@ export function toggleLesson(courseId: string, lessonId: string): RequiresAuth |
     s.progress[courseId] = progress;
   });
   if (done) track('lesson_completed', { courseId, lessonId });
+  // Résultat optimiste immédiat ; le serveur fait foi pour la référence.
   const issued = issueCertificateIfComplete(courseId);
+  void post<{ certificate?: { ref: string; at: string } | null }>(
+    '/activity/progress/toggle/',
+    { courseId, lessonId }
+  )
+    .then((res) => {
+      const cert = res?.certificate;
+      if (!cert) return;
+      mutate((s) => {
+        const existing = s.certificates.find((c) => c.courseId === courseId);
+        if (existing) {
+          existing.ref = cert.ref;
+          existing.at = cert.at;
+        } else {
+          s.certificates.unshift({ courseId, ref: cert.ref, at: cert.at });
+        }
+      });
+    })
+    .catch(() => {
+      void hydrateActivity();
+    });
   return { done, certificate: issued.certificate, newlyIssued: issued.newlyIssued };
 }
 
@@ -233,6 +295,7 @@ export function saveQuizScore(courseId: string, lessonId: string, score: number,
     s.quizScores[lessonId] = { courseId, score, total, at: new Date().toISOString() };
   });
   track('quiz_completed', { courseId, lessonId, score, total });
+  sync('/activity/quiz/', { lessonId, score, total });
   return { saved: true };
 }
 
@@ -258,6 +321,7 @@ export function toggleWebinarRegistration(webinarId: string): RequiresAuth | { r
     }
   });
   if (registered) track('webinar_registration', { webinarId });
+  sync('/activity/webinars/toggle/', { webinarId });
   return { registered };
 }
 
@@ -296,6 +360,7 @@ export function recordSearch(query: string): void {
   mutate((s) => {
     s.searchHistory = [query, ...s.searchHistory.filter((q) => q !== query)].slice(0, 8);
   }, true);
+  if (currentUser()) sync('/activity/search/', { query, results: 0 });
 }
 
 export function searchHistory(): string[] {
@@ -312,16 +377,37 @@ export function settings(): UserSettings {
   return state().settings;
 }
 
+const NOTIF_API_KEY: Record<string, string> = {
+  newResources: 'notif_new_resources',
+  newCourses: 'notif_new_courses',
+  webinarReminders: 'notif_webinars',
+  newsletter: 'notif_newsletter',
+  productUpdates: 'notif_product'
+};
+const PRIVACY_API_KEY: Record<string, string> = {
+  publicProfile: 'public_profile',
+  showEmail: 'show_email',
+  analytics: 'allow_analytics'
+};
+
 export function updateSettings(patch: Partial<UserSettings>): RequiresAuth | { saved: true } {
   if (!currentUser()) return REQUIRES_AUTH;
+  const body: Record<string, boolean> = {};
   mutate((s) => {
     Object.entries(patch.notifications ?? {}).forEach(([key, value]) => {
       s.settings.notifications[key] = !!value;
+      if (NOTIF_API_KEY[key]) body[NOTIF_API_KEY[key]] = !!value;
     });
     Object.entries(patch.privacy ?? {}).forEach(([key, value]) => {
       s.settings.privacy[key] = !!value;
+      if (PRIVACY_API_KEY[key]) body[PRIVACY_API_KEY[key]] = !!value;
     });
   });
+  if (Object.keys(body).length) {
+    void api('/auth/me/settings/', { method: 'PATCH', body }).catch(() => {
+      void hydrateActivity();
+    });
+  }
   return { saved: true };
 }
 
